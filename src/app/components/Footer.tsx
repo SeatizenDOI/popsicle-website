@@ -10,10 +10,10 @@ export default function Footer() {
     return (
         <footer className="bg-gray-5 py-8 font-medium">
             <div className="container mx-auto px-4">
-                <div className="flex flex-wrap justify-between items-center">
+                <div className="flex flex-wrap md:justify-between justify-center items-center">
                     {/* Left section with navigation links */}
                     <div className="mb-4 md:mb-0">
-                        <ul className="flex flex-col md:flex-row gap-4">
+                        <ul className="flex flex-row gap-4">
                             {footer_links.map((link) => {
                                 return (
                                     <li key={link.name}>
