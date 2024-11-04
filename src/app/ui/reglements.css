@@ -1,5 +1,4 @@
 .reglements {
-
     h1 {
         font-size: larger;
         font-weight: bold;
@@ -9,8 +8,8 @@
     h2 {
         font-size: large;
         font-weight: bold;
-        margin: 2rem 0 0.5rem 0; 
-        text-decoration: underline;   
+        margin: 2rem 0 0.5rem 0;
+        text-decoration: underline;
     }
 
     li {

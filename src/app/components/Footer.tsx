@@ -1,32 +1,37 @@
-import Link from 'next/link'
-import { LinkItem } from "@/app/lib/definition";
+import Link from 'next/link';
+import { LinkItem } from '@/app/lib/definition';
 
 export default function Footer() {
     const footer_links: LinkItem[] = [
-        { "href": "/contact-us", "name": "Nous Contacter" },
-        { "href": "/privacy-policy", "name": "Mentions Légales" },
-    ]
+        { href: '/contact-us', name: 'Nous Contacter' },
+        { href: '/privacy-policy', name: 'Mentions Légales' },
+    ];
 
     return (
         <footer className="bg-gray-5 py-8 font-medium">
             <div className="container mx-auto px-4">
-                <div className="flex flex-wrap md:justify-between justify-center items-center">
+                <div className="flex flex-wrap items-center justify-center md:justify-between">
                     {/* Left section with navigation links */}
                     <div className="mb-4 md:mb-0">
-                        <ul className="flex flex-row gap-4">
+                        <div className="flex flex-row gap-4">
                             {footer_links.map((link) => {
                                 return (
-                                    <li key={link.name}>
-                                        <Link href={link.href} className="hover:text-blue-600">{link.name}</Link>
-                                    </li>
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className="hover:text-blue-600"
+                                    >
+                                        {link.name}
+                                    </Link>
                                 );
                             })}
-                        </ul>
+                        </div>
                     </div>
 
                     {/* Right section with copyright */}
                     <div className="text-center text-gray-400">
-                        © 2024 <span className="font-semibold">POPSICLE</span>. Tous droits réservés.
+                        © 2024 <span className="font-semibold">POPSICLE</span>.
+                        Tous droits réservés.
                     </div>
                 </div>
             </div>
