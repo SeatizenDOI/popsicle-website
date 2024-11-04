@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Page() {
     return (
-        <div className='reglements sm:m-20 m-4'>
+        <div className='reglements sm:mx-20 mx-4'>
             <h1>1. CONDITIONS GÉNÉRALES </h1>
 
             <h2>Article 1 – Respect du Règlement</h2>
@@ -18,7 +18,7 @@ export default function Page() {
 
             <h2>Article 4 - Inscription</h2>
             <p>Le concours est ouvert à toute personne majeure résidant à la Réunion. Le participant devra obligatoirement remplir une fiche d’inscription pour pouvoir participer à ce concours.</p>
-        
+
             <h2>Article 5 - Lieux du concours</h2>
             <p>Pour être validé, le poisson devra obligatoirement provenir de la Réunion et du banc des 90 miles (Mont Lapérouse). Chaque concurrent doit respecter la réglementation maritime en vigueur et les zones protégées du parc marin de la Réunion.</p>
             <ul className={"list-disc list-inside"}>
@@ -49,6 +49,6 @@ export default function Page() {
                 <li><strong><u>+10 pts : Couper la tête</u></strong> : (Voir Schéma sur le protocole) et la mettre dans le sachet correspondant au poisson</li>
                 <li><strong><u>+10 pts : Si toutes les infos d’un poisson sont fournie</u></strong> :  photo et/ou vidéo avec le poisson avec son étiquette (correspondant au n° du tube) sur la balance</li>
             </ul>
-        </div> 
+        </div>
     );
 }

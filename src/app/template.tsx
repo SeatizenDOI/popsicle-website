@@ -4,9 +4,9 @@ import Footer from '@/app/components/Footer';
 
 export default function Template({ children }: { children: React.ReactNode }) {
     return (
-        <div className='flex flex-col justify-between min-h-screen' id='Template'>
+        <div className='flex flex-col justify-between min-h-screen mx-8' id='Template'>
             <Header />
-            <div>{children}</div>
+            <div className='mt-40'>{children}</div>
             <Footer />
         </div>
     );

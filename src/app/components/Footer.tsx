@@ -3,8 +3,8 @@ import { LinkItem } from "@/app/lib/definition";
 
 export default function Footer() {
     const footer_links: LinkItem[] = [
-        {"href": "/contact-us", "name": "Nous Contacter"},
-        {"href": "/privacy-policy", "name": "Mentions Légales"},
+        { "href": "/contact-us", "name": "Nous Contacter" },
+        { "href": "/privacy-policy", "name": "Mentions Légales" },
     ]
 
     return (
@@ -23,13 +23,13 @@ export default function Footer() {
                             })}
                         </ul>
                     </div>
-  
-                   {/* Right section with copyright */}
+
+                    {/* Right section with copyright */}
                     <div className="text-center text-gray-400">
                         © 2024 <span className="font-semibold">POPSICLE</span>. Tous droits réservés.
-                    </div> 
+                    </div>
                 </div>
             </div>
-      </footer>
+        </footer>
     );
 }
