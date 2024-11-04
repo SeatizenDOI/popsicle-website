@@ -1,4 +1,10 @@
 import FaqItem from '@/app/components/FaqItem';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'FAQ',
+    description: 'Foires aux questions',
+};
 
 export default function FaqPage() {
     const faqData = [
@@ -15,7 +21,9 @@ export default function FaqPage() {
 
     return (
         <div className="mx-auto max-w-7xl p-4">
-            <h1 className="mb-8 text-center text-2xl font-bold">FAQ</h1>
+            <h1 className="mb-8 text-center text-2xl font-bold">
+                Foires aux questions
+            </h1>
             {faqData.map((item, index) => (
                 <FaqItem
                     key={index}

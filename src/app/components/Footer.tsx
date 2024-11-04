@@ -3,8 +3,8 @@ import { LinkItem } from '@/app/lib/definition';
 
 export default function Footer() {
     const footer_links: LinkItem[] = [
-        { href: '/contact-us', name: 'Nous Contacter' },
-        { href: '/privacy-policy', name: 'Mentions Légales' },
+        { href: '/nous-contacter', name: 'Nous Contacter' },
+        { href: '/mentions-legales', name: 'Mentions Légales' },
     ];
 
     return (

@@ -15,4 +15,25 @@
     li {
         padding-left: 2%;
     }
+
+    th {
+        @apply bg-sky-400 text-left;
+    }
+
+    th,
+    td {
+        @apply p-2;
+    }
+
+    td {
+        @apply bg-green-400;
+    }
+
+    .zero {
+        @apply bg-red-400;
+    }
+
+    [href^='#article_'] {
+        @apply hover:text-cyan-500;
+    }
 }
