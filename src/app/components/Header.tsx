@@ -4,7 +4,6 @@ import {
     DocumentCurrencyRupeeIcon,
     ScaleIcon,
     TrophyIcon,
-    AdjustmentsVerticalIcon,
     ChatBubbleLeftRightIcon,
     AcademicCapIcon
 } from '@heroicons/react/24/outline';
