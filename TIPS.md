@@ -16,6 +16,8 @@ https://stackoverflow.com/questions/55537574/format-tsx-files-on-save-in-vs-code
 
 https://stackoverflow.com/questions/72596908/could-not-resolve-dependency-error-peer-react16-8-0-17-0-0-from-materia
 
+use react icons instead => https://react-icons.github.io/react-icons/
+
 # TAILWINDCSS
 
 Install Prettier and Tailwind Intellisense

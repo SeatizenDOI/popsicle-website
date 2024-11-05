@@ -1,12 +1,8 @@
 'use client';
 
-import {
-    DocumentCurrencyRupeeIcon,
-    ScaleIcon,
-    TrophyIcon,
-    ChatBubbleLeftRightIcon,
-    AcademicCapIcon,
-} from '@heroicons/react/24/outline';
+import { FaQuestionCircle } from 'react-icons/fa';
+import { VscLaw } from 'react-icons/vsc';
+import { GiDna2, GiTransparentTubes, GiPodium } from 'react-icons/gi';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LinkItem } from '@/app/lib/definition';
@@ -15,28 +11,28 @@ import { useState } from 'react';
 import '@/app/ui/header.css';
 
 const url_paths: LinkItem[] = [
-    { name: 'Règlements', href: '/reglements', icon: ScaleIcon },
+    { name: 'Règlements', href: '/reglements', icon: VscLaw },
     {
         name: 'Protocoles',
         href: '/protocoles',
-        icon: DocumentCurrencyRupeeIcon,
+        icon: GiTransparentTubes,
     },
     {
         name: 'En Avant La Science',
         href: '/en-avant-la-science',
-        icon: AcademicCapIcon,
+        icon: GiDna2,
     },
-    { name: 'Classements', href: '/classements', icon: TrophyIcon },
-    { name: 'FAQ', href: '/faq', icon: ChatBubbleLeftRightIcon },
+    { name: 'Classements', href: '/classements', icon: GiPodium },
+    { name: 'FAQ', href: '/faq', icon: FaQuestionCircle },
 ];
 
 export default function Header() {
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     return (
-        <div className="fixed left-0 top-0 z-50 flex w-full flex-row items-center justify-between bg-white">
+        <div className="to fixed left-0 top-0 z-50 flex w-full flex-row items-center justify-between backdrop-blur-lg">
             <Link className="mb-2 flex items-end justify-start p-4" href="/">
-                <div className="w-32 font-black text-black md:w-40">
+                <div className="w-32 md:w-40">
                     <Image
                         src="/logo.png"
                         width={250}

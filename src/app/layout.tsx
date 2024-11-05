@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { archivo } from '@/app/ui/fonts';
+import { poppins } from '@/app/ui/fonts';
 import '@/app/ui/globals.css';
 
 export const metadata: Metadata = {
@@ -8,7 +8,6 @@ export const metadata: Metadata = {
         default: 'POPSICLE',
     },
     description: 'Page pour le championnat lié au projet POPSICLE',
-    // metadataBase: new URL('https://zenodo.org/records/13374497'),
 };
 
 export default function RootLayout({
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="fr">
-            <body className={`${archivo.className} antialiased`}>
+            <body className={`${poppins.className} antialiased`}>
                 {children}
             </body>
         </html>
