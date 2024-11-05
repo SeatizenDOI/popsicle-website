@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Classement',
-    description: 'Classement et statistiques des participants',
+    title: 'Nous Contacter',
+    description: 'Liens vers nos réseaux',
 };
 
 export default function Page() {

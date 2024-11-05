@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import { archivo } from '@/app/ui/fonts';
-import "@/app/ui/globals.css";
-
+import '@/app/ui/globals.css';
 
 export const metadata: Metadata = {
     title: {
