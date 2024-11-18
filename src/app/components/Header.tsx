@@ -30,7 +30,7 @@ export default function Header() {
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     return (
-        <div className="to fixed left-0 top-0 z-50 flex w-full flex-row items-center justify-between backdrop-blur-lg">
+        <div className="to fixed left-0 top-0 z-10 flex h-40 w-full flex-row items-center justify-between bg-white">
             <Link className="mb-2 flex items-end justify-start p-4" href="/">
                 <div className="w-32 md:w-40">
                     <Image

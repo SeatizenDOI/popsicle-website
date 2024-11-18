@@ -5,3 +5,8 @@ export interface LinkItem {
     href: string;
     icon?: IconType;
 }
+
+export interface LogoItem {
+    path: string;
+    alt: string;
+}

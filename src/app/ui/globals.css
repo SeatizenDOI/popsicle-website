@@ -11,9 +11,12 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --primary_orange: #d18933;
+    --primary_red: #6e0203;
+    --primary_text: #020617;
 }
 
 body {
-    color: var(--foreground);
+    color: var(--primary_text);
     background: var(--background);
 }
