@@ -14,6 +14,8 @@ const config: Config = {
                 primary_orange: 'var(--primary_orange)',
                 primary_red: 'var(--primary_red)',
                 primary_text: 'var(--primary_text)',
+                primary_grey: 'var(--primary_grey)',
+                secondary_grey: 'var(--secondary_grey)',
             },
         },
     },
