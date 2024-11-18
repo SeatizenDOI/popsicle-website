@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { LinkItem } from '@/app/lib/definition';
+import { SocialMediaComponent } from '@/app/components/SocialMedia';
 
 export default function Footer() {
     const footer_links: LinkItem[] = [
@@ -8,31 +9,26 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-gray-5 py-8 font-medium">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-wrap items-center justify-center md:justify-between">
-                    {/* Left section with navigation links */}
-                    <div className="mb-4 md:mb-0">
-                        <div className="flex flex-row gap-4">
-                            {footer_links.map((link) => {
-                                return (
-                                    <Link
-                                        key={link.name}
-                                        href={link.href}
-                                        className="hover:text-blue-600"
-                                    >
-                                        {link.name}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </div>
+        <footer className="px-4 py-8 font-medium">
+            <div className="flex flex-col md:flex-row md:justify-between">
+                <div className="mb-4 flex flex-row justify-center gap-4 md:mb-0">
+                    {footer_links.map((link) => {
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="hover:text-blue-600"
+                            >
+                                {link.name}
+                            </Link>
+                        );
+                    })}
+                </div>
+                <SocialMediaComponent />
 
-                    {/* Right section with copyright */}
-                    <div className="text-center text-gray-400">
-                        © 2024 <span className="font-semibold">POPSICLE</span>.
-                        Tous droits réservés.
-                    </div>
+                <div className="text-center text-gray-400">
+                    © 2024 <span className="font-semibold">POPSICLE</span>.
+                    Tous droits réservés.
                 </div>
             </div>
         </footer>

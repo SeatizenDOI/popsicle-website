@@ -4,10 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { LogoItem } from '@/app/lib/definition';
-
-import { FaFacebook, FaW, FaWhatsapp } from 'react-icons/fa6';
-import { SiGmail } from 'react-icons/si';
-
+import { SocialMediaComponent } from '@/app/components/SocialMedia';
 export default function HomePage() {
     const logos: LogoItem[] = [
         { path: '/logo/cnrs.jpg', alt: 'Logo du CNRS' },
@@ -56,7 +53,7 @@ export default function HomePage() {
                         </h2>
                         <Link
                             href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                            className="bg-primary_orange hover:bg-primary_red m-8 inline-block w-fit rounded-lg px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 lg:m-16"
+                            className="m-8 inline-block w-fit rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-16"
                         >
                             <p>Inscrivez-vous</p>
                         </Link>
@@ -73,7 +70,7 @@ export default function HomePage() {
                 </div>
                 <div className="relative bottom-0 hidden flex-col items-center space-y-2 lg:flex">
                     <div
-                        className="bg-primary_orange hover:bg-primary_red mb-2 flex h-12 w-12 animate-bounce items-center justify-center rounded-full"
+                        className="mb-2 flex h-12 w-12 animate-bounce items-center justify-center rounded-full bg-primary_orange hover:bg-primary_red"
                         onClick={() => scrollToNextSection(section2Ref)}
                     >
                         <svg
@@ -95,17 +92,17 @@ export default function HomePage() {
             </section>
             <hr className="block lg:hidden" />
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
+                className="mb-8 flex h-auto flex-col justify-between xl:h-[calc(100vh-10rem)]"
                 ref={section2Ref}
             >
                 <div className="flex flex-col">
-                    <h1 className="[&>span]:text-primary_orange py-12 text-center text-xl font-semibold lg:text-4xl">
+                    <h1 className="py-12 text-center text-xl font-semibold lg:text-4xl [&>span]:text-primary_orange">
                         <span>POP</span>ulation <span>SI</span>ze of{' '}
                         <span>C</span>
                         oastal and <span>L</span>arge pelagic Fish<span>E</span>
                         s
                     </h1>
-                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:w-7/12 lg:text-lg lg:font-semibold">
+                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Le projet POPSICLE est financé par le FEAMPA et vise à
                         fournir les informations scientifiques pour une
                         exploitation durable du Croisant queu jaune (Variola
@@ -114,7 +111,7 @@ export default function HomePage() {
                         maturité des poissons. Ce projet se déroule à La Réunion
                         et à Mayotte jusqu’en 2026.{' '}
                     </p>
-                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:w-7/12 lg:text-lg lg:font-semibold">
+                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Afin de pouvoir collecter les échantillons nécessaires,
                         les partenaires du projet (IFREMER, CNS, OFB/Parc
                         Naturel Marin de Mayotte et CAPAM) proposent une
@@ -122,7 +119,7 @@ export default function HomePage() {
                         permettront de mieux connaître la biologie de cette
                         espèce et d’estimer la taille de la population.{' '}
                     </p>
-                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:w-7/12 lg:text-lg lg:font-semibold">
+                    <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         L’objectif de ce projet reste de gérer durablement cette
                         espèce et un nombre maximum de poissons pêché est fixé à
                         1000 pour ne pas mettre de pression sur la ressource.
@@ -132,16 +129,16 @@ export default function HomePage() {
                         atteint.
                     </p>
 
-                    <div className="flex flex-wrap justify-evenly pt-4">
+                    <div className="flex w-full flex-wrap justify-around self-center px-4 xl:w-10/12">
                         {logos.map((l) => {
                             return (
                                 <Image
                                     key={l.path}
                                     src={l.path}
                                     alt={l.alt}
-                                    width={512}
-                                    height={512}
-                                    className="h:4 w-auto overflow-hidden py-4 lg:h-32"
+                                    width={256}
+                                    height={256}
+                                    className="h:4 w-auto"
                                 />
                             );
                         })}
@@ -150,7 +147,7 @@ export default function HomePage() {
 
                 <div className="relative bottom-0 hidden flex-col items-center space-y-2 lg:flex">
                     <div
-                        className="bg-primary_orange hover:bg-primary_red mb-2 flex h-12 w-12 animate-bounce items-center justify-center rounded-full"
+                        className="mb-2 flex h-12 w-12 animate-bounce items-center justify-center rounded-full bg-primary_orange hover:bg-primary_red"
                         onClick={() => scrollToNextSection(section3Ref)}
                     >
                         <svg
@@ -174,81 +171,78 @@ export default function HomePage() {
             <hr className="block lg:hidden" />
 
             <section
-                className="flex h-auto lg:h-[calc(100vh-10rem)]"
+                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
                 ref={section3Ref}
             >
                 <div className="flex flex-col border">
-                    <div className="flex flex-col border">
-                        <h1 className="self-center text-4xl font-bold">
-                            Comment participer ?
-                        </h1>
-                        <p>
-                            Après avoir pris connaissance du règlement, vous
-                            pouvez nous contacter par 3 moyens.
-                        </p>
-                        <div className="flex flex-row justify-between border">
-                            <div className="flex min-h-64 flex-col justify-between">
-                                <h1 className="self-center text-xl font-semibold">
-                                    Formulaire de contact
-                                </h1>
-                                <p></p>
-                                <Link
-                                    href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                    className="bg-primary_orange hover:bg-primary_red inline-block w-fit self-center rounded-lg px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 lg:m-4"
-                                >
-                                    <p>Contactez-vous</p>
-                                </Link>
-                            </div>
-                            <div className="flex min-h-64 flex-col justify-between">
-                                <h1 className="self-center text-xl font-semibold">
-                                    Formulaire de demande d'inscription
-                                </h1>
-                                <p className="w-3/6 self-center text-justify">
-                                    En remplissant ce formulaire, vous entrez
-                                    dans la file d’attente pour participer au
-                                    projet.
-                                </p>
-                                <Link
-                                    href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                    className="bg-primary_orange hover:bg-primary_red inline-block w-fit self-center rounded-lg px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 lg:m-4"
-                                >
-                                    <p>Inscrivez-vous</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <h1>Réseaux</h1>
-                                <p>
-                                    Suivez-nous sur les réseaux et
-                                    contactez-nous pour toutes informations.
-                                </p>
-                                <div>
-                                    <FaFacebook />
-                                    <FaWhatsapp />
-                                    <SiGmail />
-                                </div>
+                    <h1 className="m-8 self-center text-4xl font-bold">
+                        Comment participer ?
+                    </h1>
+                    <p className="m-8 self-center">
+                        Après avoir pris connaissance du règlement, vous pouvez
+                        nous contacter par 3 moyens.
+                    </p>
+                    <div className="flex flex-col justify-between border lg:flex-row">
+                        <div className="m-8 flex min-h-64 w-96 flex-col justify-between border">
+                            <h1 className="self-center pt-4 text-xl font-semibold">
+                                Formulaire de contact
+                            </h1>
+                            <p></p>
+                            <Link
+                                href="/nous-contacter"
+                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-4"
+                            >
+                                <p>Contactez-vous</p>
+                            </Link>
+                        </div>
+                        <div className="m-8 flex min-h-64 w-96 flex-col justify-around border">
+                            <h1 className="pt-4 text-center text-xl font-semibold">
+                                Formulaire de demande d'inscription
+                            </h1>
+                            <p className="w-3/6 self-center text-justify">
+                                En remplissant ce formulaire, vous entrez dans
+                                la file d’attente pour participer au projet.
+                            </p>
+                            <Link
+                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-4"
+                            >
+                                <p>Inscrivez-vous</p>
+                            </Link>
+                        </div>
+                        <div className="m-8 flex min-h-64 w-96 flex-col justify-between border">
+                            <h1 className="self-center pt-4 text-xl font-semibold">
+                                Réseaux
+                            </h1>
+                            <p className="w-3/6 self-center text-justify">
+                                Suivez-nous sur les réseaux et contactez-nous
+                                pour toutes informations.
+                            </p>
+                            <div className="p-8">
+                                <SocialMediaComponent />
                             </div>
                         </div>
                     </div>
-                    <div className="relative bottom-0 hidden flex-col items-center space-y-2 lg:flex">
-                        <div
-                            className="bg-primary_orange hover:bg-primary_red flex h-12 w-12 animate-bounce items-center justify-center rounded-full"
-                            onClick={() => scrollToNextSection(section1Ref)}
+                </div>
+                <div className="relative bottom-0 hidden flex-col items-center space-y-2 lg:flex">
+                    <div
+                        className="flex h-12 w-12 animate-bounce items-center justify-center rounded-full bg-primary_orange hover:bg-primary_red"
+                        onClick={() => scrollToNextSection(section1Ref)}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 rotate-180 text-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 rotate-180 text-white"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M19 9l-7 7-7-7"
-                                />
-                            </svg>
-                        </div>
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
                     </div>
                 </div>
             </section>
