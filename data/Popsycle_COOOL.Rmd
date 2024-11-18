@@ -1,0 +1,4453 @@
+---
+title: "Suivi des échantillons de *Variola louti* du projet POPSYCLE"
+author: "Jérémie CHANUT - COOOL Research"
+date: "2024-10-15"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    highlight: tango
+    theme: journal
+    number_sections: true
+---
+
+<style>
+
+h1.title {
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid black;
+  padding: 10px;
+  font-size: 24px;
+}
+</style>
+
+
+<br><br>
+
+# <u>Contexte de l'étude</u>
+
+Ce document est une synthèse de la base de donnée POPSYCLE sur l'espèce de Mérou croissant queue jaune : *Variola Louti*.  
+Les échantillons ont été prélevé par : L'equipe de COOOL Research, l'equipe de l'IFREMER DOI, l'equipe du parc marin à Mayotte ainsi que des partenaire privée aux Seychelles et à Rodrigue.  
+L'échantillonage suis un protocole établis par la société COOOL Research.  
+Ils ont été effectué sur des poissons issue de pêche récréative et de pêche professionelle.  
+
+<br>
+
+
+Lien du protocole : [Protocole d'échantillonage du Variola louti](https://drive.google.com/file/d/1_b8egUsBNQzNJAU4so1ld9rhWFYtKTfh/view?usp=sharing)
+
+<br>
+
+Lien de la fiche de suivi de la maturité : [Fiche description  maturité](https://drive.google.com/file/d/1bYurOWL1f_V29Q6CiRX8hGazXaHLPhBG/view?usp=sharing)
+
+<br><br>  <!-- Ajoute deux lignes vides -->
+
+# <u>Rappel Biologique de l'espèce</u>
+
+<br><br>
+
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+  knitr::include_graphics("https://drive.google.com/uc?export=view&id=1jTi2Fp1LPfCn3lZsJTow5AvPGxlW96Si")
+```
+
+
+<br>
+
+**Croissant Queue Jaune** : *Variola louti* (Forsskäl, 1775)
+
+***
+
+<u>**Code FAO**</u> : VRL  
+<u>**Nom local**</u> : Rouge grand queue, Grand queue  
+<u>**Nom anglais**</u> : Yellow-edge lyretail  
+
+***
+
+<u>**Description**</u>
+
+- Nageoire caudale très concave en croissant, bordée d’un liseré jaune
+- Les bordures posterieures de toutes les nageoires sonts jaune
+- La coloration générale du corps varie du violet au rouge. Des points bleux peuvent devenir coalescents et former des lignes courtes et vermiculées.
+- Les juvéniles ont le ventre blanc, des points claire et une ligne blanche et étroites au milieu du corps, partant de la bouche à la nageoire dorsale.
+- Épines dorsales : 9 ; rayons mous dorsaux : 13 à 15
+
+<u>**Ecologie**</u>  
+
+- Zones coraliennes florissantes des lagons et des pentes externes de 1 > 180m.
+- Se nourrit principalement de poissons et occasionnelement de crustacés. 
+- Communs dans beaucoup de régions.
+- Ciguatérique dans certaines régions.
+
+<u>**Distributions**</u>  
+
+De la mer Rouge aux iles Marquises et Pitcairn ; Du sud du Japon aux iles L.Howe et Rapa
+
+
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+  knitr::include_graphics("https://drive.google.com/uc?export=view&id=1MIHNUINWnsnyGkHRVg4E5-NOSNWdQLaD")
+```
+
+***
+
+# <u>Suivi général</u>
+
+<br><br>
+
+## <u>Suivi général des echantillons</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Compter le nombre d'échantillons par site
+site_counts <- filtered_data %>%
+  group_by(Site) %>%
+  summarise(Nb_Samples = n(), .groups = 'drop')
+
+# Définir manuellement une palette de couleurs pour les sites
+site_colors <- c("Mayotte" = "#60BD68", "Reunion" = "#DECF3F",
+                 "Seychelles" = "#F15854", "Rodrigues" = "#FAA43A")
+
+# Calculer le total des échantillons
+total_samples <- sum(site_counts$Nb_Samples)
+
+# Créer un camembert avec ggplot2 et la palette de couleurs définie
+pie_chart <- ggplot(site_counts, aes(x = "", y = Nb_Samples, fill = Site)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Repartition des echantillons par pays de la zone Ocean Indien",
+       caption = paste("Total des echantillons :", total_samples)) +  # Ajouter le total des échantillons
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        plot.caption = element_text(hjust = 0.5, size = 12, face = "bold")) +  # Titre centré et légende centrée
+  geom_text(aes(label = Nb_Samples),
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = site_colors)  # Utiliser les couleurs manuelles
+
+# Afficher le graphique
+print(pie_chart)
+
+
+```
+
+<br><br>
+
+## <u>Echantillon par mois et par site</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL'.")
+}
+
+# Compter le nombre de poissons par mois et par site
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Site) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sites
+all_months_sites <- expand.grid(Mouth_capture = month.abb, 
+                                Site = unique(filtered_data$Site))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sites %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Site")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.2  # 120% de la valeur maximale
+
+# Définir manuellement une palette de couleurs pour les sites
+site_colors <- c("Mayotte" = "#60BD68","Reunion" = "#DECF3F", 
+                 "Seychelles" = "#F15854", "Rodrigues" = "#FAA43A")
+
+# Créer l'histogramme avec des couleurs par site (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Site)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Nombre d'echantillons par mois et par site"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = site_colors, name = "Site") +  # Utiliser les couleurs manuelles pour les sites
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),  # Centrer et formater le titre
+    plot.margin = margin(t = 10, r = 10, b = 0, l = 10, unit = "pt")  # Ajuster les marges du graphique
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y sans expansion
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+
+```
+
+<br><br>
+
+## <u>Cartographie</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(dplyr)
+library(leaflet)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Convertir les colonnes de latitude et longitude en vecteurs plats
+data <- data %>%
+  mutate(
+    Latitude_capture = unlist(Latitude_capture),
+    Longitude_capture = unlist(Longitude_capture),
+    Latitude_capture = as.numeric(Latitude_capture),
+    Longitude_capture = as.numeric(Longitude_capture)
+  )
+
+# Filtrer les données pour l'espèce 'VRA'
+filtered_data <- data %>% filter(Code_FAO == "VRL")
+
+# Compter le nombre d'individus par coordonnées, et par sexe
+counted_data <- filtered_data %>%
+  group_by(Latitude_capture, Longitude_capture) %>%
+  summarise(
+    count = n(),
+    males = sum(Sexe == "M", na.rm = TRUE),   # Compter les mâles
+    females = sum(Sexe == "F", na.rm = TRUE), # Compter les femelles
+    Position_capture = paste(unique(Position_capture), collapse = ", ")  # Récupérer les positions de capture
+  )
+
+# Créer une carte avec les coordonnées GPS
+carte <- leaflet(counted_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude_capture,
+    lat = ~Latitude_capture,
+    color = "blue",
+    radius = ~sqrt(count) * 2,  # Ajuster le rayon selon le nombre d'individus
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "<div style='width: 200px; background-color: white; border: 1px solid black; padding: 10px; text-align: center;'>",
+      "<strong>Position de capture:</strong><br>", Position_capture, "<br/><br/>",  # Afficher Position_capture
+      "<strong>Nombre total d'individus:</strong><br><strong>", count, "</strong><br/><br/>",  # Interligne après le total
+      "<strong>Nombre de mâles:</strong><br><strong style='color: blue;'>", males, "</strong><br/><br/>",  # Interligne après les mâles
+      "<strong>Nombre de femelles:</strong><br><strong style='color: #D5006D;'>", females, "</strong></div>"
+    )
+  )
+
+# Afficher la carte
+carte
+
+```
+
+<br><br>
+
+## Nombre d'echantillon par sexe
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce VRL
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Compter le nombre d'individus par sexe
+sex_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nombre = n(), .groups = 'drop')
+
+# Calculer le total
+total_individuals <- sum(sex_counts$Nombre)
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(sex_counts, aes(x = "", y = Nombre, fill = Sexe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.caption = element_text(hjust = 0.5, face = "bold", size = 12),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)
+  ) +
+  geom_text(aes(label = Nombre),
+            position = position_stack(vjust = 0.5),
+            size = 4,
+            color = "black",
+            fontface = "bold") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("F" = "#FF9999", "M" = "#99CCFF", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("F" = "Femelle", "M" = "Male", "Ind" = "Indetermine", "NA" = "No_Data")) +
+  labs(caption = paste("Total:", total_individuals, "individus"))
+
+suppressWarnings(print(pie_chart))
+
+
+```
+
+<br><br>
+
+## <u>Repartition des echantillons suivant les mois</u>
+
+<br><br>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL'.")
+}
+
+# Compter le nombre de poissons par mois et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sexe
+all_months_sex <- expand.grid(Mouth_capture = month.abb, 
+                              Sexe = unique(filtered_data$Sexe))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.3  # 130% de la valeur maximale
+
+# Créer l'histogramme avec des couleurs par sexe (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Repartition des echantillons / mois"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = c("M" = "lightblue", "F" = "pink","Ind" = "#FDFD96",  "NA" = "grey"),  # Couleurs personnalisées pour mâles et femelles
+                    labels = c("M" = "Male", "F" = "Femelle"),
+                    name = "Sexe") +  # Nommer la légende
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 4, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")  # Centrer et formater le titre
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+```
+
+<br><br>
+
+## <u>Relation Taille/poids  </u>
+
+<br><br>
+
+```{r echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(googlesheets4)
+library(dplyr)
+library(ggiraph)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' 
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Mayotte'.")
+}
+
+# Assurez-vous que les colonnes 'Poids_entier' et 'Taille' existent et sont numériques
+filtered_data$Poids_entier <- as.numeric(as.character(filtered_data$Poids_entier))
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Calculer les limites des axes
+x_max <- max(filtered_data$Taille, na.rm = TRUE)
+y_max <- max(filtered_data$Poids_entier, na.rm = TRUE)
+x_limit <- ceiling(x_max * 1.2)  # 120% de la valeur maximale pour X, arrondi au supérieur
+y_limit <- y_max * 1.2  # 120% de la valeur maximale pour Y
+
+# Créer le nuage de points avec ggplot
+p <- ggplot(filtered_data, aes(x = Taille, y = Poids_entier, color = Sexe, shape = Type_Taille)) +
+  geom_point_interactive(aes(
+    tooltip = paste("CODE_BARRE_Poisson:", CODE_BARRE_Poisson, 
+                    "<br>Taille:", Taille, 
+                    "<br>Poids:", Poids_entier, 
+                    "<br>Sexe:", Sexe,
+                    "<br>Type Taille:", Type_Taille),
+    data_id = CODE_BARRE_Poisson
+  ), size = 2) +  
+  scale_color_manual(values = c("M" = "blue", "F" = "#D5006D" , "Ind" = "#FDFD96", "NA" = "grey39")) +
+  scale_shape_manual(values = c("LF" = 16, "LT" = 17)) +  # 16 pour cercle plein, 17 pour triangle plein
+  scale_x_continuous(limits = c(0, x_limit), 
+                     breaks = seq(0, x_limit, by = 5),
+                     expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, y_limit), 
+                     breaks = seq(0, y_limit, length.out = 10), 
+                     labels = scales::number_format(accuracy = 0.001),
+                     expand = c(0, 0)) +
+  labs(x = "Taille (cm)", y = "Poids (kg)", 
+       title = "Relation Taille / Poids",
+       shape = "Type de Taille") +  # Ajout d'un titre pour la légende des formes
+  theme(panel.background = element_rect(fill = "lightgray"),
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Afficher le graphique interactif
+girafe(ggobj = p)
+
+```
+
+<br><br>
+
+## <u>Histogramme des échantillons de *variola louti* par classe de taille (4cm)</u>
+
+<br><br>
+
+```{r chunks-settings, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+if (!is.numeric(filtered_data$Taille)) {
+  filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+}
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.2
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE))  # Classes de 4 cm, étendu à 120%
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 80%
+y_max <- max(class_counts$Nb_Poissons) * 1.8  # 180% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind", "NA" = "grey")) +  # Couleurs par sexe et labels modifiés
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +  # Échelle étendue à 120%
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 12)
+                                            
+
+# Afficher le graphique final
+print(final_plot)
+
+
+```
+
+<br><br>
+
+## <u>Histogramme des echantillons de variola par Sexe<u/>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et exclure les NA
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL") %>%
+  mutate(Taille = as.numeric(as.character(Taille))) %>%
+  filter(!is.na(Taille), !is.na(Sexe), Sexe != "NA")  # Ajout de Sexe != "NA"
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.2
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE, include.lowest = TRUE))
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 80%
+y_max <- max(class_counts$Nb_Poissons) * 1.8  # 180% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(drop = FALSE) +  # Ceci empêchera la suppression des niveaux vides
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 9)
+                                          
+
+# Afficher le graphique final
+print(final_plot)
+
+```
+
+<br><br>
+
+## <u>Histogramme classe de taille des NA</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et uniquement les NA
+filtered_data <- data %>% filter(Code_FAO == "VRL" & is.na(Sexe))
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max(Taille, na.rm = TRUE) * 1.2, by = 4), right = FALSE))
+
+# Compter le nombre de poissons par classe
+class_counts <- filtered_data %>%
+  group_by(Classe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Calculer le maximum de l'axe y
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs pour les NA
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons)) +
+  geom_bar(stat = "identity", fill = "grey") +  # Barres pour les NA
+  labs(title = "Histogramme des tailles : Poisson non-sex\u00e9",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(
+    breaks = seq(0, ceiling(y_max), by = 1), 
+    limits = c(0, ceiling(y_max)),
+    expand = c(0, 0)  # Cette ligne supprime l'espace en bas
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Figure : Suivi de la maturité par mois</u>
+
+<br><br>
+
+[Fiche description maturité](https://drive.google.com/file/d/1bYurOWL1f_V29Q6CiRX8hGazXaHLPhBG/view?usp=sharing)
+
+***
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et enlever les NA
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL", !is.na(Maturity))
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' avec une maturité non-NA.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois et par maturité
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de maturité (sans NA)
+all_months_maturity <- expand.grid(Mouth_capture = month.abb, 
+                                   Maturity = c(1, 2, 3, 4))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturité") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturité par Mois") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Suivi Maturité par mois et par sexe</u>
+
+<br>
+
+[Fiche description maturité](https://drive.google.com/file/d/1bYurOWL1f_V29Q6CiRX8hGazXaHLPhBG/view?usp=sharing)
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EEA'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL'.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois, par maturité et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois, toutes les combinaisons de maturité et de sexe
+all_months_maturity_sex <- expand.grid(
+  Mouth_capture = month.abb, 
+  Maturity = c(1, 2, 3, 4, NA),
+  Sexe = c("F", "M")
+)
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4, NA)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture, Sexe) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité et des facettes par sexe
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Sexe, ncol = 1) +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturity") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturite par Mois et par Sexe") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+```
+
+
+## <u>Bilan des Otolithe en stock </u>
+
+<br><br>
+
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+  knitr::include_graphics("https://drive.google.com/uc?export=view&id=16N8QuEqNL39pPf3djhuenfQ1u1glYlw4")
+```
+
+<br>
+
+> Nomenclature des echelles de notation de la qualité des otolithes :  
+
+- a = Otolithe entier  
+- b = Otolithe avec une pointe cassée ou une extremitée cassée 
+- c = Otolithe cassé en deux  
+- NA = Absence d'otolithe
+
+<br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EFT'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Compter le nombre d'otolithes par catégorie
+otolith_counts <- filtered_data %>%
+  group_by(Otolithe) %>%
+  summarise(Nb_Otolithes = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(otolith_counts, aes(x = "", y = Nb_Otolithes, fill = Otolithe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Correction ici
+  labs(title = "Repartition du nombre d'otolithes par categorie") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14)) +  # Titre centré
+  geom_text(aes(label = Nb_Otolithes), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_brewer(palette = "Set2")  # Palette de couleurs plus attrayante
+
+# Afficher le graphique
+print(pie_chart)
+
+```
+
+<br><br>
+
+## <u> Bilan des échantillons de muscle et de nageoire</u>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)  # pour replace_na()
+library(patchwork)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'NXM'
+filtered_data <- data[data$Code_FAO == "VRL", ]
+
+# Remplacer les NA dans No_echantillon_muscle par une valeur explicite pour le comptage
+filtered_data <- filtered_data %>%
+  mutate(No_echantillon_muscle = replace_na(No_echantillon_muscle, "NA"))
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon muscle
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Muscle = ifelse(No_echantillon_muscle == "NA", "No muscle sample", "Muscle sample"))
+
+# Compter le nombre d'échantillons présents ou absents
+Muscle_counts <- filtered_data %>%
+  group_by(Genetique_Muscle) %>%
+  summarise(Nb_Muscle = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P2 <- ggplot(Muscle_counts, aes(x = "", y = Nb_Muscle, fill = Genetique_Muscle)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Muscle Sample") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Muscle), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Muscle sample" = "#90EE90",  # Vert pâle
+                               "No muscle sample" = "#F08080"))  # Rouge pâle
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon génétique
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Finclip = ifelse(is.na(No_echantillon_Finclip), "No Fin-Clip", "Nombre Fin-Clip"))
+
+# Compter le nombre d'échantillons présents ou absents, y compris les NA
+Fin_counts <- filtered_data %>%
+  group_by(Genetique_Finclip) %>%
+  summarise(Nb_Fin = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P1 <- ggplot(Fin_counts, aes(x = "", y = Nb_Fin, fill = Genetique_Finclip)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Fin-Clip") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Fin), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Nombre Fin-Clip" = "#90EE90",  # Vert pâle
+                               "No Fin-Clip" = "#F08080"))  # Rouge pâle
+
+# Ajouter un titre au-dessus des graphes, centré et en gras (sans soulignement)
+full_plot <- P1 + P2 + 
+  plot_annotation(
+    title = "Bilan des echantillons genetiques",
+    theme = theme(plot.title = element_text(hjust = 0.35, face = "bold", size = 18, 
+                                            lineheight = 1.5, margin = margin(b = 16)))
+  )
+
+# Afficher les graphiques combinés avec le titre
+print(full_plot)
+
+```
+
+<br><br>
+
+## <u>Tableau récapitulatif des données</u>
+
+
+<br><br>
+
+# <u>Suivi Réunion<u/>
+
+<br><br>
+
+## <u>Réunion : Cartographie</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(dplyr)
+library(leaflet)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Convertir les colonnes de latitude et longitude en vecteurs plats
+data <- data %>%
+  mutate(
+    Latitude_capture = unlist(Latitude_capture),
+    Longitude_capture = unlist(Longitude_capture),
+    Latitude_capture = as.numeric(Latitude_capture),
+    Longitude_capture = as.numeric(Longitude_capture)
+  )
+
+# Filtrer les données pour l'espèce 'VRL' et le site 'Reunion'
+filtered_data <- data %>% 
+  filter(Code_FAO == "VRL", Site == "Reunion")
+
+# Compter le nombre d'individus par coordonnées, et par sexe
+counted_data <- filtered_data %>%
+  group_by(Latitude_capture, Longitude_capture) %>%
+  summarise(
+    count = n(),
+    males = sum(Sexe == "M", na.rm = TRUE),
+    females = sum(Sexe == "F", na.rm = TRUE),
+    Position_capture = paste(unique(Position_capture), collapse = ", ")
+  )
+
+# Créer une carte avec les coordonnées GPS
+carte <- leaflet(counted_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude_capture,
+    lat = ~Latitude_capture,
+    color = "blue",
+    radius = ~sqrt(count) * 2,
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "<div style='width: 200px; background-color: white; border: 1px solid black; padding: 10px; text-align: center;'>",
+      "<strong>Position de capture:</strong><br>", Position_capture, "<br/><br/>",
+      "<strong>Nombre total d'individus:</strong><br><strong>", count, "</strong><br/><br/>",
+      "<strong>Nombre de mâles:</strong><br><strong style='color: blue;'>", males, "</strong><br/><br/>",
+      "<strong>Nombre de femelles:</strong><br><strong style='color: #D5006D;'>", females, "</strong></div>"
+    )
+  )
+
+# Afficher la carte
+carte
+```
+
+
+<br><br>
+
+## Réunion : Nombre d'echantillon par sexe
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce VRL
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Reunion", ]
+
+# Compter le nombre d'individus par sexe
+sex_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nombre = n(), .groups = 'drop')
+
+# Calculer les pourcentages
+sex_counts <- sex_counts %>%
+  mutate(Percentage = round(Nombre / sum(Nombre) * 100, 1))
+
+# Calculer le total
+total_individuals <- sum(sex_counts$Nombre)
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(sex_counts, aes(x = "", y = Nombre, fill = Sexe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.caption = element_text(hjust = 0.5, face = "bold", size = 12),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)
+  ) +
+  geom_text(aes(label = paste0(Nombre, "\n(", Percentage, "%)")),
+            position = position_stack(vjust = 0.5),
+            size = 4,
+            color = "black",
+            fontface = "bold") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("F" = "#FF9999", "M" = "#99CCFF", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("F" = "Femelle", "M" = "Male", "Ind" = "Indéterminé", "NA" = "No_Data")) +
+  labs(caption = paste("Total:", total_individuals, "individus"))
+
+suppressWarnings(print(pie_chart))
+
+
+```
+
+<br><br>
+
+## <u>Réunion : Répartition des echantillons par mois</u> 
+
+<br><br>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Reunion")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Reunion'.")
+}
+
+# Compter le nombre de poissons par mois et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sexe
+all_months_sex <- expand.grid(Mouth_capture = month.abb, 
+                              Sexe = unique(filtered_data$Sexe))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.3  # 130% de la valeur maximale
+
+# Créer l'histogramme avec des couleurs par sexe (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Nombre d'echantillons par mois à la Réunion"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = c("M" = "lightblue", "F" = "pink","Ind" = "#FDFD96",  "NA" = "grey"),  # Couleurs personnalisées
+                    labels = c("M" = "Males", "F" = "Femelles"),
+                    name = "Sexe") +  # Nommer la légende
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 4, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")  # Centrer et formater le titre
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+
+```
+
+<br><br>
+
+## <u>Réunion : Relation Taille/poids  </u>
+
+<br><br>
+
+```{r echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(googlesheets4)
+library(dplyr)
+library(ggiraph)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Reunion")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Reunion'.")
+}
+
+# Assurez-vous que les colonnes 'Poids_entier' et 'Taille' existent et sont numériques
+filtered_data$Poids_entier <- as.numeric(as.character(filtered_data$Poids_entier))
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Calculer les limites des axes
+x_max <- max(filtered_data$Taille, na.rm = TRUE)
+y_max <- max(filtered_data$Poids_entier, na.rm = TRUE)
+x_limit <- ceiling(x_max * 1.2)  # 120% de la valeur maximale pour X, arrondi au supérieur
+y_limit <- y_max * 1.2  # 120% de la valeur maximale pour Y
+
+# Créer le nuage de points avec ggplot
+p <- ggplot(filtered_data, aes(x = Taille, y = Poids_entier, color = Sexe)) +
+  geom_point_interactive(aes(
+    tooltip = paste("CODE_BARRE_Poisson:", CODE_BARRE_Poisson, 
+                    "<br>Taille:", Taille, 
+                    "<br>Poids:", Poids_entier, 
+                    "<br>Sexe:", Sexe),
+    data_id = CODE_BARRE_Poisson
+  ), size = 1.5) +  # Définit une taille fixe pour tous les points
+  scale_color_manual(values = c("M" = "blue", "F" = "#D5006D" , "Ind" = "#FDFD96", "NA" = "grey39")) +
+  scale_x_continuous(limits = c(0, x_limit), 
+                     breaks = seq(0, x_limit, by = 5),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  scale_y_continuous(limits = c(0, y_limit), 
+                     breaks = seq(0, y_limit, length.out = 10), 
+                     labels = scales::number_format(accuracy = 0.001),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  labs(x = "Taille (cm)", y = "Poids (kg)", 
+       title = "Relation Taille / Poids : Reunion") +
+  theme(panel.background = element_rect(fill = "lightgray"),
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Afficher le graphique interactif
+girafe(ggobj = p)
+
+```
+
+<br><br>
+
+## <u>Réunion : Histogramme des échantillons de par classe de taille </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Reunion")
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+if (!is.numeric(filtered_data$Taille)) {
+  filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+}
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.2
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE))  # Classes de 4 cm, étendu à 120%
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 80%
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +  # Couleurs par sexe et labels modifiés
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +  # Échelle étendue à 120%
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 12)
+                                            
+
+# Afficher le graphique final
+print(final_plot)
+
+
+```
+
+<br><br>
+
+## <u>Réunion : Histogramme des echantillons par Sexe</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Reunion")%>%
+  mutate(Taille = as.numeric(as.character(Taille))) %>%
+  filter(!is.na(Taille), !is.na(Sexe), Sexe != "NA")  # Ajout de Sexe != "NA"
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.2
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE, include.lowest = TRUE))
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 20%
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +
+  labs(title = "Histogramme des tailles : Variola louti a la Reunion",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(drop = FALSE) +  # Ceci empêchera la suppression des niveaux vides
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 2)
+                                          
+
+# Afficher le graphique final
+print(final_plot)
+
+```
+
+<br><br>
+
+## <u>Réunion : Histogramme classe de taille des NA</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Vérifier les valeurs uniques pour les colonnes d'intérêt
+print(unique(data %>% filter(Code_FAO == "VRL") %>% select(Sexe, Site)))
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et les NA dans 'Sexe' pour le site 'Reunion'
+filtered_data <- data %>% filter(Code_FAO == "VRL" & (Sexe == "NA" | is.na(Sexe)) & Site == "Reunion")
+
+# Vérifier s'il y a des données après filtrage
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après le filtrage.")
+}
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Supprimer les valeurs NA dans la colonne 'Taille'
+filtered_data <- filtered_data %>% filter(!is.na(Taille))
+
+# Vérifier s'il y a des données après suppression des valeurs NA
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après suppression des valeurs manquantes.")
+}
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max(Taille, na.rm = TRUE) * 1.2, by = 4), right = FALSE))
+
+# Vérifier s'il y a des données après création des classes
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après création des classes.")
+}
+
+# Compter le nombre de poissons par classe
+class_counts <- filtered_data %>%
+  group_by(Classe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Calculer le maximum de l'axe y
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs pour les NA
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons)) +
+  geom_bar(stat = "identity", fill = "grey") +  # Barres pour les NA
+  labs(title = "Histogramme des tailles : Poisson non-sex\u00e9",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(
+    breaks = seq(0, ceiling(y_max), by = 1), 
+    limits = c(0, ceiling(y_max)),
+    expand = c(0, 0)  # Cette ligne supprime l'espace en bas
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Réunion : Suivi de la maturité par mois</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et enlever les NA
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL", !is.na(Maturity) & data$Site == "Reunion",)
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' avec une maturité non-NA.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois et par maturité
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de maturité (sans NA)
+all_months_maturity <- expand.grid(Mouth_capture = month.abb, 
+                                   Maturity = c(1, 2, 3, 4))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturité") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturité par Mois a la Reunion") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Réunion : Suivi Maturité par mois et par sexe</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et Site : Reunion
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Reunion", ]
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL'.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois, par maturité et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois, toutes les combinaisons de maturité et de sexe
+all_months_maturity_sex <- expand.grid(
+  Mouth_capture = month.abb, 
+  Maturity = c(1, 2, 3, 4, NA),
+  Sexe = c("F", "M")
+)
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4, NA)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture, Sexe) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité et des facettes par sexe
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Sexe, ncol = 1) +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturity") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturite par Mois et par Sexe a la Reunion") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+```
+
+<br><br>
+
+## <u>Réunion : Bilan des Otolithe en stock </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EFT'
+filtered_data <- data[data$Code_FAO == "VRL" & data$Site == "Reunion", ]
+
+# Compter le nombre d'otolithes par catégorie
+otolith_counts <- filtered_data %>%
+  group_by(Otolithe) %>%
+  summarise(Nb_Otolithes = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(otolith_counts, aes(x = "", y = Nb_Otolithes, fill = Otolithe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Correction ici
+  labs(title = "Repartition du nombre d'otolithes par categorie a la Reunion") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14)) +  # Titre centré
+  geom_text(aes(label = Nb_Otolithes), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_brewer(palette = "Set2")  # Palette de couleurs plus attrayante
+
+# Afficher le graphique
+print(pie_chart)
+
+```
+
+<br><br>
+
+## <u>Réunion : Bilan des échantillons de muscle et de nageoire</u>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)  # pour replace_na()
+library(patchwork)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Reunion", ]
+
+# Remplacer les NA dans No_echantillon_muscle par une valeur explicite pour le comptage
+filtered_data <- filtered_data %>%
+  mutate(No_echantillon_muscle = replace_na(No_echantillon_muscle, "NA"))
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon muscle
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Muscle = ifelse(No_echantillon_muscle == "NA", "No muscle sample", "Muscle sample"))
+
+# Compter le nombre d'échantillons présents ou absents
+Muscle_counts <- filtered_data %>%
+  group_by(Genetique_Muscle) %>%
+  summarise(Nb_Muscle = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P2 <- ggplot(Muscle_counts, aes(x = "", y = Nb_Muscle, fill = Genetique_Muscle)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Muscle Sample") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Muscle), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Muscle sample" = "#90EE90",  # Vert pâle
+                               "No muscle sample" = "#F08080"))  # Rouge pâle
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon génétique
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Finclip = ifelse(is.na(No_echantillon_Finclip), "No Fin-Clip", "Nombre Fin-Clip"))
+
+# Compter le nombre d'échantillons présents ou absents, y compris les NA
+Fin_counts <- filtered_data %>%
+  group_by(Genetique_Finclip) %>%
+  summarise(Nb_Fin = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P1 <- ggplot(Fin_counts, aes(x = "", y = Nb_Fin, fill = Genetique_Finclip)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Fin-Clip") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Fin), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Nombre Fin-Clip" = "#90EE90",  # Vert pâle
+                               "No Fin-Clip" = "#F08080"))  # Rouge pâle
+
+# Ajouter un titre au-dessus des graphes, centré et en gras (sans soulignement)
+full_plot <- P1 + P2 + 
+  plot_annotation(
+    title = "Bilan des echantillons genetiques a la Reunion",
+    theme = theme(plot.title = element_text(hjust = 0.35, face = "bold", size = 18, 
+                                            lineheight = 1.5, margin = margin(b = 16)))
+  )
+
+# Afficher les graphiques combinés avec le titre
+print(full_plot)
+
+```
+
+<br><br>
+
+# Mayotte
+
+<br><br>
+
+## <u>Mayotte : Cartographie</u>
+
+<br><br>
+
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(dplyr)
+library(leaflet)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Convertir les colonnes de latitude et longitude en vecteurs plats
+data <- data %>%
+  mutate(
+    Latitude_capture = unlist(Latitude_capture),
+    Longitude_capture = unlist(Longitude_capture),
+    Latitude_capture = as.numeric(Latitude_capture),
+    Longitude_capture = as.numeric(Longitude_capture)
+  )
+
+# Filtrer les données pour l'espèce 'VRL' et le site 'Reunion'
+filtered_data <- data %>% 
+  filter(Code_FAO == "VRL", Site == "Mayotte")
+
+# Compter le nombre d'individus par coordonnées, et par sexe
+counted_data <- filtered_data %>%
+  group_by(Latitude_capture, Longitude_capture) %>%
+  summarise(
+    count = n(),
+    males = sum(Sexe == "M", na.rm = TRUE),
+    females = sum(Sexe == "F", na.rm = TRUE),
+    Position_capture = paste(unique(Position_capture), collapse = ", ")
+  )
+
+# Créer une carte avec les coordonnées GPS
+carte <- leaflet(counted_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude_capture,
+    lat = ~Latitude_capture,
+    color = "blue",
+    radius = ~sqrt(count) * 2,
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "<div style='width: 200px; background-color: white; border: 1px solid black; padding: 10px; text-align: center;'>",
+      "<strong>Position de capture:</strong><br>", Position_capture, "<br/><br/>",
+      "<strong>Nombre total d'individus:</strong><br><strong>", count, "</strong><br/><br/>",
+      "<strong>Nombre de mâles:</strong><br><strong style='color: blue;'>", males, "</strong><br/><br/>",
+      "<strong>Nombre de femelles:</strong><br><strong style='color: #D5006D;'>", females, "</strong></div>"
+    )
+  )
+
+# Afficher la carte
+carte
+```
+
+<br><br>
+
+## Mayotte : Nombre d'echantillon par sexe
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce VRL
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Mayotte", ]
+
+# Compter le nombre d'individus par sexe
+sex_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nombre = n(), .groups = 'drop')
+
+# Calculer les pourcentages
+sex_counts <- sex_counts %>%
+  mutate(Percentage = round(Nombre / sum(Nombre) * 100, 1))
+
+# Calculer le total
+total_individuals <- sum(sex_counts$Nombre)
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(sex_counts, aes(x = "", y = Nombre, fill = Sexe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.caption = element_text(hjust = 0.5, face = "bold", size = 12),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)
+  ) +
+  geom_text(aes(label = paste0(Nombre, "\n(", Percentage, "%)")),
+            position = position_stack(vjust = 0.5),
+            size = 4,
+            color = "black",
+            fontface = "bold") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("F" = "#FF9999", "M" = "#99CCFF", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("F" = "Femelle", "M" = "Male", "Ind" = "Indéterminé", "NA" = "No_Data")) +
+  labs(caption = paste("Total:", total_individuals, "individus"))
+
+suppressWarnings(print(pie_chart))
+
+
+```
+
+<br><br>
+
+## <u>Mayotte : Répartition des echantillons par mois</u> 
+
+<br><br>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Mayotte")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Mayotte'.")
+}
+
+# Compter le nombre de poissons par mois et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sexe
+all_months_sex <- expand.grid(Mouth_capture = month.abb, 
+                              Sexe = unique(filtered_data$Sexe))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.3  # 130% de la valeur maximale
+
+# Créer l'histogramme avec des couleurs par sexe (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Nombre d'echantillons par mois à la Réunion"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = c("M" = "lightblue", "F" = "pink","Ind" = "#FDFD96",  "NA" = "grey"),  # Couleurs personnalisées
+                    labels = c("M" = "Males", "F" = "Femelles"),
+                    name = "Sexe") +  # Nommer la légende
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 4, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")  # Centrer et formater le titre
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+
+```
+
+<br><br>
+
+## <u>Mayotte : Relation Taille/poids </u>
+
+<br><br>
+
+```{r echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(googlesheets4)
+library(dplyr)
+library(ggiraph)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Mayotte")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Mayotte'.")
+}
+
+# Assurez-vous que les colonnes 'Poids_entier' et 'Taille' existent et sont numériques
+filtered_data$Poids_entier <- as.numeric(as.character(filtered_data$Poids_entier))
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Calculer les limites des axes
+x_max <- max(filtered_data$Taille, na.rm = TRUE)
+y_max <- max(filtered_data$Poids_entier, na.rm = TRUE)
+x_limit <- ceiling(x_max * 1.2)  # 120% de la valeur maximale pour X, arrondi au supérieur
+y_limit <- y_max * 1.2  # 120% de la valeur maximale pour Y
+
+# Créer le nuage de points avec ggplot
+p <- ggplot(filtered_data, aes(x = Taille, y = Poids_entier, color = Sexe, shape = Type_Taille)) +
+  geom_point_interactive(aes(
+    tooltip = paste("CODE_BARRE_Poisson:", CODE_BARRE_Poisson, 
+                    "<br>Taille:", Taille, 
+                    "<br>Poids:", Poids_entier, 
+                    "<br>Sexe:", Sexe,
+                    "<br>Type Taille:", Type_Taille),
+    data_id = CODE_BARRE_Poisson
+  ), size = 2) +  
+  scale_color_manual(values = c("M" = "blue", "F" = "#D5006D" , "Ind" = "#FDFD96", "NA" = "grey39")) +
+  scale_shape_manual(values = c("LF" = 16, "LT" = 17)) +  # 16 pour cercle plein, 17 pour triangle plein
+  scale_x_continuous(limits = c(0, x_limit), 
+                     breaks = seq(0, x_limit, by = 5),
+                     expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, y_limit), 
+                     breaks = seq(0, y_limit, length.out = 10), 
+                     labels = scales::number_format(accuracy = 0.001),
+                     expand = c(0, 0)) +
+  labs(x = "Taille (cm)", y = "Poids (kg)", 
+       title = "Relation Taille / Poids",
+       shape = "Type de Taille") +  # Ajout d'un titre pour la légende des formes
+  theme(panel.background = element_rect(fill = "lightgray"),
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Afficher le graphique interactif
+girafe(ggobj = p)
+
+```
+
+<br><br>
+
+## <u>Mayotte : Histogramme des échantillons par classe de taille </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Mayotte"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Mayotte")
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+if (!is.numeric(filtered_data$Taille)) {
+  filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+}
+
+# Calculer la valeur maximale de Taille et l'étendre de 60%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.6
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE))  # Classes de 4 cm, étendu à 120%
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 60%
+y_max <- max(class_counts$Nb_Poissons) * 2.2  # 160% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +  # Couleurs par sexe et labels modifiés
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +  # Échelle étendue à 120%
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 10)
+                                            
+
+# Afficher le graphique final
+print(final_plot)
+
+
+```
+
+<br><br>
+
+## <u>Mayotte : Histogramme des echantillons par Sexe</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Mayotte"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Mayotte")%>%
+  mutate(Taille = as.numeric(as.character(Taille))) %>%
+  filter(!is.na(Taille), !is.na(Sexe), Sexe != "NA")  # Ajout de Sexe != "NA"
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.6
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE, include.lowest = TRUE))
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 60%
+y_max <- max(class_counts$Nb_Poissons) * 1.6  # 160% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +
+  labs(title = "Histogramme des tailles : Variola louti a Mayotte",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(drop = FALSE) +  # Ceci empêchera la suppression des niveaux vides
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 5)
+                                          
+
+# Afficher le graphique final
+print(final_plot)
+
+```
+
+<br><br>
+
+## <u>Mayotte : Histogramme classe de taille des NA</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Vérifier les valeurs uniques pour les colonnes d'intérêt
+print(unique(data %>% filter(Code_FAO == "VRL") %>% select(Sexe, Site)))
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et les NA dans 'Sexe' pour le site 'Mayotte'
+filtered_data <- data %>% filter(Code_FAO == "VRL" & (Sexe == "NA" | is.na(Sexe)) & Site == "Mayotte")
+
+# Vérifier s'il y a des données après filtrage
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après le filtrage.")
+}
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Supprimer les valeurs NA dans la colonne 'Taille'
+filtered_data <- filtered_data %>% filter(!is.na(Taille))
+
+# Vérifier s'il y a des données après suppression des valeurs NA
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après suppression des valeurs manquantes.")
+}
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max(Taille, na.rm = TRUE) * 1.2, by = 4), right = FALSE))
+
+# Vérifier s'il y a des données après création des classes
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après création des classes.")
+}
+
+# Compter le nombre de poissons par classe
+class_counts <- filtered_data %>%
+  group_by(Classe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Calculer le maximum de l'axe y
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs pour les NA
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons)) +
+  geom_bar(stat = "identity", fill = "grey") +  # Barres pour les NA
+  labs(title = "Histogramme des tailles : Poisson non-sex\u00e9",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(
+    breaks = seq(0, ceiling(y_max), by = 1), 
+    limits = c(0, ceiling(y_max)),
+    expand = c(0, 0)  # Cette ligne supprime l'espace en bas
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Mayotte : Suivi de la maturité par mois</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et enlever les NA
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL", !is.na(Maturity) & data$Site == "Mayotte",)
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' avec une maturité non-NA.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois et par maturité
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de maturité (sans NA)
+all_months_maturity <- expand.grid(Mouth_capture = month.abb, 
+                                   Maturity = c(1, 2, 3, 4))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturité") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturité par Mois") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+## <u>Mayotte : Suivi Maturité par mois et par sexe</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et Site : Reunion
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Mayotte", ]
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL'.")
+}
+
+# Assurer que Maturity est au format numérique
+filtered_data$Maturity <- as.numeric(as.character(filtered_data$Maturity))
+
+# Compter le nombre de poissons par mois, par maturité et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Maturity, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois, toutes les combinaisons de maturité et de sexe
+all_months_maturity_sex <- expand.grid(
+  Mouth_capture = month.abb, 
+  Maturity = c(1, 2, 3, 4, NA),
+  Sexe = c("F", "M")
+)
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_maturity_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Maturity", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Inverser l'ordre des niveaux de Maturity pour l'affichage
+monthly_counts_complete$Maturity <- factor(monthly_counts_complete$Maturity, 
+                                           levels = rev(c(1, 2, 3, 4, NA)))
+
+# Calculer le maximum de l'axe Y (N + 30%)
+max_y <- max(monthly_counts_complete %>% 
+               group_by(Mouth_capture, Sexe) %>% 
+               summarise(total = sum(Nb_Poissons)) %>% 
+               pull(total))
+y_limit <- ceiling(max_y * 1.3)
+
+# Créer l'histogramme avec des couleurs par maturité et des facettes par sexe
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Maturity)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Sexe, ncol = 1) +
+  labs(x = "", y = "Nombre d'individus") +
+  scale_fill_manual(values = c("4" = "#8B4513", "3" = "#99FF99", "2" = "#FFCC99", "1" = "#FFFF99"),
+                    labels = c("4" = "Stade D : Regressing", "3" = "Stade C : Spawning", "2" = "Stade B : Maturation", "1" = "Stade A : Immature"),
+                    name = "Maturity") +
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),
+            position = position_stack(vjust = 0.5), size = 3, color = "black") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.line.x.bottom = element_line(color = "black", size = 1),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  ) +
+  scale_y_continuous(limits = c(0, y_limit), expand = c(0, 0)) +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid', colour = "grey80"),
+    panel.grid.minor = element_line(linewidth = 0.1, linetype = 'solid', colour = "grey90"),
+    axis.line = element_line(colour = "black")
+  ) +
+  ggtitle("Stade de Maturite par Mois et par Sexe") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+# Afficher l'histogramme
+print(histogram)
+
+```
+
+<br><br>
+
+## <u>Mayotte : Bilan des Otolithe en stock </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EFT'
+filtered_data <- data[data$Code_FAO == "VRL" & data$Site == "Mayotte", ]
+
+# Compter le nombre d'otolithes par catégorie
+otolith_counts <- filtered_data %>%
+  group_by(Otolithe) %>%
+  summarise(Nb_Otolithes = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(otolith_counts, aes(x = "", y = Nb_Otolithes, fill = Otolithe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Correction ici
+  labs(title = "Repartition du nombre d'otolithes par categorie") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14)) +  # Titre centré
+  geom_text(aes(label = Nb_Otolithes), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_brewer(palette = "Set2")  # Palette de couleurs plus attrayante
+
+# Afficher le graphique
+print(pie_chart)
+
+```
+
+<br><br>
+
+## <u>Mayotte : Bilan des échantillons de muscle et de nageoire</u>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)  # pour replace_na()
+library(patchwork)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Mayotte", ]
+
+# Remplacer les NA dans No_echantillon_muscle par une valeur explicite pour le comptage
+filtered_data <- filtered_data %>%
+  mutate(No_echantillon_muscle = replace_na(No_echantillon_muscle, "NA"))
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon muscle
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Muscle = ifelse(No_echantillon_muscle == "NA", "No muscle sample", "Muscle sample"))
+
+# Compter le nombre d'échantillons présents ou absents
+Muscle_counts <- filtered_data %>%
+  group_by(Genetique_Muscle) %>%
+  summarise(Nb_Muscle = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P2 <- ggplot(Muscle_counts, aes(x = "", y = Nb_Muscle, fill = Genetique_Muscle)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Muscle Sample") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Muscle), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Muscle sample" = "#90EE90",  # Vert pâle
+                               "No muscle sample" = "#F08080"))  # Rouge pâle
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon génétique
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Finclip = ifelse(is.na(No_echantillon_Finclip), "No Fin-Clip", "Nombre Fin-Clip"))
+
+# Compter le nombre d'échantillons présents ou absents, y compris les NA
+Fin_counts <- filtered_data %>%
+  group_by(Genetique_Finclip) %>%
+  summarise(Nb_Fin = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P1 <- ggplot(Fin_counts, aes(x = "", y = Nb_Fin, fill = Genetique_Finclip)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Fin-Clip") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Fin), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Nombre Fin-Clip" = "#90EE90",  # Vert pâle
+                               "No Fin-Clip" = "#F08080"))  # Rouge pâle
+
+# Ajouter un titre au-dessus des graphes, centré et en gras (sans soulignement)
+full_plot <- P1 + P2 + 
+  plot_annotation(
+    title = "Bilan des echantillons genetiques a la Reunion",
+    theme = theme(plot.title = element_text(hjust = 0.35, face = "bold", size = 18, 
+                                            lineheight = 1.5, margin = margin(b = 16)))
+  )
+
+# Afficher les graphiques combinés avec le titre
+print(full_plot)
+
+```
+
+<br><br>
+
+# Seychelles
+
+<br><br>
+
+## Seychelles : Cartographie 
+
+<br><br>
+
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(dplyr)
+library(leaflet)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Convertir les colonnes de latitude et longitude en vecteurs plats
+data <- data %>%
+  mutate(
+    Latitude_capture = unlist(Latitude_capture),
+    Longitude_capture = unlist(Longitude_capture),
+    Latitude_capture = as.numeric(Latitude_capture),
+    Longitude_capture = as.numeric(Longitude_capture)
+  )
+
+# Filtrer les données pour l'espèce 'VRL' et le site 'Reunion'
+filtered_data <- data %>% 
+  filter(Code_FAO == "VRL", Site == "Seychelles")
+
+# Compter le nombre d'individus par coordonnées, et par sexe
+counted_data <- filtered_data %>%
+  group_by(Latitude_capture, Longitude_capture) %>%
+  summarise(
+    count = n(),
+    males = sum(Sexe == "M", na.rm = TRUE),
+    females = sum(Sexe == "F", na.rm = TRUE),
+    Position_capture = paste(unique(Position_capture), collapse = ", ")
+  )
+
+# Créer une carte avec les coordonnées GPS
+carte <- leaflet(counted_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude_capture,
+    lat = ~Latitude_capture,
+    color = "blue",
+    radius = ~sqrt(count) * 2,
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "<div style='width: 200px; background-color: white; border: 1px solid black; padding: 10px; text-align: center;'>",
+      "<strong>Position de capture:</strong><br>", Position_capture, "<br/><br/>",
+      "<strong>Nombre total d'individus:</strong><br><strong>", count, "</strong><br/><br/>",
+      "<strong>Nombre de mâles:</strong><br><strong style='color: blue;'>", males, "</strong><br/><br/>",
+      "<strong>Nombre de femelles:</strong><br><strong style='color: #D5006D;'>", females, "</strong></div>"
+    )
+  )
+
+# Afficher la carte
+carte
+```
+
+<br><br>
+
+## Seychelles : Nombre d'echantillon par sexe
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce VRL
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Seychelles", ]
+
+# Compter le nombre d'individus par sexe
+sex_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nombre = n(), .groups = 'drop')
+
+# Calculer les pourcentages
+sex_counts <- sex_counts %>%
+  mutate(Percentage = round(Nombre / sum(Nombre) * 100, 1))
+
+# Calculer le total
+total_individuals <- sum(sex_counts$Nombre)
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(sex_counts, aes(x = "", y = Nombre, fill = Sexe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.caption = element_text(hjust = 0.5, face = "bold", size = 12),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)
+  ) +
+  geom_text(aes(label = paste0(Nombre, "\n(", Percentage, "%)")),
+            position = position_stack(vjust = 0.5),
+            size = 4,
+            color = "black",
+            fontface = "bold") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("F" = "#FF9999", "M" = "#99CCFF", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("F" = "Femelle", "M" = "Male", "Ind" = "Indéterminé", "NA" = "No_Data")) +
+  labs(caption = paste("Total:", total_individuals, "individus"))
+
+suppressWarnings(print(pie_chart))
+
+
+```
+
+<br><br>
+
+## <u>Seychelles : Répartition des echantillons par mois</u> 
+
+<br><br>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Seychelles")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Seychelles'.")
+}
+
+# Compter le nombre de poissons par mois et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sexe
+all_months_sex <- expand.grid(Mouth_capture = month.abb, 
+                              Sexe = unique(filtered_data$Sexe))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.3  # 130% de la valeur maximale
+
+# Créer l'histogramme avec des couleurs par sexe (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Nombre d'echantillons par mois"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = c("M" = "lightblue", "F" = "pink","Ind" = "#FDFD96",  "NA" = "grey"),  # Couleurs personnalisées
+                    labels = c("M" = "Males", "F" = "Femelles"),
+                    name = "Sexe") +  # Nommer la légende
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 4, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")  # Centrer et formater le titre
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+
+```
+
+<br><br>
+
+## <u>Seychelles : Relation Taille/poids </u>
+
+<br><br>
+
+```{r echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(googlesheets4)
+library(dplyr)
+library(ggiraph)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Seychelles"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Seychelles")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Seychelles'.")
+}
+
+# Assurez-vous que les colonnes 'Poids_entier' et 'Taille' existent et sont numériques
+filtered_data$Poids_entier <- as.numeric(as.character(filtered_data$Poids_entier))
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Calculer les limites des axes
+x_max <- max(filtered_data$Taille, na.rm = TRUE)
+y_max <- max(filtered_data$Poids_entier, na.rm = TRUE)
+x_limit <- ceiling(x_max * 1.2)  # 120% de la valeur maximale pour X, arrondi au supérieur
+y_limit <- y_max * 1.2  # 120% de la valeur maximale pour Y
+
+# Créer le nuage de points avec ggplot
+p <- ggplot(filtered_data, aes(x = Taille, y = Poids_entier, color = Sexe)) +
+  geom_point_interactive(aes(
+    tooltip = paste("CODE_BARRE_Poisson:", CODE_BARRE_Poisson, 
+                    "<br>Taille:", Taille, 
+                    "<br>Poids:", Poids_entier, 
+                    "<br>Sexe:", Sexe),
+    data_id = CODE_BARRE_Poisson
+  ), size = 1.5) +  # Définit une taille fixe pour tous les points
+  scale_color_manual(values = c("M" = "blue", "F" = "#D5006D" , "Ind" = "#FDFD96", "NA" = "grey39")) +
+  scale_x_continuous(limits = c(0, x_limit), 
+                     breaks = seq(0, x_limit, by = 5),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  scale_y_continuous(limits = c(0, y_limit), 
+                     breaks = seq(0, y_limit, length.out = 10), 
+                     labels = scales::number_format(accuracy = 0.001),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  labs(x = "Taille (cm)", y = "Poids (kg)", 
+       title = "Relation Taille / Poids : Reunion") +
+  theme(panel.background = element_rect(fill = "lightgray"),
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Afficher le graphique interactif
+girafe(ggobj = p)
+
+```
+
+<br><br>
+
+## <u>Seychelles : Histogramme des échantillons par classe de taille </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Seychelles"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Seychelles")
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+if (!is.numeric(filtered_data$Taille)) {
+  filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+}
+
+# Calculer la valeur maximale de Taille et l'étendre de 60%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.6
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE))  # Classes de 4 cm, étendu à 120%
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 60%
+y_max <- max(class_counts$Nb_Poissons) * 2.2  # 160% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +  # Couleurs par sexe et labels modifiés
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +  # Échelle étendue à 120%
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 10)
+                                            
+
+# Afficher le graphique final
+print(final_plot)
+
+
+```
+
+<br><br>
+
+## <u>Seychelles : Histogramme des echantillons par Sexe</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Seychelles"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Seychelles")%>%
+  mutate(Taille = as.numeric(as.character(Taille))) %>%
+  filter(!is.na(Taille), !is.na(Sexe), Sexe != "NA")  # Ajout de Sexe != "NA"
+
+# Calculer la valeur maximale de Taille et l'étendre de 20%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.6
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE, include.lowest = TRUE))
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 60%
+y_max <- max(class_counts$Nb_Poissons) * 1.6  # 160% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +
+  labs(title = "Histogramme des tailles : Variola louti a Mayotte",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(drop = FALSE) +  # Ceci empêchera la suppression des niveaux vides
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 5)
+                                          
+
+# Afficher le graphique final
+print(final_plot)
+
+```
+
+<br><br>
+
+## <u>Seychelles : Histogramme classe de taille des NA</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Vérifier les valeurs uniques pour les colonnes d'intérêt
+print(unique(data %>% filter(Code_FAO == "VRL") %>% select(Sexe, Site)))
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et les NA dans 'Sexe' pour le site 'Reunion'
+filtered_data <- data %>% filter(Code_FAO == "VRL" & (Sexe == "NA" | is.na(Sexe)) & Site == "Seychelles")
+
+# Vérifier s'il y a des données après filtrage
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après le filtrage.")
+}
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Supprimer les valeurs NA dans la colonne 'Taille'
+filtered_data <- filtered_data %>% filter(!is.na(Taille))
+
+# Vérifier s'il y a des données après suppression des valeurs NA
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après suppression des valeurs manquantes.")
+}
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max(Taille, na.rm = TRUE) * 1.2, by = 4), right = FALSE))
+
+# Vérifier s'il y a des données après création des classes
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après création des classes.")
+}
+
+# Compter le nombre de poissons par classe
+class_counts <- filtered_data %>%
+  group_by(Classe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Calculer le maximum de l'axe y
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs pour les NA
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons)) +
+  geom_bar(stat = "identity", fill = "grey") +  # Barres pour les NA
+  labs(title = "Histogramme des tailles : Poisson non-sex\u00e9",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(
+    breaks = seq(0, ceiling(y_max), by = 1), 
+    limits = c(0, ceiling(y_max)),
+    expand = c(0, 0)  # Cette ligne supprime l'espace en bas
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+
+
+## <u>Seychelles : Bilan des Otolithe en stock </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EFT'
+filtered_data <- data[data$Code_FAO == "VRL" & data$Site == "Seychelles", ]
+
+# Compter le nombre d'otolithes par catégorie
+otolith_counts <- filtered_data %>%
+  group_by(Otolithe) %>%
+  summarise(Nb_Otolithes = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(otolith_counts, aes(x = "", y = Nb_Otolithes, fill = Otolithe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Correction ici
+  labs(title = "Repartition du nombre d'otolithes par categorie") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14)) +  # Titre centré
+  geom_text(aes(label = Nb_Otolithes), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_brewer(palette = "Set2")  # Palette de couleurs plus attrayante
+
+# Afficher le graphique
+print(pie_chart)
+
+```
+
+<br><br>
+
+## <u>Seychelles : Bilan des échantillons de muscle et de nageoire</u>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)  # pour replace_na()
+library(patchwork)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Seychelles", ]
+
+# Remplacer les NA dans No_echantillon_muscle par une valeur explicite pour le comptage
+filtered_data <- filtered_data %>%
+  mutate(No_echantillon_muscle = replace_na(No_echantillon_muscle, "NA"))
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon muscle
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Muscle = ifelse(No_echantillon_muscle == "NA", "No muscle sample", "Muscle sample"))
+
+# Compter le nombre d'échantillons présents ou absents
+Muscle_counts <- filtered_data %>%
+  group_by(Genetique_Muscle) %>%
+  summarise(Nb_Muscle = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P2 <- ggplot(Muscle_counts, aes(x = "", y = Nb_Muscle, fill = Genetique_Muscle)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Muscle Sample") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Muscle), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Muscle sample" = "#90EE90",  # Vert pâle
+                               "No muscle sample" = "#F08080"))  # Rouge pâle
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon génétique
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Finclip = ifelse(is.na(No_echantillon_Finclip), "No Fin-Clip", "Nombre Fin-Clip"))
+
+# Compter le nombre d'échantillons présents ou absents, y compris les NA
+Fin_counts <- filtered_data %>%
+  group_by(Genetique_Finclip) %>%
+  summarise(Nb_Fin = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P1 <- ggplot(Fin_counts, aes(x = "", y = Nb_Fin, fill = Genetique_Finclip)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Fin-Clip") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Fin), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Nombre Fin-Clip" = "#90EE90",  # Vert pâle
+                               "No Fin-Clip" = "#F08080"))  # Rouge pâle
+
+# Ajouter un titre au-dessus des graphes, centré et en gras (sans soulignement)
+full_plot <- P1 + P2 + 
+  plot_annotation(
+    title = "Bilan des echantillons genetiques",
+    theme = theme(plot.title = element_text(hjust = 0.35, face = "bold", size = 18, 
+                                            lineheight = 1.5, margin = margin(b = 16)))
+  )
+
+# Afficher les graphiques combinés avec le titre
+print(full_plot)
+
+```
+
+<br><br>
+
+# Rodrigues
+
+<br><br>
+
+## Cartographie : Rodrigues
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(dplyr)
+library(leaflet)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Convertir les colonnes de latitude et longitude en vecteurs plats
+data <- data %>%
+  mutate(
+    Latitude_capture = unlist(Latitude_capture),
+    Longitude_capture = unlist(Longitude_capture),
+    Latitude_capture = as.numeric(Latitude_capture),
+    Longitude_capture = as.numeric(Longitude_capture)
+  )
+
+# Filtrer les données pour l'espèce 'VRL' et le site 'Reunion'
+filtered_data <- data %>% 
+  filter(Code_FAO == "VRL", Site == "Rodrigues")
+
+# Compter le nombre d'individus par coordonnées, et par sexe
+counted_data <- filtered_data %>%
+  group_by(Latitude_capture, Longitude_capture) %>%
+  summarise(
+    count = n(),
+    males = sum(Sexe == "M", na.rm = TRUE),
+    females = sum(Sexe == "F", na.rm = TRUE),
+    Position_capture = paste(unique(Position_capture), collapse = ", ")
+  )
+
+# Créer une carte avec les coordonnées GPS
+carte <- leaflet(counted_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude_capture,
+    lat = ~Latitude_capture,
+    color = "blue",
+    radius = ~sqrt(count) * 2,
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "<div style='width: 200px; background-color: white; border: 1px solid black; padding: 10px; text-align: center;'>",
+      "<strong>Position de capture:</strong><br>", Position_capture, "<br/><br/>",
+      "<strong>Nombre total d'individus:</strong><br><strong>", count, "</strong><br/><br/>",
+      "<strong>Nombre de mâles:</strong><br><strong style='color: blue;'>", males, "</strong><br/><br/>",
+      "<strong>Nombre de femelles:</strong><br><strong style='color: #D5006D;'>", females, "</strong></div>"
+    )
+  )
+
+# Afficher la carte
+carte
+```
+
+<br><br>
+
+## Rodrigues : Nombre d'echantillon par sexe
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce VRL
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Rodrigues", ]
+
+# Compter le nombre d'individus par sexe
+sex_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nombre = n(), .groups = 'drop')
+
+# Calculer les pourcentages
+sex_counts <- sex_counts %>%
+  mutate(Percentage = round(Nombre / sum(Nombre) * 100, 1))
+
+# Calculer le total
+total_individuals <- sum(sex_counts$Nombre)
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(sex_counts, aes(x = "", y = Nombre, fill = Sexe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.caption = element_text(hjust = 0.5, face = "bold", size = 12),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)
+  ) +
+  geom_text(aes(label = paste0(Nombre, "\n(", Percentage, "%)")),
+            position = position_stack(vjust = 0.5),
+            size = 4,
+            color = "black",
+            fontface = "bold") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("F" = "#FF9999", "M" = "#99CCFF", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("F" = "Femelle", "M" = "Male", "Ind" = "Indéterminé", "NA" = "No_Data")) +
+  labs(caption = paste("Total:", total_individuals, "individus"))
+
+suppressWarnings(print(pie_chart))
+
+
+```
+
+<br><br>
+
+## <u>Rodrigues : Répartition des echantillons par mois</u> 
+
+<br><br>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Réunion"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Rodrigues")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Rodrigues'.")
+}
+
+# Compter le nombre de poissons par mois et par sexe
+monthly_counts <- filtered_data %>%
+  group_by(Mouth_capture, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Créer un dataframe avec tous les mois et toutes les combinaisons de sexe
+all_months_sex <- expand.grid(Mouth_capture = month.abb, 
+                              Sexe = unique(filtered_data$Sexe))
+
+# Joindre les comptes mensuels avec le dataframe de tous les mois
+monthly_counts_complete <- all_months_sex %>%
+  left_join(monthly_counts, by = c("Mouth_capture", "Sexe")) %>%
+  mutate(Nb_Poissons = replace_na(Nb_Poissons, 0))  # Remplacer NA par 0
+
+# Assurer que Mouth_capture est un facteur avec les niveaux corrects
+monthly_counts_complete$Mouth_capture <- factor(monthly_counts_complete$Mouth_capture, 
+                                                levels = month.abb)
+
+# Calculer la valeur maximale pour l'axe Y
+max_value <- max(aggregate(Nb_Poissons ~ Mouth_capture, data = monthly_counts_complete, sum)$Nb_Poissons)
+y_max <- max_value * 1.3  # 130% de la valeur maximale
+
+# Créer l'histogramme avec des couleurs par sexe (barres empilées)
+histogram <- ggplot(monthly_counts_complete, aes(x = Mouth_capture, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  labs(
+    x = "",  # Pas d'étiquette pour l'axe x
+    y = "Nombre d'individus",
+    title = "Nombre d'echantillons par mois"  # Titre du graphique
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_manual(values = c("M" = "lightblue", "F" = "pink","Ind" = "#FDFD96",  "NA" = "grey"),  # Couleurs personnalisées
+                    labels = c("M" = "Males", "F" = "Femelles"),
+                    name = "Sexe") +  # Nommer la légende
+  geom_text(aes(label = ifelse(Nb_Poissons > 0, Nb_Poissons, "")),  # N'affiche que si Nb_Poissons > 0
+            position = position_stack(vjust = 0.5), size = 4, color = "black") +  # Ajouter les valeurs au milieu des barres
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Orientation des étiquettes de l'axe des x
+    axis.line.x.bottom = element_line(color = "black", size = 0.5),  # Lignes de base pour l'axe des x
+    axis.title.y = element_text(margin = margin(r = 20)),  # Décaler le titre de l'axe y
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")  # Centrer et formater le titre
+  ) +
+  scale_y_continuous(limits = c(0, y_max), breaks = seq(0, y_max, by = ceiling(y_max/10)), expand = c(0, 0)) +  # Ajuster l'échelle Y
+  theme(
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "grey80"),  # Lignes de grille principales
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "grey90"),  # Lignes de grille mineures
+    axis.line = element_line(colour = "black")  # Lignes des axes x et y
+  )
+
+# Afficher l'histogramme
+print(histogram)
+
+
+```
+
+<br><br>
+
+## <u>Rodrigues : Relation Taille/poids </u>
+
+<br><br>
+
+```{r echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(googlesheets4)
+library(dplyr)
+library(ggiraph)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Seychelles"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Rodrigues")
+
+# Vérifier qu'il y a des données
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible pour le Code_FAO 'VRL' et le site 'Rodrigues'.")
+}
+
+# Assurez-vous que les colonnes 'Poids_entier' et 'Taille' existent et sont numériques
+filtered_data$Poids_entier <- as.numeric(as.character(filtered_data$Poids_entier))
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Calculer les limites des axes
+x_max <- max(filtered_data$Taille, na.rm = TRUE)
+y_max <- max(filtered_data$Poids_entier, na.rm = TRUE)
+x_limit <- ceiling(x_max * 1.2)  # 120% de la valeur maximale pour X, arrondi au supérieur
+y_limit <- y_max * 1.2  # 120% de la valeur maximale pour Y
+
+# Créer le nuage de points avec ggplot
+p <- ggplot(filtered_data, aes(x = Taille, y = Poids_entier, color = Sexe)) +
+  geom_point_interactive(aes(
+    tooltip = paste("CODE_BARRE_Poisson:", CODE_BARRE_Poisson, 
+                    "<br>Taille:", Taille, 
+                    "<br>Poids:", Poids_entier, 
+                    "<br>Sexe:", Sexe),
+    data_id = CODE_BARRE_Poisson
+  ), size = 1.5) +  # Définit une taille fixe pour tous les points
+  scale_color_manual(values = c("M" = "blue", "F" = "#D5006D" , "Ind" = "#FDFD96", "NA" = "grey39")) +
+  scale_x_continuous(limits = c(0, x_limit), 
+                     breaks = seq(0, x_limit, by = 5),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  scale_y_continuous(limits = c(0, y_limit), 
+                     breaks = seq(0, y_limit, length.out = 10), 
+                     labels = scales::number_format(accuracy = 0.001),
+                     expand = c(0, 0)) +  # Supprime l'expansion automatique
+  labs(x = "Taille (cm)", y = "Poids (kg)", 
+       title = "Relation Taille / Poids : Reunion") +
+  theme(panel.background = element_rect(fill = "lightgray"),
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Afficher le graphique interactif
+girafe(ggobj = p)
+
+```
+
+<br><br>
+
+## <u>Seychelles : Histogramme des échantillons par classe de taille </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et site "Rodrigues"
+filtered_data <- data %>%
+  filter(Code_FAO == "VRL" & Site == "Rodrigues")
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+if (!is.numeric(filtered_data$Taille)) {
+  filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+}
+
+# Calculer la valeur maximale de Taille et l'étendre de 60%
+max_taille <- max(filtered_data$Taille, na.rm = TRUE) * 1.6
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max_taille, by = 4), right = FALSE))  # Classes de 4 cm, étendu à 120%
+
+# Compter le nombre de poissons par classe et sexe
+class_counts <- filtered_data %>%
+  group_by(Classe, Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Compter le nombre total de poissons et par sexe
+total_counts <- filtered_data %>%
+  group_by(Sexe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop') %>%
+  bind_rows(tibble(Sexe = "Total", Nb_Poissons = nrow(filtered_data)))  # Ajouter le total
+
+# Calculer le maximum de l'axe y et l'étendre de 60%
+y_max <- max(class_counts$Nb_Poissons) * 2.2  # 160% du maximum
+
+# Créer l'histogramme avec des couleurs par sexe
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons, fill = Sexe)) +
+  geom_bar(stat = "identity", position = "stack") +  # Barres empilées
+  scale_fill_manual(values = c("M" = "#87CEEB", "F" = "pink", "Ind" = "#FDFD96", "NA" = "grey"),
+                    labels = c("M" = "Male", "F" = "Femelle", "Ind" = "Ind")) +  # Couleurs par sexe et labels modifiés
+  labs(title = "Histogramme des tailles : Variola louti",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(breaks = seq(0, ceiling(y_max), by = 1), limits = c(0, ceiling(y_max)), expand = c(0, 0)) +  # Échelle étendue à 120%
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Créer un tableau des résultats avec des lignes
+table_data <- as.data.frame(total_counts)
+table_plot <- tableGrob(table_data, rows = NULL, theme = ttheme_minimal(
+  core = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  colhead = list(fg_params = list(fontface = "bold", hjust = 0.5, fontsize = 8)),
+  rowhead = list(fg_params = list(fontface = "bold", fontsize = 8)),
+  padding = unit(c(4, 4), "mm")
+))
+
+# Positionner le tableau complètement à droite du graphique
+final_plot <- histogram + annotation_custom(grob = table_plot, 
+                                            xmin = length(levels(class_counts$Classe)) + 0.5, 
+                                            xmax = length(levels(class_counts$Classe)) + 2, 
+                                            ymin = 0, ymax = y_max + 10)
+                                            
+
+# Afficher le graphique final
+print(final_plot)
+
+
+```
+
+<br><br>
+
+## <u>Rodrigues : Histogramme des echantillons par Sexe</u>
+
+<br><br>
+
+NA - Il n' a pas de donnée sur le sexe à Rodrigues
+
+<br><br>
+
+## <u>Rodrigues : Histogramme classe de taille des NA</u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Vérifier les valeurs uniques pour les colonnes d'intérêt
+print(unique(data %>% filter(Code_FAO == "VRL") %>% select(Sexe, Site)))
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL' et les NA dans 'Sexe' pour le site 'Reunion'
+filtered_data <- data %>% filter(Code_FAO == "VRL" & (Sexe == "NA" | is.na(Sexe)) & Site == "Rodrigues")
+
+# Vérifier s'il y a des données après filtrage
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après le filtrage.")
+}
+
+# Vérifier que la colonne 'Taille' est bien au format numérique
+filtered_data$Taille <- as.numeric(as.character(filtered_data$Taille))
+
+# Supprimer les valeurs NA dans la colonne 'Taille'
+filtered_data <- filtered_data %>% filter(!is.na(Taille))
+
+# Vérifier s'il y a des données après suppression des valeurs NA
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après suppression des valeurs manquantes.")
+}
+
+# Créer une classe de taille
+filtered_data <- filtered_data %>%
+  mutate(Classe = cut(Taille, breaks = seq(0, max(Taille, na.rm = TRUE) * 1.2, by = 4), right = FALSE))
+
+# Vérifier s'il y a des données après création des classes
+if (nrow(filtered_data) == 0) {
+  stop("Aucune donnée disponible après création des classes.")
+}
+
+# Compter le nombre de poissons par classe
+class_counts <- filtered_data %>%
+  group_by(Classe) %>%
+  summarise(Nb_Poissons = n(), .groups = 'drop')
+
+# Convertir la variable 'Classe' en facteur pour s'assurer de son affichage correct
+class_counts$Classe <- as.factor(class_counts$Classe)
+
+# Calculer le maximum de l'axe y
+y_max <- max(class_counts$Nb_Poissons) * 1.2  # 120% du maximum
+
+# Créer l'histogramme avec des couleurs pour les NA
+histogram <- ggplot(class_counts, aes(x = Classe, y = Nb_Poissons)) +
+  geom_bar(stat = "identity", fill = "grey") +  # Barres pour les NA
+  labs(title = "Histogramme des tailles : Poisson non-sex\u00e9",
+       x = "Classe de Taille (cm)",
+       y = "Nombre d'individus") +
+  scale_y_continuous(
+    breaks = seq(0, ceiling(y_max), by = 1), 
+    limits = c(0, ceiling(y_max)),
+    expand = c(0, 0)  # Cette ligne supprime l'espace en bas
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14, margin = margin(b = 20)),  # Titre centré
+        axis.title.x = element_text(face = "bold", margin = margin(t = 10)),  # Décalage du titre de l'axe X
+        axis.title.y = element_text(face = "bold", margin = margin(r = 10)),  # Décalage du titre de l'axe Y
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +  # Incliner les étiquettes de l'axe X
+  scale_x_discrete(limits = levels(class_counts$Classe)) +  # Limites des classes de taille
+  geom_text(aes(label = Nb_Poissons), position = position_stack(vjust = 0.5), 
+            size = 4, fontface = "bold", color = "black")  # Ajouter les valeurs en gras
+
+# Afficher l'histogramme
+print(histogram)
+
+
+
+```
+
+<br><br>
+
+
+## <u>Rodrigues : Bilan des Otolithe en stock </u>
+
+<br><br>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'EFT'
+filtered_data <- data[data$Code_FAO == "VRL" & data$Site == "Rodrigues", ]
+
+# Compter le nombre d'otolithes par catégorie
+otolith_counts <- filtered_data %>%
+  group_by(Otolithe) %>%
+  summarise(Nb_Otolithes = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2
+pie_chart <- ggplot(otolith_counts, aes(x = "", y = Nb_Otolithes, fill = Otolithe)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Correction ici
+  labs(title = "Repartition du nombre d'otolithes par categorie") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14)) +  # Titre centré
+  geom_text(aes(label = Nb_Otolithes), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_brewer(palette = "Set2")  # Palette de couleurs plus attrayante
+
+# Afficher le graphique
+print(pie_chart)
+
+```
+
+<br><br>
+
+## <u>Rodrigues : Bilan des échantillons de muscle et de nageoire</u>
+
+```{r, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.align='center', fig.width=10, fig.height=8}
+
+# Définir les options globales pour tous les chunks
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = "center")
+
+library(googlesheets4)
+library(ggplot2)
+library(dplyr)
+library(tidyr)  # pour replace_na()
+library(patchwork)
+library(readr)
+
+# Définir le répertoire de travail
+setwd("/home/bioeos/Documents/project_hub/popsicle-website/data")
+
+# Lire le fichier CSV
+data <- read_csv("Popsicle.csv")
+
+# Filtrer les données pour l'espèce avec le Code_FAO 'VRL'
+filtered_data <- data[data$Code_FAO == "VRL"& data$Site == "Rodrigues", ]
+
+# Remplacer les NA dans No_echantillon_muscle par une valeur explicite pour le comptage
+filtered_data <- filtered_data %>%
+  mutate(No_echantillon_muscle = replace_na(No_echantillon_muscle, "NA"))
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon muscle
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Muscle = ifelse(No_echantillon_muscle == "NA", "No muscle sample", "Muscle sample"))
+
+# Compter le nombre d'échantillons présents ou absents
+Muscle_counts <- filtered_data %>%
+  group_by(Genetique_Muscle) %>%
+  summarise(Nb_Muscle = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P2 <- ggplot(Muscle_counts, aes(x = "", y = Nb_Muscle, fill = Genetique_Muscle)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Muscle Sample") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Muscle), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Muscle sample" = "#90EE90",  # Vert pâle
+                               "No muscle sample" = "#F08080"))  # Rouge pâle
+
+# Créer une nouvelle colonne indiquant la présence ou absence d'échantillon génétique
+filtered_data <- filtered_data %>%
+  mutate(Genetique_Finclip = ifelse(is.na(No_echantillon_Finclip), "No Fin-Clip", "Nombre Fin-Clip"))
+
+# Compter le nombre d'échantillons présents ou absents, y compris les NA
+Fin_counts <- filtered_data %>%
+  group_by(Genetique_Finclip) %>%
+  summarise(Nb_Fin = n(), .groups = 'drop')
+
+# Créer un camembert avec ggplot2 en utilisant des couleurs pâles
+P1 <- ggplot(Fin_counts, aes(x = "", y = Nb_Fin, fill = Genetique_Finclip)) +
+  geom_bar(stat = "identity", width = 1, color = "black") +  # Liseré noir autour des segments
+  coord_polar(theta = "y") +  # Faire un camembert
+  labs(title = "Fin-Clip") +
+  theme_void() +  # Enlever les axes pour le camembert
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11)) +  # Titre centré
+  geom_text(aes(label = Nb_Fin), 
+            position = position_stack(vjust = 0.5), size = 4, color = "black", fontface = "bold") +  # Valeurs en gras
+  theme(legend.position = "right") +  # Position de la légende
+  scale_fill_manual(values = c("Nombre Fin-Clip" = "#90EE90",  # Vert pâle
+                               "No Fin-Clip" = "#F08080"))  # Rouge pâle
+
+# Ajouter un titre au-dessus des graphes, centré et en gras (sans soulignement)
+full_plot <- P1 + P2 + 
+  plot_annotation(
+    title = "Bilan des echantillons genetiques",
+    theme = theme(plot.title = element_text(hjust = 0.35, face = "bold", size = 18, 
+                                            lineheight = 1.5, margin = margin(b = 16)))
+  )
+
+# Afficher les graphiques combinés avec le titre
+print(full_plot)
+
+```
+
+
+

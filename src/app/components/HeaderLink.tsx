@@ -16,9 +16,9 @@ export function HeaderLink(link: LinkItem, isDesktop: boolean) {
             key={isDesktop ? link.name : link.name + '_menu'}
             href={link.href}
             className={clsx(
-                'flex h-[48px] items-center gap-2 p-3 text-xl font-bold hover:scale-x-105 hover:text-secblue md:justify-start md:p-2 md:px-3',
+                'hover:text-blue flex h-[48px] items-center gap-2 p-3 text-xl font-bold hover:scale-x-105 md:justify-start md:p-2 md:px-3',
                 {
-                    'animate-pulse text-secblue': pathname === link.href,
+                    'animate-pulse': pathname === link.href,
                 }
             )}
         >

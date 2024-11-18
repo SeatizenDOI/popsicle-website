@@ -50,3 +50,25 @@ https://en.wikipedia.org/wiki/Brotli
 # TW Elements
 
 https://tw-elements.com/docs/standard/components/accordion/
+
+# Parallax
+
+https://react-scroll-parallax.damnthat.tv/
+https://www.react-spring.dev
+https://www.lundevweb.com
+
+# https://www.youtube.com/watch?v=qyomWr_C_jA
+
+https://heropatterns.com/
+https://webaim.org/resources/contrastchecker/
+https://www.similarweb.com/
+https://mobbin.com/
+
+## Design inpiration
+
+privacy and rules: https://mobbin.com/privacy
+tables inspiration :
+
+# Deploy vercel
+
+https://medium.com/@zay_kyoy/deploy-nextjs-app-on-vps-20aedfbed3d1

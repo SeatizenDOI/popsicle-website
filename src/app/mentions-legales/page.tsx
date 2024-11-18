@@ -12,9 +12,7 @@ export default function Page() {
                 Mentions Légales
             </h1>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
-                1. Éditeur du site
-            </h2>
+            <h2 className="mb-2 mt-8 text-xl font-bold">1. Éditeur du site</h2>
             <p>
                 Nom de l'entreprise : Ifremer
                 <br />
@@ -25,9 +23,7 @@ export default function Page() {
                 <br />
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
-                2. Hébergement
-            </h2>
+            <h2 className="mb-2 mt-8 text-xl font-bold">2. Hébergement</h2>
             <p>
                 Hébergeur : OVH <br />
                 Adresse : 2, rue Kellermann, 59100 Roubaix. <br />
@@ -35,7 +31,7 @@ export default function Page() {
                 <br />
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
+            <h2 className="mb-2 mt-8 text-xl font-bold">
                 3. Propriété intellectuelle
             </h2>
             <p>
@@ -52,9 +48,7 @@ export default function Page() {
                 droits de PI concerné.
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
-                4. Responsabilité
-            </h2>
+            <h2 className="mb-2 mt-8 text-xl font-bold">4. Responsabilité</h2>
             <p>
                 Ifremer met tout en œuvre pour assurer l'exactitude et la mise à
                 jour des informations diffusées sur ce site. Toutefois, Ifremer
@@ -65,7 +59,7 @@ export default function Page() {
                 disponibles sur ce site.
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
+            <h2 className="mb-2 mt-8 text-xl font-bold">
                 5. Cookies et données personnelles
             </h2>
             <p>
@@ -73,9 +67,7 @@ export default function Page() {
                 scientifiques.
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold underline">
-                6. Loi applicable
-            </h2>
+            <h2 className="mb-2 mt-8 text-xl font-bold">6. Loi applicable</h2>
             <p>
                 Les présentes mentions légales sont régies par la loi française.
                 Tout litige relatif à l'utilisation de ce site est soumis à la
