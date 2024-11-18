@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { LogoItem } from '@/app/lib/definition';
 import { SocialMediaComponent } from '@/app/components/SocialMedia';
+
 export default function HomePage() {
     const logos: LogoItem[] = [
         { path: '/logo/cnrs.jpg', alt: 'Logo du CNRS' },

@@ -18,11 +18,11 @@ export default function Page() {
         Total: [25, 30, 40, 60, 35, 35, 40],
     };
     return (
-        <div className="reglements mx-4 sm:mx-20">
+        <div className="reglements mx-4 sm:mx-20 xl:mx-48 2xl:mx-96">
             <h1>1. CONDITIONS GÉNÉRALES </h1>
 
             <h2 id="article_1">Article 1 – Respect du Règlement</h2>
-            <p>
+            <p className="text-justify">
                 Si un participant a manqué d’observer un des articles de ce
                 règlement, il sera disqualifié. Les organisateurs du projet
                 notifieront le participant via les plateformes de communication
@@ -32,7 +32,7 @@ export default function Page() {
             <h2 id="article_2">
                 Article 2 – Conditions de Participation au projet{' '}
             </h2>
-            <p>
+            <p className="text-justify">
                 La participation est ouverte à toute personne majeure résidant à
                 la Réunion. La participation au projet est réservée à tout
                 participant pêcheur non professionnel et/ou non guide de pêche
@@ -56,14 +56,14 @@ export default function Page() {
             <p>Le concours se déroulera du 15 octobre 2024 au 15 juin 2025</p>
 
             <h2 id="article_4">Article 4 - Inscription</h2>
-            <p>
+            <p className="text-justify">
                 Le concours est ouvert à toute personne majeure résidant à la
                 Réunion. Le participant devra obligatoirement remplir une fiche
                 d’inscription pour pouvoir participer à ce concours.
             </p>
 
             <h2 id="article_5">Article 5 - Lieux du concours</h2>
-            <p>
+            <p className="text-justify">
                 Pour être validé, le poisson devra obligatoirement provenir de
                 la Réunion et du banc des 90 miles (Mont Lapérouse). Chaque
                 concurrent doit respecter la réglementation maritime en vigueur
@@ -224,38 +224,36 @@ export default function Page() {
             </p>
 
             <h2 id="article_9">Article 9: Moyen de communication</h2>
-            <p>
+            <p className="text-justify">
                 Toute demande ou information à transmettre se fera par SMS,
                 Whatsapp ou messenger. Les demandes seront traitées durant les
                 jours ouvrés dans les journées (entre 9h et 17h). Les photos et
                 les vidéos seront transmises par ces canaux (SMS, Whatsapp ou
                 messenger).
-            </p>
-            <p className="container bg-red-600 font-bold underline">
-                Attention : à chaque vidéo ou photo l'étiquette du numéro
-                correspondant au tube d’échantillon doit apparaître avec le
-                poisson pour que celui-ci soit validé. Si il n’y a pas
-                d’étiquette avec le poisson, la vidéo ou la photo ne sera pas
-                prise en compte.
+                <span className="bg-red-600 font-bold underline">
+                    Attention : à chaque vidéo ou photo l'étiquette du numéro
+                    correspondant au tube d’échantillon doit apparaître avec le
+                    poisson pour que celui-ci soit validé. Si il n’y a pas
+                    d’étiquette avec le poisson, la vidéo ou la photo ne sera
+                    pas prise en compte.
+                </span>
             </p>
             <h2 id="article_10">Article 10: Modalités de Classement</h2>
-            <p>
+            <p className="text-justify">
                 Le classement sera établi par le comptage du total des points
-                par pseudo à chaque semaine.
-            </p>
-            <p>
-                A la fin du projet, les points seront comptabilisés pour chaque
-                participant et le classement final sera établi.
+                par pseudo à chaque semaine. A la fin du projet, les points
+                seront comptabilisés pour chaque participant et le classement
+                final sera établi.
             </p>
             <h2 id="article_11">Article 11: Récompense </h2>
-            <p>
+            <p className="text-justify">
                 Il faut mettre la liste des lots (t shirts, sacs étanches, lot
                 final…) ici. Pour pouvoir gagner le lot final, il faut un
                 minimum de points. Le cumul de ces points sera de à minima{' '}
                 <span className="font-bold underline">300 pts</span>.
             </p>
             <h2 id="article_12">Article 12: Modification du règlement </h2>
-            <p>
+            <p className="text-justify">
                 A tout moment, les organisateurs du projet pourront modifier le
                 règlement du projet pour s’adapter à de nouvelles conditions
                 particulières. Les modifications seront communiquées à tous les
