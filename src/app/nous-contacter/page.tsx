@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Contact } from '@/app/components/Contact';
 
 export const metadata: Metadata = {
     title: 'Nous Contacter',
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-    return <div>Aled</div>;
+    return (
+        <div>
+            <Contact />
+        </div>
+    );
 }
