@@ -55,7 +55,7 @@ export function Contact() {
                     type="sujet"
                     placeholder="Sujet"
                     className="w-full rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 outline-none focus:border-primary_orange focus:shadow-md"
-                    {...register('sujet', { required: true })}
+                    {...register('subject', { required: true })}
                 />
             </div>
             <div className="mb-5">

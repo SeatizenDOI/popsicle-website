@@ -14,6 +14,6 @@ export interface LogoItem {
 export type FormData = {
     name: string;
     email: string;
-    sujet: string;
+    subject: string;
     message: string;
 };
