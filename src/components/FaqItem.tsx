@@ -12,7 +12,7 @@ export default function FaqItem({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="my-2 rounded-2xl bg-primary_grey">
+        <div className="bg-secondary_orange my-2 rounded-2xl">
             <button
                 className="flex w-full flex-row justify-between py-4 focus:outline-none"
                 onClick={() => setIsOpen(!isOpen)}
@@ -34,7 +34,7 @@ export default function FaqItem({
                 </svg>
             </button>
             {isOpen && (
-                <p className="rounded-b-2xl bg-secondary_grey px-8 py-8 text-justify">
+                <p className="bg-tertiary_orange rounded-b-2xl px-8 py-8 text-justify">
                     {answer}
                 </p>
             )}

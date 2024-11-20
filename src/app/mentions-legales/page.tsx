@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="mx-4 sm:mx-20 xl:mx-48 2xl:mx-96">
-            <h1 className="mb-2 text-center text-4xl font-bold">
+            <h1 className="mb-2 text-center text-lg font-bold sm:text-4xl">
                 Mentions Légales
             </h1>
 

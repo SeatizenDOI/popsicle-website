@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col">
-            <h1 className="m-8 text-center text-4xl font-bold">
+            <h1 className="m-8 text-center text-lg font-bold sm:text-4xl">
                 Formulaire de contact
             </h1>
             <Contact />

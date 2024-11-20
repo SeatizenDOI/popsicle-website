@@ -19,7 +19,7 @@ export default function Page() {
     };
     return (
         <div className="reglements mx-4 sm:mx-20 xl:mx-48 2xl:mx-96">
-            <h1 className="m-8 text-center text-4xl font-bold">
+            <h1 className="m-8 text-center text-lg font-bold sm:text-4xl">
                 1. CONDITIONS GÉNÉRALES
             </h1>
             <h2 id="article_1">Article 1 – Respect du Règlement</h2>

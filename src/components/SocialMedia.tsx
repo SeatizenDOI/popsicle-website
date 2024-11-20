@@ -12,7 +12,7 @@ export function SocialMediaComponent() {
                 <FaFacebook />
             </Link>
             <Link
-                href="https://wa.me/"
+                href="https://wa.me/262693544353"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-emerald-500"
             >
                 <FaWhatsapp />

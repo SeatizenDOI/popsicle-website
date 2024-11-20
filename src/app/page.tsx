@@ -58,6 +58,9 @@ export default function HomePage() {
                         >
                             <p>Inscrivez-vous</p>
                         </Link>
+                        <div className="mb-4 max-w-20 p-8">
+                            <SocialMediaComponent />
+                        </div>
                     </div>
                     <div className="flex flex-row justify-center lg:w-2/4">
                         <Image
@@ -93,7 +96,7 @@ export default function HomePage() {
             </section>
             <hr className="block lg:hidden" />
             <section
-                className="mb-8 flex h-auto flex-col justify-between xl:h-[calc(100vh-10rem)]"
+                className="mb-8 flex h-auto flex-col justify-between xl:h-[calc(100vh-5rem)]"
                 ref={section2Ref}
             >
                 <div className="flex flex-col">
@@ -172,7 +175,7 @@ export default function HomePage() {
             <hr className="block lg:hidden" />
 
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
+                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-5rem)]"
                 ref={section3Ref}
             >
                 <div className="flex flex-col">
