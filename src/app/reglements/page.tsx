@@ -19,8 +19,9 @@ export default function Page() {
     };
     return (
         <div className="reglements mx-4 sm:mx-20 xl:mx-48 2xl:mx-96">
-            <h1>1. CONDITIONS GÉNÉRALES </h1>
-
+            <h1 className="m-8 text-center text-4xl font-bold">
+                1. CONDITIONS GÉNÉRALES
+            </h1>
             <h2 id="article_1">Article 1 – Respect du Règlement</h2>
             <p className="text-justify">
                 Si un participant a manqué d’observer un des articles de ce
@@ -28,7 +29,6 @@ export default function Page() {
                 notifieront le participant via les plateformes de communication
                 du projet (<Link href="#article_9">Article 9</Link>).
             </p>
-
             <h2 id="article_2">
                 Article 2 – Conditions de Participation au projet{' '}
             </h2>
@@ -51,17 +51,14 @@ export default function Page() {
                 sera responsable des communications avec les organisateurs du
                 projet.
             </p>
-
             <h2 id="article_3">Article 3 – Information sur le concours</h2>
             <p>Le concours se déroulera du 15 octobre 2024 au 15 juin 2025</p>
-
             <h2 id="article_4">Article 4 - Inscription</h2>
             <p className="text-justify">
                 Le concours est ouvert à toute personne majeure résidant à la
                 Réunion. Le participant devra obligatoirement remplir une fiche
                 d’inscription pour pouvoir participer à ce concours.
             </p>
-
             <h2 id="article_5">Article 5 - Lieux du concours</h2>
             <p className="text-justify">
                 Pour être validé, le poisson devra obligatoirement provenir de
@@ -76,7 +73,6 @@ export default function Page() {
                     </Link>
                 </li>
             </ul>
-
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
             <p>
                 Pour cette étude il n’y a pas de limite de taille de capture
@@ -165,20 +161,17 @@ export default function Page() {
                 </li>
             </ul>
             <h2 id="article_7">Article 7 - Comptabilisation des points</h2>
-
             <table className="text-surface min-w-full text-left text-sm font-light">
                 <thead>
                     <tr>
-                        <th className="bg-white">
-                            Informations ou échantillons fournis
-                        </th>
+                        <th>Informations ou échantillons fournis</th>
                         <th colSpan={7}>Calcul des points</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Object.entries(table_values).map(([key, values]) => (
                         <tr key={key}>
-                            <th>{key}</th>
+                            <th className="bg-slate-200 text-left">{key}</th>
                             {values.map((value, index) =>
                                 key === 'Total' ? (
                                     <th key={index} className="">
@@ -187,7 +180,11 @@ export default function Page() {
                                 ) : (
                                     <td
                                         key={index}
-                                        className={value === 0 ? 'zero' : ''}
+                                        className={` ${
+                                            value === 0
+                                                ? 'bg-red-200'
+                                                : 'bg-green-200'
+                                        } p-2 font-medium`}
                                     >
                                         {value}
                                     </td>
@@ -197,11 +194,9 @@ export default function Page() {
                     ))}
                 </tbody>
             </table>
-
             <h2 id="article_8">
                 Article 8 - Enregistrements des prises - Réclamations
             </h2>
-
             <p>
                 L’enregistrement de chaque prise sera validé par les
                 organisateurs du projet après vérification des données à fournir
@@ -222,7 +217,6 @@ export default function Page() {
                 Une mise à jour hebdomadaire sera effectuée via les réseaux
                 sociaux dédiés et le site web du projet.
             </p>
-
             <h2 id="article_9">Article 9: Moyen de communication</h2>
             <p className="text-justify">
                 Toute demande ou information à transmettre se fera par SMS,
@@ -230,13 +224,14 @@ export default function Page() {
                 jours ouvrés dans les journées (entre 9h et 17h). Les photos et
                 les vidéos seront transmises par ces canaux (SMS, Whatsapp ou
                 messenger).
-                <span className="bg-red-600 font-bold underline">
-                    Attention : à chaque vidéo ou photo l'étiquette du numéro
-                    correspondant au tube d’échantillon doit apparaître avec le
-                    poisson pour que celui-ci soit validé. Si il n’y a pas
-                    d’étiquette avec le poisson, la vidéo ou la photo ne sera
-                    pas prise en compte.
-                </span>
+            </p>{' '}
+            <br />
+            <p className="font-bold text-red-600 underline">
+                Attention : à chaque vidéo ou photo l'étiquette du numéro
+                correspondant au tube d’échantillon doit apparaître avec le
+                poisson pour que celui-ci soit validé. Si il n’y a pas
+                d’étiquette avec le poisson, la vidéo ou la photo ne sera pas
+                prise en compte.
             </p>
             <h2 id="article_10">Article 10: Modalités de Classement</h2>
             <p className="text-justify">
