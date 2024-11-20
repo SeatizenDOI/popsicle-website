@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { LinkItem } from '@/app/lib/definition';
-import { SocialMediaComponent } from '@/app/components/SocialMedia';
+import { LinkItem } from '@/lib/definition';
+import { SocialMediaComponent } from '@/components/SocialMedia';
 
 export default function Footer() {
     const footer_links: LinkItem[] = [

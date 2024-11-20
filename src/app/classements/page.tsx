@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { CardsSkeleton } from '@/app/ui/skeletons';
-import GetImage from '@/app/components/GetImage';
+import GetImage from '@/components/GetImage';
 
 export const metadata: Metadata = {
     title: 'Classement',

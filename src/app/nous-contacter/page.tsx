@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Contact } from '@/app/components/Contact';
+import { Contact } from '@/components/Contact';
 
 export const metadata: Metadata = {
     title: 'Nous Contacter',
@@ -8,7 +8,10 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div>
+        <div className="flex flex-col">
+            <h1 className="m-8 text-center text-4xl font-bold">
+                Formulaire de contact
+            </h1>
             <Contact />
         </div>
     );

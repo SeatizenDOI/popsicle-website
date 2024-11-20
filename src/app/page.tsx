@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
-import { LogoItem } from '@/app/lib/definition';
-import { SocialMediaComponent } from '@/app/components/SocialMedia';
+import { LogoItem } from '@/lib/definition';
+import { SocialMediaComponent } from '@/components/SocialMedia';
 
 export default function HomePage() {
     const logos: LogoItem[] = [

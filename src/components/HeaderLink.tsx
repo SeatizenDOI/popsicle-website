@@ -2,7 +2,7 @@
 
 import { clsx } from 'clsx';
 import { usePathname } from 'next/navigation';
-import { LinkItem } from '@/app/lib/definition';
+import { LinkItem } from '@/lib/definition';
 import Link from 'next/link';
 import { AiFillCloud } from 'react-icons/ai';
 

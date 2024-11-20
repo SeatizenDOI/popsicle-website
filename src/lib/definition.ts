@@ -10,3 +10,10 @@ export interface LogoItem {
     path: string;
     alt: string;
 }
+
+export type FormData = {
+    name: string;
+    email: string;
+    sujet: string;
+    message: string;
+};

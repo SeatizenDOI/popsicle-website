@@ -1,4 +1,4 @@
-import FaqItem from '@/app/components/FaqItem';
+import FaqItem from '@/components/FaqItem';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

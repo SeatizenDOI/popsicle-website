@@ -5,8 +5,8 @@ import { VscLaw } from 'react-icons/vsc';
 import { GiDna2, GiTransparentTubes, GiPodium } from 'react-icons/gi';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LinkItem } from '@/app/lib/definition';
-import { HeaderLink } from '@/app/components/HeaderLink';
+import { LinkItem } from '@/lib/definition';
+import { HeaderLink } from '@/components/HeaderLink';
 import { useState } from 'react';
 import '@/app/ui/header.css';
 
