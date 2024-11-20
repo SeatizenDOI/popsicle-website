@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa6';
+import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
 
 export function SocialMediaComponent() {
@@ -12,16 +12,22 @@ export function SocialMediaComponent() {
                 <FaFacebook />
             </Link>
             <Link
-                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                href="https://wa.me/"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-emerald-500"
             >
                 <FaWhatsapp />
             </Link>
             <Link
-                href="mailto:popsicle.coool974@gmail.com"
+                href="mailto:contact.popsicle974@gmail.com"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-red-400"
             >
                 <SiGmail />
+            </Link>
+            <Link
+                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-pink-400"
+            >
+                <FaInstagram />
             </Link>
         </div>
     );

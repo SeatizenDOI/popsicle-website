@@ -175,51 +175,51 @@ export default function HomePage() {
                 className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
                 ref={section3Ref}
             >
-                <div className="flex flex-col border">
-                    <h1 className="m-8 self-center text-4xl font-bold">
+                <div className="flex flex-col">
+                    <h1 className="m-8 self-center text-lg font-bold sm:text-4xl">
                         Comment participer ?
                     </h1>
                     <p className="m-8 self-center">
                         Après avoir pris connaissance du règlement, vous pouvez
                         nous contacter par 3 moyens.
                     </p>
-                    <div className="flex flex-col justify-between border lg:flex-row">
-                        <div className="m-8 flex min-h-64 w-96 flex-col justify-between border">
-                            <h1 className="self-center pt-4 text-xl font-semibold">
+                    <div className="flex flex-col justify-center lg:flex-row">
+                        <div className="m-8 flex flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange lg:w-96">
+                            <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de contact
                             </h1>
                             <p></p>
                             <Link
                                 href="/nous-contacter"
-                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-4"
+                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
                             >
                                 <p>Contactez-vous</p>
                             </Link>
                         </div>
-                        <div className="m-8 flex min-h-64 w-96 flex-col justify-around border">
-                            <h1 className="pt-4 text-center text-xl font-semibold">
+                        <div className="m-8 flex aspect-auto min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange">
+                            <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de demande d'inscription
                             </h1>
-                            <p className="w-3/6 self-center text-justify">
+                            <p className="w-9/12 self-center text-center">
                                 En remplissant ce formulaire, vous entrez dans
                                 la file d’attente pour participer au projet.
                             </p>
                             <Link
                                 href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-4"
+                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
                             >
                                 <p>Inscrivez-vous</p>
                             </Link>
                         </div>
-                        <div className="m-8 flex min-h-64 w-96 flex-col justify-between border">
-                            <h1 className="self-center pt-4 text-xl font-semibold">
+                        <div className="m-8 flex min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange lg:w-96">
+                            <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Réseaux
                             </h1>
-                            <p className="w-3/6 self-center text-justify">
+                            <p className="w-9/12 self-center text-center">
                                 Suivez-nous sur les réseaux et contactez-nous
                                 pour toutes informations.
                             </p>
-                            <div className="p-8">
+                            <div className="mb-4 p-8">
                                 <SocialMediaComponent />
                             </div>
                         </div>
