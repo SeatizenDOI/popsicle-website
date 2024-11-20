@@ -14,7 +14,7 @@ export function Contact() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="m-8 w-1/3 max-w-screen-lg self-center"
+            className="m-8 max-w-screen-lg self-center sm:w-1/3"
         >
             <div className="mb-5">
                 <label
