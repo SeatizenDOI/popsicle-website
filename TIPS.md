@@ -72,3 +72,7 @@ tables inspiration :
 # Deploy vercel
 
 https://medium.com/@zay_kyoy/deploy-nextjs-app-on-vps-20aedfbed3d1
+
+## Setup email sender
+
+https://medium.com/@abilsavio/email-contact-form-using-nextjs-app-router-60c29fe70644

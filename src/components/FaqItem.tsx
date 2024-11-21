@@ -12,17 +12,17 @@ export default function FaqItem({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-t border-gray-300">
+        <div className="bg-secondary_orange my-2 rounded-2xl">
             <button
                 className="flex w-full flex-row justify-between py-4 focus:outline-none"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <h2 className="text-lg font-semibold text-blue-600">
+                <h2 className="px-8 py-2 text-sm font-semibold sm:text-2xl">
                     {question}
                 </h2>
 
                 <svg
-                    className={`h-6 w-6 transform text-gray-600 transition-transform ${isOpen ? 'rotate-90' : 'rotate-0'}`}
+                    className={`mr-8 h-10 w-10 transform transition-transform ${isOpen ? 'rotate-0' : 'rotate-90'}`}
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -33,7 +33,11 @@ export default function FaqItem({
                     <polyline points="6 9 12 15 18 9" />
                 </svg>
             </button>
-            {isOpen && <p className="py-2 pl-4 text-gray-700">{answer}</p>}
+            {isOpen && (
+                <p className="bg-tertiary_orange rounded-b-2xl px-8 py-8 text-justify">
+                    {answer}
+                </p>
+            )}
         </div>
     );
 }

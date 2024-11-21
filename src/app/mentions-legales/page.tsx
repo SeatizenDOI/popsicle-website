@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="mx-4 sm:mx-20">
-            <h1 className="mb-2 text-center text-4xl font-bold">
+        <div className="mx-4 sm:mx-20 xl:mx-48 2xl:mx-96">
+            <h1 className="mb-2 text-center text-lg font-bold sm:text-4xl">
                 Mentions Légales
             </h1>
 
@@ -34,7 +34,7 @@ export default function Page() {
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 3. Propriété intellectuelle
             </h2>
-            <p>
+            <p className="text-justify">
                 Tout contenu, information, texte, matériau, nom, image,
                 illustration et représentation visuelle (y compris, sans s'y
                 limiter, ceux provenant de nos partenaires, affiliés,
@@ -49,7 +49,7 @@ export default function Page() {
             </p>
 
             <h2 className="mb-2 mt-8 text-xl font-bold">4. Responsabilité</h2>
-            <p>
+            <p className="text-justify">
                 Ifremer met tout en œuvre pour assurer l'exactitude et la mise à
                 jour des informations diffusées sur ce site. Toutefois, Ifremer
                 ne peut garantir l'exactitude, la précision ou l'exhaustivité
@@ -62,13 +62,13 @@ export default function Page() {
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 5. Cookies et données personnelles
             </h2>
-            <p>
+            <p className="text-justify">
                 Ce site n'utilise pas de cookies et ne collecte pas de données
                 scientifiques.
             </p>
 
             <h2 className="mb-2 mt-8 text-xl font-bold">6. Loi applicable</h2>
-            <p>
+            <p className="text-justify">
                 Les présentes mentions légales sont régies par la loi française.
                 Tout litige relatif à l'utilisation de ce site est soumis à la
                 compétence exclusive des tribunaux français.

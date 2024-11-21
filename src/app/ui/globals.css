@@ -11,9 +11,18 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --primary_orange: #d18933;
+    --secondary_orange: hsl(33, 63%, 80%);
+    --tertiary_orange: hsl(33, 63%, 95%);
+    --primary_red: #6e0203;
+    --secondary_red: #320101;
+    --primary_text: #020617;
+    --primary_grey: #cbd5e1;
+    --secondary_grey: #f1f5f9;
+    --secondary_white: #fefee2;
 }
 
 body {
-    color: var(--foreground);
+    color: var(--primary_text);
     background: var(--background);
 }
