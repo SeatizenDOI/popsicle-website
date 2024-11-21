@@ -52,14 +52,16 @@ export default function HomePage() {
                             Un projet de science participative qui a besoin de
                             vous !
                         </h2>
-                        <Link
-                            href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                            className="m-8 inline-block w-fit rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red lg:m-16"
-                        >
-                            <p>Inscrivez-vous</p>
-                        </Link>
-                        <div className="mb-4 max-w-20 p-8">
-                            <SocialMediaComponent />
+                        <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
+                            <Link
+                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red"
+                            >
+                                <p>Inscrivez-vous</p>
+                            </Link>
+                            <div className="self-center">
+                                <SocialMediaComponent />
+                            </div>
                         </div>
                     </div>
                     <div className="flex flex-row justify-center lg:w-2/4">

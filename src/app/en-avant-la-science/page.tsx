@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-    return <div className="gap-y-10"></div>;
+    return <div className="gap-y-10">WIP</div>;
 }
