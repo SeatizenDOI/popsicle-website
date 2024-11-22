@@ -164,17 +164,26 @@ export default function Page() {
             <table className="text-surface min-w-full text-left text-sm font-light">
                 <thead>
                     <tr>
-                        <th>Informations ou échantillons fournis</th>
-                        <th colSpan={7}>Calcul des points</th>
+                        <th className="bg-slate-200 pl-2 text-left">
+                            Informations ou échantillons fournis
+                        </th>
+                        <th className="bg-slate-200 pl-2 text-left" colSpan={7}>
+                            Calcul des points
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {Object.entries(table_values).map(([key, values]) => (
                         <tr key={key}>
-                            <th className="bg-slate-200 text-left">{key}</th>
+                            <th className="bg-slate-200 pl-2 text-left">
+                                {key}
+                            </th>
                             {values.map((value, index) =>
                                 key === 'Total' ? (
-                                    <th key={index} className="">
+                                    <th
+                                        key={index}
+                                        className="bg-slate-200 pl-2 text-left"
+                                    >
                                         {value}
                                     </th>
                                 ) : (
@@ -182,8 +191,8 @@ export default function Page() {
                                         key={index}
                                         className={` ${
                                             value === 0
-                                                ? 'bg-red-200'
-                                                : 'bg-green-200'
+                                                ? 'bg-red-200 pl-2'
+                                                : 'bg-green-200 pl-2'
                                         } p-2 font-medium`}
                                     >
                                         {value}
