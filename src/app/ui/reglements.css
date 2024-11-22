@@ -1,8 +1,7 @@
 .reglements {
     h2 {
-        font-size: large;
-        font-weight: bold;
-        margin: 2rem 0 0.5rem 0;
+        @apply text-lg font-semibold sm:text-xl sm:font-bold;
+        margin: 4rem 0 1rem 0;
     }
 
     li {
@@ -10,6 +9,6 @@
     }
 
     [href^='#article_'] {
-        @apply animate-pulse hover:text-primary_orange;
+        @apply animate-pulse font-bold text-primary_orange;
     }
 }
