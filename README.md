@@ -12,4 +12,4 @@ EMAIL_WEBSITE_PASSWORD=\*\*\*\*\*\*
 
 Build your container: `docker build -t popsicle:latest .`
 
-Run your container: `docker run --rm -p 3003:3000 popsicle:latest`
+Run your container: `docker run --rm --name popsicle-website -d -p 3003:3000 popsicle:latest`

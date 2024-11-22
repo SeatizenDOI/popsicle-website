@@ -8,10 +8,11 @@ import { SocialMediaComponent } from '@/components/SocialMedia';
 
 export default function HomePage() {
     const logos: LogoItem[] = [
-        { path: '/logo/cnrs.jpg', alt: 'Logo du CNRS' },
+        { path: '/logo/cnrs.png', alt: 'Logo du CNRS' },
+        { path: '/logo/lirmm.jpg', alt: 'Logo du LIRMM' },
         { path: '/logo/capam.jpeg', alt: 'Logo de la CAPAM' },
         { path: '/logo/coool.webp', alt: 'Logo de COOOOL' },
-        { path: '/logo/Gouvernement.png', alt: 'Logo du gouvernement' },
+        { path: '/logo/gouvernement.png', alt: 'Logo du gouvernement' },
         { path: '/logo/ifremer.png', alt: "Logo d'Ifremer" },
         { path: '/logo/ofb.jpg', alt: "Logo de l'OFB" },
         {
@@ -143,8 +144,8 @@ export default function HomePage() {
                                     src={l.path}
                                     alt={l.alt}
                                     width={256}
-                                    height={256}
-                                    className="h:4 w-auto"
+                                    height={128}
+                                    className="h-12 w-auto px-4 lg:h-14 xl:h-16"
                                 />
                             );
                         })}
