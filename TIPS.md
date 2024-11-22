@@ -76,3 +76,7 @@ https://medium.com/@zay_kyoy/deploy-nextjs-app-on-vps-20aedfbed3d1
 ## Setup email sender
 
 https://medium.com/@abilsavio/email-contact-form-using-nextjs-app-router-60c29fe70644
+
+## SEO
+
+https://sosteve.medium.com/your-next-js-website-isnt-on-google-time-to-fix-it-c8f92f515e35
