@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-export default function FaqItem({
+export default function ScienceItem({
     question,
     answer,
 }: {
     question: string;
-    answer: string;
+    answer: ReactNode;
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -34,9 +34,9 @@ export default function FaqItem({
                 </svg>
             </button>
             {isOpen && (
-                <p className="rounded-b-2xl bg-tertiary_orange px-8 py-8 text-justify">
+                <div className="rounded-b-2xl bg-tertiary_orange px-8 py-8 text-justify">
                     {answer}
-                </p>
+                </div>
             )}
         </div>
     );

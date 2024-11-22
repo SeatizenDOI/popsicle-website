@@ -99,7 +99,7 @@ export default function HomePage() {
             </section>
             <hr className="block lg:hidden" />
             <section
-                className="mb-8 flex h-auto flex-col justify-between bg-orange-50 px-8 xl:h-[calc(100vh-5rem)]"
+                className="mb-8 flex h-auto flex-col justify-between bg-tertiary_orange px-8 xl:h-[calc(100vh-5rem)]"
                 ref={section2Ref}
             >
                 <div className="flex flex-col">

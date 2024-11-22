@@ -4,9 +4,8 @@ import { EtudeGUAM } from '@/app/en-avant-la-science/EtudeGuam';
 import { Tripes } from '@/app/en-avant-la-science/Tripes';
 import { Nageoire } from '@/app/en-avant-la-science/Nageoire';
 import { HeightAndWeight } from '@/app/en-avant-la-science/HeightAndWeight';
-import { Story } from '@/app/en-avant-la-science/Story';
 import { Otolithes } from '@/app/en-avant-la-science/Otolithes';
-import { CKMR } from '@/app/en-avant-la-science/CKMR';
+import ScienceItem from '@/components/ScienceItem';
 
 export const metadata: Metadata = {
     title: 'En avant la science',
@@ -14,37 +13,43 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+    const scienceItem = [
+        {
+            question: 'Biologie du Grand Queue et du Tire Boure',
+            answer: Species,
+        },
+        {
+            question:
+                'Pourquoi nous voulons récupérer la mesure précise et le poids du poisson ?',
+            answer: HeightAndWeight,
+        },
+        {
+            question:
+                'Pourquoi nous voulons récupérer un morceau de nageoire ?',
+            answer: Nageoire,
+        },
+        {
+            question: 'Otolithes',
+            answer: Otolithes,
+        },
+        {
+            question: 'Pourquoi nous voulons récupérer les tripes ?',
+            answer: Tripes,
+        },
+    ];
+
     return (
-        <div className="mt-8 flex flex-row">
-            <div className="hidden h-fit w-2/12 flex-col border p-6 sm:flex">
-                <h2 className="py-2 text-sm font-bold">Espèce</h2>
-                <h2 className="py-2 text-sm font-bold">Tripes</h2>
-                <h2 className="py-2 text-sm font-bold">Nageoire</h2>
-                <h2 className="py-2 text-sm font-bold">Histoire</h2>
-                <h2 className="py-2 text-sm font-bold">CKMR</h2>
-                <h2 className="py-2 text-sm font-bold">Otolithes</h2>
-                <h2 className="py-2 text-sm font-bold">GUAM</h2>
-                <h2 className="py-2 text-sm font-bold">
-                    Relation Poids Taille
-                </h2>
-            </div>
-            <div>
-                <Species />
-                <hr className="my-8" />
-                <Story />
-                <hr className="my-8" />
-                <EtudeGUAM />
-                <hr className="my-8" />
-                <Nageoire />
-                <hr className="my-8" />
-                <Tripes />
-                <hr className="my-8" />
-                <HeightAndWeight />
-                <hr className="my-8" />
-                <Otolithes />
-                <hr className="my-8" />
-                <CKMR />
-            </div>
+        <div className="mx-auto flex max-w-7xl flex-col p-4">
+            <h1 className="mb-2 text-center text-lg font-bold sm:text-4xl">
+                En Avant La Science
+            </h1>
+            {scienceItem.map((item, index) => (
+                <ScienceItem
+                    key={index}
+                    question={item.question}
+                    answer={item.answer()}
+                />
+            ))}
         </div>
     );
 }
