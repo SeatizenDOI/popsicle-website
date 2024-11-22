@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     let table_values = {
-        'Donnée de base': [25, 25, 25, 25, 25, 25, 25],
+        'Donnée de base (Article 6.1)': [25, 25, 25, 25, 25, 25, 25],
         'Poids + photo/video sur balance': [0, 5, 5, 5, 0, 0, 5],
         Tripes: [0, 0, 10, 10, 10, 0, 0],
         Tête: [0, 0, 0, 10, 0, 10, 10],
@@ -30,74 +30,112 @@ export default function Page() {
                 du projet (<Link href="#article_9">Article 9</Link>).
             </p>
             <h2 id="article_2">
-                Article 2 – Conditions de Participation au projet{' '}
+                Article 2 – Conditions de Participation au projet
             </h2>
             <p className="text-justify">
                 La participation est ouverte à toute personne majeure résidant à
-                la Réunion. La participation au projet est réservée à tout
-                participant pêcheur non professionnel et/ou non guide de pêche
-                en bateau et en kayak. Le nombre de participants est limité à
+                la Réunion.
+            </p>
+            <p className="text-justify">
+                La participation au projet est réservée à tout participant
+                pêcheur non professionnel en bateau et en kayak. Les guides de
+                pêche sont aussi exclus. Le nombre de participants est limité à
                 100 personnes. Une fiche d’inscription sera à remplir
                 obligatoirement par le participant pour obtenir le droit de
-                participer. Les 100 premiers inscrits pourront participer. Un
-                participant peut représenter une personne physique ou plusieurs
-                personnes réunies en “équipe”. Le classement (
+                participer.
+            </p>
+            <p className="text-justify">
+                Les 100 premiers inscrits pourront participer. Un participant
+                peut représenter une personne physique ou plusieurs personnes
+                réunies en “équipe”. Le classement (
                 <Link href="#article_10">Article 10</Link>) et récompense (
                 <Link href="#article_11">Article 11</Link>) seront seulement
-                attribués à un participant même s’il s’agit de plusieurs
-                personnes physiques. Par exemple, un t-shirt du projet pourra
-                être obtenu mais un seul t-shirt sera fourni au participant. En
-                cas de participation en équipe, la personne physique inscrite
-                sera responsable des communications avec les organisateurs du
-                projet.
+                attribués au participant même s’il s’agit de plusieurs personnes
+                physiques. Par exemple, un t-shirt du projet pourra être obtenu
+                mais un seul un T-shirt sera fourni au participant. En cas de
+                participation en équipe, la personne physique inscrite sera
+                responsable des communications avec les organisateurs du projet.
             </p>
             <h2 id="article_3">Article 3 – Information sur le concours</h2>
-            <p>Le concours se déroulera du 15 octobre 2024 au 15 juin 2025</p>
+            <p>
+                Le projet se déroulera du 1er décembre 2024 au 15 juin 2025. Si
+                1000 poissons sont capturés avant la date de fin (15 juin 2025),
+                le projet prendra fin de manière anticipée. Dans ce cas, cette
+                fin anticipée sera communiquée aux participants via les réseaux
+                sociaux du projet.
+            </p>
             <h2 id="article_4">Article 4 - Inscription</h2>
             <p className="text-justify">
-                Le concours est ouvert à toute personne majeure résidant à la
-                Réunion. Le participant devra obligatoirement remplir une fiche
-                d’inscription pour pouvoir participer à ce concours.
+                Le participant devra obligatoirement remplir une fiche
+                d’inscription pour pouvoir participer à ce concours. La demande
+                d’inscription peut se faire en ligne (sur cette{' '}
+                <Link
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSedBqQrLrL93RY3YVnp3zKsyw-YRPzxW25fO0Um3pxvdGEGzA/viewform"
+                    className="font-bold text-primary_orange"
+                >
+                    page
+                </Link>
+                ) ou en envoyant la demande en annexe ci-après aux organisateurs
+                via les outils de communication proposés (whatsapp et messenger)
             </p>
-            <h2 id="article_5">Article 5 - Lieux du concours</h2>
+            <h2 id="article_5">Article 5 - Lieu du projet</h2>
             <p className="text-justify">
-                Pour être validé, le poisson devra obligatoirement provenir de
-                la Réunion et du banc des 90 miles (Mont Lapérouse). Chaque
-                concurrent doit respecter la réglementation maritime en vigueur
-                et les zones protégées du parc marin de la Réunion.
+                Pour être validé, le poisson devra obligatoirement être capturé
+                à la Réunion ou sur le banc des 90 miles (Mont Lapérouse) durant
+                la période du projet (<Link href="#article_3">Article 3</Link>).
+                La vérification du lieu de capture sera effectuée via les
+                photos/vidéos prises (<Link href="#article_6">Article 6</Link>).
             </p>
-            <ul>
-                <li>
-                    <Link href="https://www.reservemarinereunion.fr/wp-content/uploads/2020/09/Plaquette-peche-de-loisir.pdf">
-                        Réserve marine
-                    </Link>
-                </li>
-            </ul>
+            <br />
+            <p className="text-justify font-semibold">
+                Chaque concurrent doit respecter la réglementation maritime en
+                vigueur (
+                <Link
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSedBqQrLrL93RY3YVnp3zKsyw-YRPzxW25fO0Um3pxvdGEGzA/viewform"
+                    className="font-bold text-primary_orange"
+                >
+                    site de la DMSOI
+                </Link>
+                ) ainsi que les zones protégées de la Réserve Marine de la
+                Réunion (
+                <Link
+                    href="https://www.reservemarinereunion.fr/wp-content/uploads/2020/09/Plaquette-peche-de-loisir.pdf"
+                    className="font-bold text-primary_orange"
+                >
+                    Réserve marine
+                </Link>
+                ).
+            </p>
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
             <p>
                 Pour cette étude il n’y a pas de limite de taille de capture
                 dans un premier temps.
             </p>
             <p>
-                En effet pour cette étude nous avons besoin de xx poissons de
-                -25 cm.
-            </p>
-            <p>
-                Une fois ce quota atteint,
-                <strong>
+                Nous avons besoin de 50 poissons entiers de moins 25 cm. Une
+                fois ce quota atteint,
+                <span className="font-semibold">
+                    {'  '}
                     tout poisson en dessous de cette taille ne sera pas
-                    comptabilisé sauf si celui-ci est relâché
-                </strong>
-                .
-            </p>
-            <p>
-                Pour ces poissons, un petit bout de nageoire et la longueur
-                suffira pour obtenir un total des 60 pts.
+                    comptabilisé sauf si celui-ci est relâché (preuve par
+                    vidéo).{' '}
+                </span>{' '}
+                Pour ces poissons, un petit bout de nageoire caudale (identique
+                à la réglementation en vigueur), la longueur et une vidéo/photo
+                du relâché suffira pour obtenir un total{' '}
+                <span className="font-semibold">de 25 points.</span> Pour
+                rappel, un maximum de 1000 poissons sur la durée du projet est
+                fixé. Le projet prend fin lorsque ce nombre est atteint même
+                avant la date finale du 15 juin 2025. Les participants seront
+                avertis par les moyens de communication du projet lorsque cette
+                limitation est atteinte.
             </p>
             <br />
             <p>
-                Pour valider une prise, il faut impérativement fournir les
-                informations suivantes :
+                <span id="article_61">6.1</span> Pour valider une prise, il faut
+                impérativement transmettre les informations et échantillons
+                suivants via un des outils mis à disposition (
+                <Link href="#article_9">Article 9</Link>) :
             </p>
             <ul>
                 <li>Pseudo pêcheur</li>
@@ -108,8 +146,8 @@ export default function Page() {
                 </li>
                 <li>
                     Photo et/ou vidéo du poisson avec son étiquette
-                    (correspondant au n° du tube) avec la réunion en arrière
-                    plan
+                    (correspondant au n° du tube) avec La Réunion en arrière
+                    plan ou la carte GPS (sur le banc des 90)
                 </li>
                 <li>
                     Photo et/ou vidéo du poisson avec son étiquette
@@ -118,48 +156,56 @@ export default function Page() {
                 </li>
                 <li>Mesure du poisson en cm</li>
                 <li>
-                    PMorceau de nageoire dans le tube de stockage correspondant
-                    au numéro de l'étiquette du poisson
+                    Morceau de nageoire caudale (identique à la réglementation
+                    en vigueur) dans le tube de stockage correspondant au numéro
+                    de l'étiquette du poisson
                 </li>
             </ul>
+            <p>
+                Ces informations et échantillons permettent d’obtenir{' '}
+                <span className="font-semibold">25 points.</span>
+            </p>
             <br />
             <p>
-                Pour valider des points Bonus, il faut impérativement fournir
-                avec la même prise :
+                <span id="article_62">6.2</span> Pour valider des points Bonus,
+                il faut impérativement fournir avec la même prise :
             </p>
-            <ul>
+            <ul className="pt-4">
                 <li>
                     <strong>
-                        <u>+5 pts : Poids du poisson</u>
+                        <u>+ 5 pts : Poids du poisson</u>
                     </strong>
                     : photo et/ou vidéo avec le poisson avec son étiquette
                     (correspondant au n° du tube) sur la balance
                 </li>
-                <li>
+                <li className="pt-2">
                     <strong>
                         <u>+10 pts </u>
                     </strong>
                     : L’ensemble des tripes de la cavité abdominale à prélever
-                    et mettre dans le sachet correspondant au poisson
+                    et mettre dans le sachet correspondant au poisson. La partie
+                    importante est les gonades (cf photos protocoles)
                 </li>
-                <li>
+                <li className="pt-2">
                     <strong>
                         <u>+10 pts : Couper la tête</u>
                     </strong>
                     : (Voir Schéma sur le protocole) et la mettre dans le sachet
                     correspondant au poisson
                 </li>
-                <li>
+                <li className="pt-2">
                     <strong>
                         <u>
                             +10 pts : Si toutes les infos d’un poisson sont
-                            fournie
+                            fournies (taille, poids, tripes, têtes)
                         </u>
                     </strong>
-                    : photo et/ou vidéo avec le poisson avec son étiquette
-                    (correspondant au n° du tube) sur la balance
                 </li>
             </ul>
+            <p className="pt-4">
+                Ou Poisson entier :{' '}
+                <span className="font-semibold"> 60 pts</span>
+            </p>
             <h2 id="article_7">Article 7 - Comptabilisation des points</h2>
             <table className="text-surface min-w-full text-left text-sm font-light">
                 <thead>
@@ -203,6 +249,20 @@ export default function Page() {
                     ))}
                 </tbody>
             </table>
+            <h3>Exemple de calcul</h3>
+            <p>
+                Données de base (25 pts) + le poids fourni (+ 5pts) soit un
+                total de 25 + 5 = 30pts
+            </p>
+            <p>
+                Données de base (25 pts) + la tête (+ 10pts) + les tripes (+
+                10pts) sont fournie en plus : 25 + 10 + 10 = 45 pts
+            </p>
+            <p>
+                Données de base (25 pts) + poids (+ 5pts) + tripes (+ 10pts) +
+                tête (+ 10pts) sont fournie : 25 + 5 + 10 + 10 = 50 pts donc
+                l’échantillonnage est complet : bonus + 10 pts soit 60 pts
+            </p>
             <h2 id="article_8">
                 Article 8 - Enregistrements des prises - Réclamations
             </h2>
@@ -222,7 +282,7 @@ export default function Page() {
                 les données requises qui correspond à un échantillonnage complet
                 du poisson ou au don du poisson entier..
             </p>
-            <p className="font-bold">
+            <p className="pt-4 font-bold">
                 Une mise à jour hebdomadaire sera effectuée via les réseaux
                 sociaux dédiés et le site web du projet.
             </p>
@@ -244,18 +304,39 @@ export default function Page() {
             </p>
             <h2 id="article_10">Article 10: Modalités de Classement</h2>
             <p className="text-justify">
-                Le classement sera établi par le comptage du total des points
-                par pseudo à chaque semaine. A la fin du projet, les points
-                seront comptabilisés pour chaque participant et le classement
-                final sera établi.
+                Le classement sera établi par le total des points par pseudo à
+                chaque semaine. A la fin du projet, les points seront
+                comptabilisés pour chaque participant et le classement final
+                sera établi.
             </p>
             <h2 id="article_11">Article 11: Récompense </h2>
             <p className="text-justify">
-                Il faut mettre la liste des lots (t shirts, sacs étanches, lot
-                final…) ici. Pour pouvoir gagner le lot final, il faut un
-                minimum de points. Le cumul de ces points sera de à minima{' '}
+                Pour pouvoir gagner le lot final, il faut un minimum de points.
+                Le cumul de ces points sera de à minima{' '}
                 <span className="font-bold underline">300 pts</span>.
             </p>
+            <ul className="pt-4">
+                <li>
+                    Premier prix: Bon d’achat de 1000 € dans un des magasins de
+                    la Caz à Pêche
+                </li>
+                <li>
+                    Deuxième prix: Bon d’achat de 750 € dans un des magasins de
+                    la Caz à Pêche
+                </li>
+                <li>
+                    Troisième prix: Bon d’achat de 500 € dans un des magasins de
+                    la Caz à Pêche
+                </li>
+                <li>
+                    Pour tous les participants atteignant 300 points: un T-shirt
+                    du projet
+                </li>
+                <li>
+                    Pour tous les participants: un sac étanche du projet
+                    contenant des kits d’échantillonnage
+                </li>
+            </ul>
             <h2 id="article_12">Article 12: Modification du règlement </h2>
             <p className="text-justify">
                 A tout moment, les organisateurs du projet pourront modifier le

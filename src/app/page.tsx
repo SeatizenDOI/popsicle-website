@@ -41,7 +41,7 @@ export default function HomePage() {
     return (
         <div>
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
+                className="mx-8 flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
                 ref={section1Ref}
             >
                 <div className="flex flex-col-reverse lg:flex-row">
@@ -71,7 +71,7 @@ export default function HomePage() {
                             width={850}
                             height={510}
                             alt="Mervyn avec un variola louti"
-                            className="mt-8"
+                            className="mt-8 h-fit w-auto"
                         />
                     </div>
                 </div>
@@ -99,7 +99,7 @@ export default function HomePage() {
             </section>
             <hr className="block lg:hidden" />
             <section
-                className="mb-8 flex h-auto flex-col justify-between xl:h-[calc(100vh-5rem)]"
+                className="mb-8 flex h-auto flex-col justify-between bg-orange-50 px-8 xl:h-[calc(100vh-5rem)]"
                 ref={section2Ref}
             >
                 <div className="flex flex-col">
@@ -112,7 +112,7 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Le projet POPSICLE est financé par le FEAMPA et vise à
                         fournir les informations scientifiques pour une
-                        exploitation durable du Croisant queu jaune (Variola
+                        exploitation durable du Croisant queue jaune (Variola
                         louti). Des nouvelles méthodes génétiques vont être
                         utilisées pour déterminer l’âge, le sexe et le stade de
                         maturité des poissons. Ce projet se déroule à La Réunion
@@ -145,7 +145,7 @@ export default function HomePage() {
                                     alt={l.alt}
                                     width={256}
                                     height={128}
-                                    className="h-12 w-auto px-4 lg:h-14 xl:h-16"
+                                    className="h-12 w-auto px-4 mix-blend-multiply lg:h-14 xl:h-20"
                                 />
                             );
                         })}
@@ -178,7 +178,7 @@ export default function HomePage() {
             <hr className="block lg:hidden" />
 
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-5rem)]"
+                className="mx-8 flex h-auto flex-col justify-between lg:h-[calc(100vh-5rem)]"
                 ref={section3Ref}
             >
                 <div className="flex flex-col">
