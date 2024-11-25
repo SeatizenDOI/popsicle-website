@@ -38,7 +38,7 @@ export default function Header() {
                 className="to fixed left-0 top-0 z-20 flex bg-transparent p-4"
                 href="/"
             >
-                <div className="w-52 xl:w-64">
+                <div className="h-auto w-52 xl:w-64">
                     <Image
                         src="/logo.png"
                         width={250}
@@ -83,7 +83,7 @@ export default function Header() {
                             </div>
                             <div className="flex min-h-[250px] flex-col items-center justify-between">
                                 {url_paths.map((url) => HeaderLink(url, false))}
-                                {Counter(true)}
+                                <Counter isNavMenu={true} />
                             </div>
                         </div>
                     </section>
@@ -92,7 +92,7 @@ export default function Header() {
                         {url_paths.map((url) => HeaderLink(url, true))}
                     </div>
                 </nav>
-                {Counter(false)}
+                <Counter isNavMenu={false} />
             </div>
         </>
     );

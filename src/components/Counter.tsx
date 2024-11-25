@@ -1,4 +1,4 @@
-export function Counter(isNavMenu: boolean) {
+export function Counter({ isNavMenu }: { isNavMenu: boolean }) {
     return (
         <div
             className={` ${

@@ -1,17 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRef } from 'react';
 import { LogoItem } from '@/lib/definition';
 import { SocialMediaComponent } from '@/components/SocialMedia';
+import PrimaryButton from '@/components/PrimaryButton';
 
 export default function HomePage() {
     const logos: LogoItem[] = [
         { path: '/logo/cnrs.png', alt: 'Logo du CNRS' },
         { path: '/logo/lirmm.jpg', alt: 'Logo du LIRMM' },
         { path: '/logo/capam.jpeg', alt: 'Logo de la CAPAM' },
-        { path: '/logo/coool.webp', alt: 'Logo de COOOOL' },
+        { path: '/logo/coool.svg', alt: 'Logo de COOOOL' },
         { path: '/logo/gouvernement.png', alt: 'Logo du gouvernement' },
         { path: '/logo/ifremer.png', alt: "Logo d'Ifremer" },
         { path: '/logo/ofb.jpg', alt: "Logo de l'OFB" },
@@ -54,12 +54,10 @@ export default function HomePage() {
                             vous !
                         </h2>
                         <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
-                            <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red"
-                            >
-                                <p>Inscrivez-vous</p>
-                            </Link>
+                            <PrimaryButton
+                                link_ref={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                                name={'Inscrivez-vous'}
+                            />
                             <div className="self-center">
                                 <SocialMediaComponent />
                             </div>
@@ -194,13 +192,12 @@ export default function HomePage() {
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de contact
                             </h1>
-                            <p></p>
-                            <Link
-                                href="/nous-contacter"
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Contactez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={'/nous-contacter'}
+                                    name={'Contactez-nous'}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex aspect-auto min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
@@ -210,12 +207,14 @@ export default function HomePage() {
                                 En remplissant ce formulaire, vous entrez dans
                                 la file d’attente pour participer au projet.
                             </p>
-                            <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Inscrivez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={
+                                        'https://forms.gle/JCbwYwZUYQESgGDQ7'
+                                    }
+                                    name={'Inscrivez-vous'}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange lg:w-96">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
