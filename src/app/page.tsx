@@ -49,14 +49,38 @@ export default function HomePage() {
                         <h1 className="m-8 text-4xl font-black md:text-6xl lg:px-8 xl:text-8xl">
                             POPSICLE
                         </h1>
-                        <h2 className="px-8 text-2xl font-semibold md:text-4xl lg:ml-8">
-                            Un projet de science participative qui a besoin de
-                            vous !
+                        <h2 className="px-8 text-2xl font-bold md:text-4xl lg:ml-8">
+                            Pêcheur amateur en bateau ou kayak ?
                         </h2>
+                        <h2 className="font-regular px-8 pt-4 text-xl md:text-2xl lg:ml-8">
+                            Participe à une aventure unique où{' '}
+                            <span className="font-bold">pêche</span> et{' '}
+                            <span className="font-bold">science</span> se
+                            rencontrent !
+                        </h2>
+                        <p className="font-regular px-8 pt-4 text-justify text-lg lg:ml-8">
+                            🎣 Mission : Pêche du{' '}
+                            <span className="font-bold italic">
+                                Variola louti
+                            </span>{' '}
+                            et envoie des échantillons selon un protocole
+                            simple. Chaque étape te rapporte des points et te
+                            classe parmi les 100 participants.
+                        </p>
+                        <p className="font-regular px-8 pb-4 text-justify text-lg lg:ml-8">
+                            🏆 À la clé : Jusqu’à{' '}
+                            <span className="font-bold">1000€</span> pour
+                            récompenser les participants les plus investis après
+                            6 mois !
+                        </p>
+                        <p className="px-8 py-4 text-justify text-xl font-medium lg:ml-8">
+                            Un défi scientifique fun à partager entre amis ! 🚀
+                        </p>
                         <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
                             <PrimaryButton
                                 link_ref={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
                                 name={'Inscrivez-vous'}
+                                new_page={true}
                             />
                             <div className="self-center">
                                 <SocialMediaComponent />
@@ -196,6 +220,7 @@ export default function HomePage() {
                                 <PrimaryButton
                                     link_ref={'/nous-contacter'}
                                     name={'Contactez-nous'}
+                                    new_page={false}
                                 />
                             </div>
                         </div>
@@ -213,6 +238,7 @@ export default function HomePage() {
                                         'https://forms.gle/JCbwYwZUYQESgGDQ7'
                                     }
                                     name={'Inscrivez-vous'}
+                                    new_page={true}
                                 />
                             </div>
                         </div>

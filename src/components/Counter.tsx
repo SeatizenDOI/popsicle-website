@@ -9,7 +9,7 @@ export function Counter({ isNavMenu }: { isNavMenu: boolean }) {
                 <span className="text-lg font-extrabold text-primary_orange">
                     0
                 </span>{' '}
-                / 750 adultes
+                / 950 adultes
             </h2>
             <h2 className="w-32 px-2 py-4 text-center text-white">
                 <span className="text-lg font-extrabold text-primary_orange">

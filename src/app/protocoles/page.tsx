@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import Map from '@/components/MapZonePeche/DynamicMapZone';
-import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+import Map from '@/components/MapZonePeche/DynamicMapZone';
 
 export const metadata: Metadata = {
     title: 'Protocoles',
@@ -13,8 +13,21 @@ export default function Page() {
         <div className="mx-4 flex flex-col sm:mx-20 xl:mx-48 2xl:mx-96">
             <h1 className="mb-2 text-center text-lg font-bold sm:text-4xl">
                 Protocole d’échantillonnage pour le projet de génétique POPSICLE
-                (Variola louti)
+                (<i>Variola louti</i> )
             </h1>
+
+            <div className="flex flex-col justify-center py-8">
+                <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/IDQLxDn8i2s?si=nXFYpl58IdLad149"
+                    title=" "
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen={true}
+                    className="w-full self-center xl:w-2/3"
+                ></iframe>
+            </div>
 
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 1. Numéroter le tube et remplir la feuille d’échantillonnage. Un
@@ -26,8 +39,8 @@ export default function Page() {
                 espèce - numéro à 4 chiffres). Les informations à conserver sont
                 si possible: numéro d’échantillon, lieu de capture, date de
                 capture et d’échantillonnage, latitude/longitude, profondeur de
-                capture, taille, poids, sexe, code FAO code (VRL, Variola louti
-                - VRA, Variola albimarginata).{' '}
+                capture, taille, poids, sexe, code FAO code (VRL,{' '}
+                <i>Variola louti</i> - VRA, Variola albimarginata).{' '}
             </p>
             <p className="pt-4 font-semibold">
                 Pour localiser le site ou la zone de pêche, veuillez consulter
@@ -81,7 +94,7 @@ export default function Page() {
                 />
             </div>
 
-            <div className="flex flex-shrink">
+            <div className="flex flex-col xl:flex-row">
                 <h3 className="round-lg m-4 h-fit bg-tertiary_orange p-12 font-semibold text-red-700">
                     Porter des gants ou laver vous les mains avant le
                     prélèvement

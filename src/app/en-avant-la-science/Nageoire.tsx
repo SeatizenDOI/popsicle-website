@@ -36,8 +36,9 @@ export function Nageoire() {
             </div>
             <div>
                 <h1 className="my-4 text-center text-lg font-bold">
-                    Le mérou à croissant queue jaune (Variola louti) nous
-                    raconte son histoire : des pêcheurs aux généticiens !
+                    Le mérou à croissant queue jaune (
+                    <span className="italic">Variola louti</span>) nous raconte
+                    son histoire : des pêcheurs aux généticiens !
                 </h1>
 
                 <h2 className="m-4 text-sm font-semibold">

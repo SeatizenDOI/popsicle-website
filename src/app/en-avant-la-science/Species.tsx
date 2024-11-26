@@ -20,7 +20,10 @@ export function Species() {
 
                 <ul className="pr-0 sm:pr-8 xl:pr-32">
                     <li>Nom créole: Grand Queue</li>
-                    <li>Nom scientifique : Variola louti</li>
+                    <li>
+                        Nom scientifique :{' '}
+                        <span className="italic">Variola louti</span>
+                    </li>
                     <li>Taille max : 90 cm (LF)</li>
                     <li>Distribution : Zone tropical Indo-Pacifique</li>
                     <li>
@@ -50,7 +53,10 @@ export function Species() {
 
                 <ul className="pr-0 sm:pr-8 xl:pr-32">
                     <li>Nom créole: Tire Boure</li>
-                    <li>Nom scientifique : Variola albimarginata</li>
+                    <li>
+                        Nom scientifique :{' '}
+                        <span className="italic">Variola albimarginata</span>
+                    </li>
                     <li>Taille max : 65 cm (LF)</li>
                     <li>Distribution : Zone tropical Indo-Pacifique</li>
                     <li>
