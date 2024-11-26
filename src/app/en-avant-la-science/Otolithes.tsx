@@ -1,35 +1,36 @@
-import Image from 'next/image';
+import ImageContainer from '@/components/ImageContainer';
+import VideoContainer from '@/components/VideoContainer';
 
 export function Otolithes() {
     return (
         <div>
             <p className="text-justify">
-                Les otolithes permettent de connaître l'âge et déterminer la
-                croissance du poisson. Il s’agit de concrétions calcaire qui se
-                trouvent dans l’oreille interne du poisson. Cela lui permet de
-                s’orienter dans l’espace et de percevoir les sons et les
-                vibrations. Il y a 3 paires, on ne garde que la grande qui
-                s’appelle la Sagitae. Pour déterminer l’âge du poisson, on
-                compte les stries claires et sombres comme les cernes sur la
-                souche d’un arbre.
+                Les otolithes permettent de connaître l'âge et la croissance du
+                poisson. Ce sont des concrétions calcaires situées dans
+                l'oreille interne du poisson, qui lui servent à s'orienter dans
+                l'espace et à percevoir les sons et vibrations.
             </p>
-            <div className="flex flex-col justify-between border pt-4 sm:flex-row">
-                <Image
-                    src="/Otolithe_1.png"
-                    width={500}
-                    height={500}
-                    alt="Description position otolithes"
-                    className="h-fit w-1/2"
-                />
 
-                <Image
-                    src="/Otolithe_2.png"
-                    width={500}
-                    height={500}
-                    alt="Comparaison otolithe et arbre"
-                    className="h-fit w-1/2"
-                />
-            </div>
+            <ImageContainer
+                url="/Otolithe_1.png"
+                title="Les otolithes sont placés à l'arrière de la tête, dans l'oreille interne du poisson.  "
+            />
+            <p className="py-12 text-justify">
+                Il existe 3 paires d'otolithes, mais seule la grande, appelée
+                Sagitta, est conservée. Pour déterminer l'âge du poisson, on
+                compte les stries claires et sombres, semblables aux cernes d'un
+                arbre.
+            </p>
+
+            <ImageContainer
+                url="/Otolithe_2.png"
+                title="Les stries des otolithes sont semblables aux cernes des arbres."
+            />
+
+            <VideoContainer
+                url="https://www.youtube.com/embed/0z17x3t2r0Q?si=jTOHUDZLVwXsTzqP"
+                title="Échantillonnage biologique de poissons récifaux : Extraction des otolithes"
+            />
         </div>
     );
 }

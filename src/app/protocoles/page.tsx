@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 import Map from '@/components/MapZonePeche/DynamicMapZone';
+import VideoContainer from '@/components/VideoContainer';
 
 export const metadata: Metadata = {
     title: 'Protocoles',
@@ -16,18 +17,10 @@ export default function Page() {
                 (<i>Variola louti</i> )
             </h1>
 
-            <div className="flex flex-col justify-center py-8">
-                <iframe
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/IDQLxDn8i2s?si=nXFYpl58IdLad149"
-                    title=" "
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen={true}
-                    className="w-full self-center xl:w-2/3"
-                ></iframe>
-            </div>
+            <VideoContainer
+                url="https://www.youtube.com/embed/IDQLxDn8i2s?si=nXFYpl58IdLad149"
+                title="Échantillonnage biologique de poissons récifaux : Prélèvement de muscle"
+            />
 
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 1. Numéroter le tube et remplir la feuille d’échantillonnage. Un

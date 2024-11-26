@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { LogoItem } from '@/lib/definition';
@@ -60,12 +61,18 @@ export default function HomePage() {
                         </h2>
                         <p className="font-regular px-8 pt-4 text-justify text-lg lg:ml-8">
                             🎣 Mission : Pêche du{' '}
-                            <span className="font-bold italic">
-                                Variola louti
+                            <span className="font-bold">
+                                Croissant Queue Jaune
                             </span>{' '}
-                            et envoie des échantillons selon un protocole
-                            simple. Chaque étape te rapporte des points et te
-                            classe parmi les 100 participants.
+                            et envoie des échantillons selon{' '}
+                            <Link
+                                href="/protocoles"
+                                className="animate-pulse font-bold text-primary_orange"
+                            >
+                                un protocole simple
+                            </Link>
+                            . Chaque étape te rapporte des points et te classe
+                            parmi les 100 participants.
                         </p>
                         <p className="font-regular px-8 pb-4 text-justify text-lg lg:ml-8">
                             🏆 À la clé : Jusqu’à{' '}
