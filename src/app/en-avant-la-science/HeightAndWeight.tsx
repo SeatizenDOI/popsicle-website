@@ -1,44 +1,38 @@
-import Image from 'next/image';
+import ImageContainer from '@/components/ImageContainer';
 
 export function HeightAndWeight() {
     return (
         <div>
             <p className="text-justify">
-                La mesure de la taille du poisson est l’élément cruciale pour
-                avoir un point de point de départ fiable d’une étude.{' '}
+                La mesure de la taille du poisson est un élément clé pour
+                établir une base fiable pour toute étude.
             </p>
             <p className="pt-4 text-justify">
-                Le fait de peser et mesurer individuellement les poissons d'une
-                espèce donnée permet de construire une relation entre la taille
-                et le poids. Cette relation est ensuite appliquée aux poissons
-                qui ne seront que mesurés afin d’estimer leur poids.{' '}
+                En pesant et mesurant individuellement les poissons d’une
+                espèce, il est possible de définir une relation taille-poids.
+                Cette relation permet ensuite d’estimer le poids des poissons
+                uniquement mesurés.
             </p>
             <p className="pt-4 text-justify">
-                La mesure suit une méthode internationale standardisée. Il
-                s’agit de la mesure Longueur - fourche (L.F).
-            </p>
-            <p className="py-4 text-justify">
-                De plus, les mesures permettent également d’établir une courbe
-                de croissance en fonction de l'âge, d’établir les tailles de
-                première maturité sexuelle, les tailles de transition de sexe…
+                La méthode utilisée est standardisée à l’échelle internationale
+                : il s’agit de la Longueur - fourche (L.F).
             </p>
 
-            <div className="flex justify-between">
-                <Image
-                    src="/graph_taille_individu.png"
-                    width={500}
-                    height={500}
-                    alt="Graphique montrant la relation entre la taille et le nombre d'individu."
-                    className="h-fit w-1/2"
-                />
-                <Image
-                    src="/lf_variola.png"
-                    width={500}
-                    height={500}
-                    alt="Image pour mesurer la longueur fourche d'un variola "
-                    className="h-fit w-1/2"
-                />
-            </div>
+            <ImageContainer
+                url="/lf_variola.png"
+                title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
+            />
+            <p className="py-4 text-justify">
+                Ces mesures servent également à construire une courbe de
+                croissance en fonction de l’âge, à déterminer les tailles de
+                première maturité sexuelle, les tailles de transition de sexe,
+                et bien d’autres paramètres biologiques essentiels.
+            </p>
+
+            <ImageContainer
+                url="/graph_taille_individu.png"
+                title="Relation entre la taille et le nombre d'individu."
+            />
         </div>
     );
 }

@@ -9,20 +9,20 @@ export const metadata: Metadata = {
 export default function FaqPage() {
     const faqData = [
         {
-            question: 'What is Next.js?',
-            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas nibh ac dolor sodales aliquam a vel sapien. Phasellus bibendum libero nec fringilla tempus. Curabitur id metus id mi maximus mollis sed ac mi. Nunc commodo id enim et varius. Quisque ac tempor ex. Morbi elementum ac ex nec condimentum. Praesent eleifend, dolor quis malesuada elementum, felis est posuere arcu, at posuere augue diam eu massa. Morbi hendrerit rutrum nulla, ac fermentum nibh interdum ullamcorper. Morbi sed placerat magna, a pulvinar odio. In vitae dui sed justo bibendum tincidunt mattis eget massa. ',
+            question: 'Pourquoi devrais-je participer?',
+            answer: "Participer au projet POPSICLE, c'est contribuer à la préservation de l'avenir de la pêche du Variola Louti en assurant une gestion durable de cette ressource. En partageant vos prises, vous jouez un rôle clé dans une recherche scientifique qui protège votre activité et l'écosystème marin pour les générations futures.",
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question: 'Quel poisson pêchons-nous?',
+            answer: 'Dans le cadre du projet POPSICLE, nous pêchons le Croisant queue jaune (Variola louti), une espèce de mérou prisée, essentielle pour les écosystèmes marins et la pêche durable.',
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question: 'Combien de poissons seront prelevés?',
+            answer: "Dans le cadre du projet, 1000 poissons seront prélevés au total, dont un maximum de 50 juvéniles. Une fois ce seuil de 50 juvéniles atteint, nous n'acceptons plus de spécimens immatures pour préserver la population.",
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question: 'Est-ce que cela va avoir un impact sur la population ?',
+            answer: 'Nous ne savons pas encore si cela aura un impact sur la population, mais le projet est conçu pour minimiser les risques en limitant le prélèvement à 1000 poissons et en utilisant ces données pour mieux comprendre et gérer durablement l’espèce.',
         },
     ];
 

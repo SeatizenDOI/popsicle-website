@@ -1,6 +1,7 @@
 import '@/app/ui/reglements.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import PrimaryButton from '@/components/PrimaryButton';
 
 export const metadata: Metadata = {
     title: 'Règlements',
@@ -346,6 +347,18 @@ export default function Page() {
                 <Link href="#article_9">Article 9</Link>
                 ).
             </p>
+            <div className="flex flex-col">
+                <h2 className="self-center">
+                    Vous avez tout lu ? Alors foncez
+                </h2>
+                <div className="mt-2 self-center">
+                    <PrimaryButton
+                        link_ref={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                        name={'Inscrivez-vous'}
+                        new_page={true}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

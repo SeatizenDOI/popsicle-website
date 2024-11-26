@@ -1,17 +1,18 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { LogoItem } from '@/lib/definition';
 import { SocialMediaComponent } from '@/components/SocialMedia';
+import PrimaryButton from '@/components/PrimaryButton';
 
 export default function HomePage() {
     const logos: LogoItem[] = [
         { path: '/logo/cnrs.png', alt: 'Logo du CNRS' },
         { path: '/logo/lirmm.jpg', alt: 'Logo du LIRMM' },
         { path: '/logo/capam.jpeg', alt: 'Logo de la CAPAM' },
-        { path: '/logo/coool.webp', alt: 'Logo de COOOOL' },
+        { path: '/logo/coool.svg', alt: 'Logo de COOOOL' },
         { path: '/logo/gouvernement.png', alt: 'Logo du gouvernement' },
         { path: '/logo/ifremer.png', alt: "Logo d'Ifremer" },
         { path: '/logo/ofb.jpg', alt: "Logo de l'OFB" },
@@ -49,17 +50,45 @@ export default function HomePage() {
                         <h1 className="m-8 text-4xl font-black md:text-6xl lg:px-8 xl:text-8xl">
                             POPSICLE
                         </h1>
-                        <h2 className="px-8 text-2xl font-semibold md:text-4xl lg:ml-8">
-                            Un projet de science participative qui a besoin de
-                            vous !
+                        <h2 className="px-8 text-2xl font-bold md:text-4xl lg:ml-8">
+                            Pêcheur amateur en bateau ou kayak ?
                         </h2>
-                        <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
+                        <h2 className="font-regular px-8 pt-4 text-xl md:text-2xl lg:ml-8">
+                            Participe à une aventure unique où{' '}
+                            <span className="font-bold">pêche</span> et{' '}
+                            <span className="font-bold">science</span> se
+                            rencontrent !
+                        </h2>
+                        <p className="font-regular px-8 pt-4 text-justify text-lg lg:ml-8">
+                            🎣 Mission : Pêche du{' '}
+                            <span className="font-bold">
+                                Croissant Queue Jaune
+                            </span>{' '}
+                            et envoie des échantillons selon{' '}
                             <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red"
+                                href="/protocoles"
+                                className="animate-pulse font-bold text-primary_orange"
                             >
-                                <p>Inscrivez-vous</p>
+                                un protocole simple
                             </Link>
+                            . Chaque étape te rapporte des points et te classe
+                            parmi les 100 participants.
+                        </p>
+                        <p className="font-regular px-8 pb-4 text-justify text-lg lg:ml-8">
+                            🏆 À la clé : Jusqu’à{' '}
+                            <span className="font-bold">1000€</span> pour
+                            récompenser les participants les plus investis après
+                            6 mois !
+                        </p>
+                        <p className="px-8 py-4 text-justify text-xl font-medium lg:ml-8">
+                            Un défi scientifique fun à partager entre amis ! 🚀
+                        </p>
+                        <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
+                            <PrimaryButton
+                                link_ref={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                                name={'Inscrivez-vous'}
+                                new_page={true}
+                            />
                             <div className="self-center">
                                 <SocialMediaComponent />
                             </div>
@@ -194,13 +223,13 @@ export default function HomePage() {
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de contact
                             </h1>
-                            <p></p>
-                            <Link
-                                href="/nous-contacter"
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Contactez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={'/nous-contacter'}
+                                    name={'Contactez-nous'}
+                                    new_page={false}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex aspect-auto min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
@@ -210,12 +239,15 @@ export default function HomePage() {
                                 En remplissant ce formulaire, vous entrez dans
                                 la file d’attente pour participer au projet.
                             </p>
-                            <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Inscrivez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={
+                                        'https://forms.gle/JCbwYwZUYQESgGDQ7'
+                                    }
+                                    name={'Inscrivez-vous'}
+                                    new_page={true}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange lg:w-96">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">

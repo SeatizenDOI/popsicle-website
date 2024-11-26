@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Species } from '@/app/en-avant-la-science/Species';
-import { EtudeGUAM } from '@/app/en-avant-la-science/EtudeGuam';
 import { Tripes } from '@/app/en-avant-la-science/Tripes';
 import { Nageoire } from '@/app/en-avant-la-science/Nageoire';
 import { HeightAndWeight } from '@/app/en-avant-la-science/HeightAndWeight';
 import { Otolithes } from '@/app/en-avant-la-science/Otolithes';
+import { CKMR } from '@/app/en-avant-la-science/CKMR';
+
 import ScienceItem from '@/components/ScienceItem';
 
 export const metadata: Metadata = {
@@ -19,22 +20,26 @@ export default function Page() {
             answer: Species,
         },
         {
-            question:
-                'Pourquoi nous voulons récupérer la mesure précise et le poids du poisson ?',
+            question: 'Taille et poids pour les relations biométriques',
             answer: HeightAndWeight,
         },
         {
             question:
-                'Pourquoi nous voulons récupérer un morceau de nageoire ?',
+                "Les nageoires donnent l'espèce grâce à des analyses génétiques",
             answer: Nageoire,
         },
         {
-            question: 'Otolithes',
+            question: 'Otolithes pour l’âge et la croissance',
             answer: Otolithes,
         },
         {
-            question: 'Pourquoi nous voulons récupérer les tripes ?',
+            question:
+                'Les tripes déterminent le sexe et le stade de maturation du poisson',
             answer: Tripes,
+        },
+        {
+            question: 'Explication du CKMR (Close kin mark-recapture)  ',
+            answer: CKMR,
         },
     ];
 
