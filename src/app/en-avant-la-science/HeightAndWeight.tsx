@@ -19,7 +19,7 @@ export function HeightAndWeight() {
             </p>
 
             <ImageContainer
-                url="/lf_variola.png"
+                url="/lf_variola.svg"
                 title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
             />
             <p className="py-4 text-justify">

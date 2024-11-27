@@ -141,11 +141,11 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Le projet POPSICLE est financé par le FEAMPA et vise à
                         fournir les informations scientifiques pour une
-                        exploitation durable du Croisant queue jaune (Variola
-                        louti). Des nouvelles méthodes génétiques vont être
-                        utilisées pour déterminer l’âge, le sexe et le stade de
-                        maturité des poissons. Ce projet se déroule à La Réunion
-                        et à Mayotte jusqu’en 2026.{' '}
+                        exploitation durable du Croissant Queue Jaune ({' '}
+                        <i>Variola louti</i> ). Des nouvelles méthodes
+                        génétiques vont être utilisées pour déterminer l’âge, le
+                        sexe et le stade de maturité des poissons. Ce projet se
+                        déroule à La Réunion et à Mayotte jusqu’en 2026.{' '}
                     </p>
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Afin de pouvoir collecter les échantillons nécessaires,

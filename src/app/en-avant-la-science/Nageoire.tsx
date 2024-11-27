@@ -25,7 +25,7 @@ export function Nageoire() {
                 </li>
             </ul>
             <ImageContainer
-                url="/method_ckmr.png"
+                url="/method_ckmr.svg"
                 title="Identification paires avec le CKMR."
             />
 

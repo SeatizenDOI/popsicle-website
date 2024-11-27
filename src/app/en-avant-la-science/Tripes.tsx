@@ -41,7 +41,7 @@ export function Tripes() {
                 </li>
             </ul>
             <ImageContainer
-                url="/tripes.png"
+                url="/tripes.svg"
                 title="Évolution des gonades en fonction du stade de maturité"
             />
         </div>
