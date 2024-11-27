@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
 
 import Map from '@/components/MapZonePeche/DynamicMapZone';
 import VideoContainer from '@/components/VideoContainer';
+import ImageContainer from '@/components/ImageContainer';
 
 export const metadata: Metadata = {
     title: 'Protocoles',
@@ -59,14 +59,10 @@ export default function Page() {
                 </li>
             </ul>
 
-            <div className="flex w-full self-center sm:w-1/2">
-                <Image
-                    alt="LF Variola"
-                    src="/Longueur_LF.png"
-                    width={1024}
-                    height={1024}
-                />
-            </div>
+            <ImageContainer
+                url="/lf_variola.svg"
+                title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
+            />
 
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 3- (Facultatif) Noter le sexe + prendre une photo de la gonade
@@ -78,14 +74,8 @@ export default function Page() {
                 4- Prendre 1 ou 2 échantillon(s) de nageoire et le(s) placer
                 dans le tube numéroté
             </h2>
-            <div className="flex w-full self-center">
-                <Image
-                    alt="Prélèvement"
-                    src="/prelevement.png"
-                    width={1024}
-                    height={1024}
-                />
-            </div>
+
+            <ImageContainer url="/prelevement.png" title="Prélèvement." />
 
             <div className="flex flex-col xl:flex-row">
                 <h3 className="round-lg m-4 h-fit bg-tertiary_orange p-12 font-semibold text-red-700">

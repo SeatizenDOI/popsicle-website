@@ -12,7 +12,7 @@ export function Otolithes() {
             </p>
 
             <ImageContainer
-                url="/Otolithe_1.png"
+                url="/Otolithe_1.svg"
                 title="Les otolithes sont placés à l'arrière de la tête, dans l'oreille interne du poisson.  "
             />
             <p className="py-12 text-justify">
@@ -23,8 +23,8 @@ export function Otolithes() {
             </p>
 
             <ImageContainer
-                url="/Otolithe_2.png"
-                title="Les stries des otolithes sont semblables aux cernes des arbres."
+                url="/Otolithe_2.svg"
+                title="Les stries des otolithes sont semblables aux cernes des arbres. On les compte pour déterminer l'âge."
             />
 
             <VideoContainer

@@ -12,7 +12,7 @@ export default function VideoContainer({
                 height="315"
                 src={url}
                 title={title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen={true}
                 className="w-full"
