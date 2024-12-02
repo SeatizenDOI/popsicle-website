@@ -17,7 +17,7 @@ export function Nageoire() {
                 </li>
                 <li>
                     Utiliser une méthode génétique (CKMR) pour estimer le nombre
-                    d'individus adultes dans une population de poissons marins.
+                    d'individus adultes dans une population.
                 </li>
                 <li>
                     Développer de nouvelles techniques pour déterminer l’âge et
@@ -25,8 +25,9 @@ export function Nageoire() {
                 </li>
             </ul>
             <ImageContainer
-                url="/method_ckmr.svg"
-                title="Identification paires avec le CKMR."
+                url="/genet_nageoire.jpg"
+                title="Explication de l'utilité d'une nageoire dans la génétique"
+                onlyAlt={true}
             />
 
             <div className="mt-12">
@@ -49,10 +50,11 @@ export function Nageoire() {
                 </p>
                 <p className="px-4 pb-4 text-justify">
                     Il nous révèle, par exemple, que les mérous du nord de
-                    Madagascar forment peut-être une grande famille qui se
-                    mélange peu avec leurs cousins des Seychelles. Chaque région
-                    pourrait ainsi avoir sa propre "famille" de mérous, avec des
-                    caractéristiques génétiques uniques.
+                    Madagascar forment <strong> peut-être </strong> une grande
+                    famille qui se mélange peu avec leurs cousins des
+                    Seychelles. Chaque région pourrait ainsi avoir sa propre
+                    "famille" de mérous, avec des caractéristiques génétiques
+                    uniques.
                 </p>
                 <p className="px-4 pb-4 text-justify">
                     Ces informations sont précieuses pour les scientifiques :
@@ -62,6 +64,12 @@ export function Nageoire() {
                     groupes isolés qui pourraient être plus vulnérables.
                 </p>
 
+                <ImageContainer
+                    url="/struc_pop.jpg"
+                    title="Image montrant une structure de population"
+                    onlyAlt={true}
+                />
+
                 <h2 className="m-4 text-lg font-semibold">
                     Mais combien sont-ils vraiment ? La méthode "close-kin
                     mark-recapture" (CKMR)
@@ -70,9 +78,10 @@ export function Nageoire() {
                     Imaginez que chaque fois qu’un pêcheur attrape un mérou, on
                     effectue un petit test ADN. Au fil des captures, on commence
                     à découvrir des poissons qui sont apparentés : un père et
-                    son petit, deux frères, une grand-mère et sa fille... C’est
-                    un peu comme dans un village : plus il est petit, plus vous
-                    avez de chances de croiser des membres d’une même famille.
+                    son petit, deux frères, une grand-mère et sa petite-fille...
+                    C’est un peu comme dans un village : plus il est petit, plus
+                    vous avez de chances de croiser des membres d’une même
+                    famille.
                 </p>
                 <p className="px-4 pb-4 text-justify">
                     Ainsi, si les pêcheurs trouvent beaucoup de mérous
@@ -80,6 +89,11 @@ export function Nageoire() {
                     revanche, si les liens de parenté sont rares, cela indique
                     probablement une population plus grande. Plutôt malin, non ?
                 </p>
+                <ImageContainer
+                    url="/metho_ckmr.jpg"
+                    title="Principe du CKMR"
+                    onlyAlt={true}
+                />
             </div>
         </div>
     );

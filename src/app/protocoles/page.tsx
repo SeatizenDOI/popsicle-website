@@ -17,6 +17,8 @@ export default function Page() {
                 (<i>Variola louti</i> )
             </h1>
 
+            <ImageContainer url="/protocole.jpg" title="Fiche protocole" />
+
             <VideoContainer
                 url="https://www.youtube.com/embed/IDQLxDn8i2s?si=nXFYpl58IdLad149"
                 title="Échantillonnage biologique de poissons récifaux : Prélèvement de muscle"
@@ -76,50 +78,6 @@ export default function Page() {
             </h2>
 
             <ImageContainer url="/prelevement.png" title="Prélèvement." />
-
-            <div className="flex flex-col xl:flex-row">
-                <h3 className="round-lg m-4 h-fit bg-tertiary_orange p-12 font-semibold text-red-700">
-                    Porter des gants ou laver vous les mains avant le
-                    prélèvement
-                </h3>
-
-                <div className="round-lg m-4 bg-tertiary_orange p-12">
-                    <h3 className="pb-4 font-semibold text-red-700">
-                        Nettoyer et désinfecter les outils entre chaque
-                        prélèvement
-                    </h3>
-                    <ol className="list-decimal">
-                        <li>Rincer à l’eau</li>
-                        <li>Laver avec du savon et une éponge</li>
-                        <li>Rincer à l’eau</li>
-                        <li>Sécher avec un sopalin propre</li>
-                    </ol>
-                </div>
-
-                <div className="round-lg m-4 bg-tertiary_orange p-12">
-                    <h3 className="pb-4 font-semibold text-red-700">
-                        ATTENTION
-                    </h3>
-                    <ol className="list-decimal">
-                        <li>
-                            Sécher et nettoyer la zone de prélèvement avec un
-                            sopalin
-                        </li>
-                        <li>
-                            Prendre un morceau de nageoire (~1cm) et le placer
-                            dans le tube (5 mL)
-                        </li>
-                        <li>
-                            Immerger l’échantillon dans l’alcool et enlever les
-                            bulles d’air
-                        </li>
-                        <li>Sceller avec du parafilm pour éviter les fuite</li>
-                    </ol>
-                </div>
-                <h3 className="round-lg m-4 h-fit bg-tertiary_orange p-12 font-semibold text-red-700">
-                    Stocker au congélateur à -20°C
-                </h3>
-            </div>
         </div>
     );
 }

@@ -4,7 +4,6 @@ import { Tripes } from '@/app/en-avant-la-science/Tripes';
 import { Nageoire } from '@/app/en-avant-la-science/Nageoire';
 import { HeightAndWeight } from '@/app/en-avant-la-science/HeightAndWeight';
 import { Otolithes } from '@/app/en-avant-la-science/Otolithes';
-import { CKMR } from '@/app/en-avant-la-science/CKMR';
 
 import ScienceItem from '@/components/ScienceItem';
 
@@ -36,10 +35,6 @@ export default function Page() {
             question:
                 'Les tripes déterminent le sexe et le stade de maturation du poisson',
             answer: Tripes,
-        },
-        {
-            question: 'Explication du CKMR (Close kin mark-recapture)  ',
-            answer: CKMR,
         },
     ];
 

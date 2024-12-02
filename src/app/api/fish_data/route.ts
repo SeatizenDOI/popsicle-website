@@ -61,6 +61,5 @@ export async function GET() {
             stockage: d['Stockage'] || '',
         })
     );
-    console.log("J'ai pas cache la donnée");
     return Response.json({ data });
 }
