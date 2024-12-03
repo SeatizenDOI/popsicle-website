@@ -2,7 +2,7 @@
 
 import useSWR, { Fetcher } from 'swr';
 
-import { FishItem } from '@/lib/definition';
+import { FishItem, getSexeEnum } from '@/lib/definition';
 import {
     ScatterChart,
     ScatterData,
@@ -23,7 +23,7 @@ export default function HeightWeightChart() {
         return {
             height: fi.tailleMesureCm,
             weight: fi.poidsEntierKg,
-            sex: fi.sexe,
+            sex: getSexeEnum(fi.sexe),
         };
     });
 

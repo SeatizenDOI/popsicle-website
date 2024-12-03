@@ -5,22 +5,22 @@ import { colors } from '@/lib/data';
 import * as d3 from 'd3';
 import React, { useRef, useEffect, useState } from 'react';
 
-export interface SexByMonthItem {
-    month: string;
-    M: number;
-    F: number;
-    Ind: number;
+export type StackHistoYValue = Record<string, number>;
+
+export interface StackHistoItem {
+    x_label: string;
+    values: StackHistoYValue;
 }
 
-interface SexByMonthProps {
-    data: SexByMonthItem[];
+interface StackHistoProps {
+    data: StackHistoItem[];
     x_title: string;
     y_title: string;
     width?: number;
     height?: number;
 }
 
-export const StackHistoChart: React.FC<SexByMonthProps> = ({
+export const StackHistoChart: React.FC<StackHistoProps> = ({
     data,
     x_title,
     y_title,
@@ -29,12 +29,12 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
 }) => {
     const ref = useRef<SVGSVGElement | null>(null);
 
-    // Initialize with all keys active
-    const keys = ['M', 'F', 'Ind'];
-    const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set(keys));
+    // Extract keys dynamically from the first item's `values` object
+    const allKeys = Object.keys(data[0]?.values || {});
+    const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set(allKeys));
 
     useEffect(() => {
-        const margin = { top: 30, right: 30, bottom: 50, left: 50 };
+        const margin = { top: 50, right: 30, bottom: 50, left: 50 };
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom;
 
@@ -49,14 +49,20 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
             .append('g')
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
+        // Filter keys to only include active ones
         const filteredKeys = Array.from(activeKeys);
 
-        const stackGenerator = d3.stack<SexByMonthItem>().keys(filteredKeys);
+        // Prepare stack generator
+        const stackGenerator = d3
+            .stack<StackHistoItem>()
+            .keys(filteredKeys)
+            .value((d, key) => d.values[key] || 0);
         const stackedData = stackGenerator(data);
 
+        // Scales
         const x = d3
             .scaleBand()
-            .domain(data.map((d) => d.month))
+            .domain(data.map((d) => d.x_label))
             .range([0, chartWidth])
             .padding(0.2);
 
@@ -68,7 +74,10 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
             ])
             .range([chartHeight, 0]);
 
-        const color = d3.scaleOrdinal(colors);
+        const color = d3.scaleOrdinal(
+            Object.keys(data),
+            colors.slice(0, data.length)
+        );
 
         // Axes
         chart.append('g').call(d3.axisLeft(y));
@@ -76,6 +85,22 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
             .append('g')
             .attr('transform', `translate(0, ${chartHeight})`)
             .call(d3.axisBottom(x));
+
+        // Axes titles
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', height - 10)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '14px')
+            .text(x_title);
+
+        svg.append('text')
+            .attr('x', -height / 2)
+            .attr('y', 15)
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'rotate(-90)')
+            .style('font-size', '14px')
+            .text(y_title);
 
         // Bars
         chart
@@ -87,20 +112,20 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
             .selectAll('rect')
             .data((d) => d)
             .join('rect')
-            .attr('x', (d) => x(d.data.month)!)
+            .attr('x', (d) => x(d.data.x_label)!)
             .attr('y', (d) => y(d[1]))
             .attr('height', (d) => y(d[0]) - y(d[1]))
             .attr('width', x.bandwidth());
 
-        // Add Legend
+        // Legend
         const legend = svg
             .append('g')
             .attr('transform', `translate(${margin.left}, ${margin.top / 2})`);
 
-        keys.forEach((key, i) => {
+        allKeys.forEach((key, i) => {
             const legendGroup = legend
                 .append('g')
-                .attr('transform', `translate(${i * 80}, 0)`);
+                .attr('transform', `translate(${i * 120}, 0)`);
 
             legendGroup
                 .append('rect')
@@ -136,7 +161,7 @@ export const StackHistoChart: React.FC<SexByMonthProps> = ({
                     setActiveKeys(updatedKeys);
                 });
         });
-    }, [data, width, height, activeKeys]);
+    }, [data, width, height, x_title, y_title, activeKeys]);
 
     return <svg ref={ref}></svg>;
 };

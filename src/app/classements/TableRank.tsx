@@ -31,7 +31,7 @@ export default function TableRank() {
                         .sort((a, b) => a.rank - b.rank)
                         .map((fr) => {
                             return (
-                                <tr>
+                                <tr key={fr.rank}>
                                     <td>{fr.rank}</td>
                                     <td>{fr.pseudo}</td>
                                     <td>{fr.nbPoint}</td>

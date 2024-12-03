@@ -2,10 +2,10 @@
 
 import useSWR, { Fetcher } from 'swr';
 
-import { FishItem } from '@/lib/definition';
+import { FishItem, getSexeEnum, Sexe } from '@/lib/definition';
 import {
     StackHistoChart,
-    SexByMonthItem,
+    StackHistoItem
 } from '@/components/ClassementGraph/StackHistoChart';
 import { months } from '@/lib/data';
 
@@ -19,18 +19,27 @@ export default function SexByMonthChart() {
     if (!data) return <div>Loading...</div>;
 
     let fish_items = data.data;
-    let month_data: SexByMonthItem[] = [];
+    let month_data: StackHistoItem[] = [];
 
+    // For each month, we filter and sort by sexe.
     for (const [abr, full] of Object.entries(months)) {
         const tmp = fish_items.filter((fi) => fi.monthCapture === abr);
-        month_data.push({
-            month: full,
-            M: tmp.filter((fi) => fi.sexe === 'Mâle').length,
-            F: tmp.filter((fi) => fi.sexe === 'Femelle').length,
-            Ind: tmp.filter((fi) => fi.sexe === 'Ind').length,
-        });
+        let tmp_month: StackHistoItem = {
+            x_label: full,
+            values: {},
+        };
+        tmp_month.values[Sexe.MALE] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.MALE
+        ).length;
+        tmp_month.values[Sexe.FEMELLE] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.FEMELLE
+        ).length;
+        tmp_month.values[Sexe.IND] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.IND
+        ).length;
+        month_data.push(tmp_month);
     }
-
+    console.log(month_data);
     return (
         <StackHistoChart
             data={month_data}

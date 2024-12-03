@@ -4,8 +4,10 @@ import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
 import { colors } from '@/lib/data';
 
+export type DonutChartItems = Record<string, number>;
+
 interface DonutChartProps {
-    data: Record<string, number>;
+    data: DonutChartItems;
     width?: number;
     height?: number;
 }
@@ -23,7 +25,10 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
         const radius = Math.min(width, height) / 2;
 
-        const color = d3.scaleOrdinal(colors);
+        const color = d3.scaleOrdinal(
+            Object.keys(data),
+            colors.slice(0, data.length)
+        );
 
         // Convert data to array format
         const pie = d3.pie().value((d: any) => d[1]);

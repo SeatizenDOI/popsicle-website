@@ -2,9 +2,9 @@
 
 import useSWR, { Fetcher } from 'swr';
 
-import { FishItem } from '@/lib/definition';
+import { FishItem, getSexeEnum, Sexe } from '@/lib/definition';
 import {
-    SexByMonthItem,
+    StackHistoItem,
     StackHistoChart,
 } from '@/components/ClassementGraph/StackHistoChart';
 
@@ -20,7 +20,7 @@ export default function SexByHeightChart() {
     if (!data) return <div>Loading...</div>;
 
     let fish_items = data.data;
-    let size_data: SexByMonthItem[] = [];
+    let size_data: StackHistoItem[] = [];
 
     const max_size = Math.max(...fish_items.map((fi) => fi.tailleMesureCm));
 
@@ -29,12 +29,20 @@ export default function SexByHeightChart() {
             (fi) =>
                 fi.tailleMesureCm >= i && fi.tailleMesureCm < i + SIZE_INTERVAL
         );
-        size_data.push({
-            month: '[' + i + ',' + (i + 4) + ']',
-            M: tmp.filter((fi) => fi.sexe === 'Mâle').length,
-            F: tmp.filter((fi) => fi.sexe === 'Femelle').length,
-            Ind: tmp.filter((fi) => fi.sexe === 'Ind').length,
-        });
+        let tmp_size_data: StackHistoItem = {
+            x_label: '[' + i + ',' + (i + 4) + ']',
+            values: {},
+        };
+        tmp_size_data.values[Sexe.MALE] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.MALE
+        ).length;
+        tmp_size_data.values[Sexe.FEMELLE] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.FEMELLE
+        ).length;
+        tmp_size_data.values[Sexe.IND] = tmp.filter(
+            (fi) => getSexeEnum(fi.sexe) === Sexe.IND
+        ).length;
+        size_data.push(tmp_size_data);
     }
 
     return (

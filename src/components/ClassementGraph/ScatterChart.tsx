@@ -1,6 +1,7 @@
 'use client';
 
 import { colors } from '@/lib/data';
+import { Sexe } from '@/lib/definition';
 
 import * as d3 from 'd3';
 import React, { useRef, useEffect, useState } from 'react';
@@ -8,7 +9,7 @@ import React, { useRef, useEffect, useState } from 'react';
 export interface ScatterData {
     height: number;
     weight: number;
-    sex: string;
+    sex: Sexe;
 }
 
 interface ScatterChartProps {
@@ -23,8 +24,9 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
     height = 400,
 }) => {
     const ref = useRef<SVGSVGElement | null>(null);
+    const allKeys = [...new Set(data.map((d) => d.sex))];
     const [activeSexes, setActiveSexes] = useState<Set<string>>(
-        new Set(data.map((d) => d.sex))
+        new Set(allKeys)
     );
 
     useEffect(() => {
@@ -50,8 +52,10 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
             ])
             .range([chartHeight, 0]);
 
-        const color = d3.scaleOrdinal(colors);
-
+        const color = d3.scaleOrdinal(
+            Object.keys(data),
+            colors.slice(0, data.length)
+        );
         const svg = d3
             .select(ref.current)
             .attr('width', width)
@@ -95,7 +99,7 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
             .attr('cx', (d) => x(d.weight))
             .attr('cy', (d) => y(d.height))
             .attr('r', 5)
-            .attr('fill', (d) => color(d.sex)!);
+            .attr('fill', (d) => color(d.sex));
 
         // Add tooltip
         const tooltip = d3
@@ -133,7 +137,7 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
             .append('g')
             .attr('transform', `translate(${margin.left}, ${margin.top / 2})`);
 
-        ['Mâle', 'Femelle', 'Ind'].forEach((sex, i) => {
+        allKeys.forEach((sex, i) => {
             const legendGroup = legend
                 .append('g')
                 .attr('transform', `translate(${i * 80}, 0)`);

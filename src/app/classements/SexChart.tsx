@@ -2,7 +2,7 @@
 
 import useSWR, { Fetcher } from 'swr';
 
-import { FishItem } from '@/lib/definition';
+import { FishItem, getSexeEnum } from '@/lib/definition';
 import { DonutChart } from '@/components/ClassementGraph/DonutChart';
 
 const fetcher: Fetcher<{ data: FishItem[] }, string> = (apiEndPoint: string) =>
@@ -18,10 +18,12 @@ export default function SexChart() {
     let counts: { [id: string]: number } = {};
 
     fish_items.forEach((fi) => {
-        if (!counts[fi.sexe]) {
-            counts[fi.sexe] = 0;
+        const gen_sex = getSexeEnum(fi.sexe);
+
+        if (!counts[gen_sex]) {
+            counts[gen_sex] = 0;
         }
-        counts[fi.sexe] += 1;
+        counts[gen_sex] += 1;
     });
 
     return <DonutChart data={counts} />;

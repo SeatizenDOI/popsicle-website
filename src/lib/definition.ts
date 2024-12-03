@@ -52,3 +52,15 @@ export interface FishItem {
     prelevPar: string;
     stockage: string;
 }
+
+export enum Sexe {
+    MALE = 'Mâle',
+    FEMELLE = 'Femelle',
+    IND = 'Indéfini',
+}
+
+export function getSexeEnum(sexe: string): Sexe {
+    if (sexe.includes('I')) return Sexe.IND;
+    else if (sexe.includes('F')) return Sexe.FEMELLE;
+    return Sexe.MALE;
+}
