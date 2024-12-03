@@ -18,6 +18,12 @@ export type FormData = {
     message: string;
 };
 
+export interface FisherRank {
+    rank: number;
+    nbPoint: number;
+    pseudo: string;
+}
+
 export interface FishItem {
     site: string;
     projet: string;
