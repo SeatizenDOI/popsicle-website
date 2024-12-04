@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 const csv_file_path: string =
     process.env.NODE_ENV === 'production'
-        ? './data/Popsicle.csv'
+        ? process.env.PROD_PATH + '/data/Popsicle.csv'
         : './data/Popsicle_test.csv';
 
 export async function GET() {

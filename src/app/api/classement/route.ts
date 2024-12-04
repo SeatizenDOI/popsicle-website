@@ -3,7 +3,7 @@ import { csvParse } from 'd3';
 import { FisherRank } from '@/lib/definition';
 const csv_file_path: string =
     process.env.NODE_ENV === 'production'
-        ? './data/Classement.csv'
+        ? process.env.PROD_PATH + '/data/Classement.csv'
         : './data/Classement_test.csv';
 
 export async function GET() {
