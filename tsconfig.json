@@ -29,7 +29,8 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "src/app/api/email/route.ts",
-        "src/components/Map/DynamicMap.jsx"
+        "src/components/Map/DynamicMap.jsx",
+        "src/components/ClassementGraph/*.tsx"
     ],
     "exclude": ["node_modules"]
 }

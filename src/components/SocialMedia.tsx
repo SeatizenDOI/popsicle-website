@@ -6,7 +6,7 @@ export function SocialMediaComponent() {
     return (
         <div className="mx-8 flex flex-row justify-evenly py-4 text-2xl lg:py-0">
             <Link
-                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                href="https://www.facebook.com/Popsicle974"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-blue-400"
             >
                 <FaFacebook />
@@ -24,7 +24,7 @@ export function SocialMediaComponent() {
                 <SiGmail />
             </Link>
             <Link
-                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                href="https://www.instagram.com/popsicle_974/"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-pink-400"
             >
                 <FaInstagram />

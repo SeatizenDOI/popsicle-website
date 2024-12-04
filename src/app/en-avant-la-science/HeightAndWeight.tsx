@@ -28,11 +28,6 @@ export function HeightAndWeight() {
                 première maturité sexuelle, les tailles de transition de sexe,
                 et bien d’autres paramètres biologiques essentiels.
             </p>
-
-            <ImageContainer
-                url="/graph_taille_individu.png"
-                title="Relation entre la taille et le nombre d'individu."
-            />
         </div>
     );
 }

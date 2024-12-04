@@ -22,9 +22,11 @@ const toBase64 = (str: string) =>
 export default function ImageContainer({
     url,
     title,
+    onlyAlt,
 }: {
     url: string;
     title: string;
+    onlyAlt?: boolean;
 }) {
     return (
         <div className="my-4 flex flex-col shadow-lg">
@@ -32,13 +34,17 @@ export default function ImageContainer({
                 alt={title}
                 className="w-full"
                 src={url}
-                width={250}
-                height={250}
-                placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(250, 250))}`}
+                width={1920}
+                height={1080}
+                placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(1920, 1080))}`}
             />
-            <h2 className="self-center py-6 font-semibold italic text-secondary_red">
-                {title}
-            </h2>
+            {onlyAlt ? (
+                <></>
+            ) : (
+                <h2 className="self-center py-6 font-semibold italic text-secondary_red">
+                    {title}
+                </h2>
+            )}
         </div>
     );
 }

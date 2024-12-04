@@ -17,8 +17,8 @@ export function Tripes() {
                 reproduction et l’âge du changement de sexe, entre autres.
             </p>
             <p className="pt-4 text-justify">
-                La particularité du mérou grand queue comme le tir bour est
-                qu’il est{' '}
+                Comme de nombreux mérous, le mérou grand queue a la
+                particularité d'être{' '}
                 <span className="font-semibold">hermaphrodite protogyne</span>.
             </p>
             <p className="pt-4 text-justify">
@@ -37,12 +37,13 @@ export function Tripes() {
                 </li>
                 <li>
                     des facteurs environnementaux : température, salinité,
-                    pollution.
+                    pollution...
                 </li>
             </ul>
             <ImageContainer
-                url="/tripes.svg"
-                title="Évolution des gonades en fonction du stade de maturité"
+                url="/gonade.jpeg"
+                title="Evolution des gonades en fonction du sexe"
+                onlyAlt={true}
             />
         </div>
     );

@@ -9,12 +9,21 @@ export const metadata: Metadata = {
 export default function FaqPage() {
     const faqData = [
         {
-            question: 'Pourquoi devrais-je participer?',
-            answer: "Participer au projet POPSICLE, c'est contribuer à la préservation de l'avenir de la pêche du Variola Louti en assurant une gestion durable de cette ressource. En partageant vos prises, vous jouez un rôle clé dans une recherche scientifique qui protège votre activité et l'écosystème marin pour les générations futures.",
+            question: 'Pourquoi devrais-je participer ?',
+            answer: 'Vous pêchez des mérous croissant à queue jaune ? Nous aurions besoin de prélever un morceau de nageoire.',
         },
         {
-            question: 'Quel poisson pêchons-nous?',
-            answer: 'Dans le cadre du projet POPSICLE, nous pêchons le Croisant queue jaune (Variola louti), une espèce de mérou prisée, essentielle pour les écosystèmes marins et la pêche durable.',
+            question: 'Quel poisson nous intéresse ?',
+            answer: 'Nous pêchons uniquement le mérou croissant à queue jaune.',
+        },
+        {
+            question: "Quelles sont les sites d'études ?",
+            answer: "Le seul site d'étude est la Réunion.",
+        },
+        {
+            question:
+                'Quelle est la période du projet de science participative ?',
+            answer: 'La période du projet de science participative se déroule du 15 décembre au 15 juin. ',
         },
     ];
 

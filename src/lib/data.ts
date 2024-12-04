@@ -114,3 +114,34 @@ export const zone_peche = {
         [-19.7379, 54.0178],
     ],
 };
+
+export const months = {
+    Jan: 'Janvier',
+    Fev: 'Février',
+    Mar: 'Mars',
+    Apr: 'Avril',
+    May: 'Mai',
+    Jun: 'Juin',
+    Jul: 'Juillet',
+    Aug: 'Août',
+    Sep: 'Septembre',
+    Oct: 'Octobre',
+    Nov: 'Novembre',
+    Dec: 'Décembre',
+};
+
+export const colors: Array<string> = [
+    '#5d3705',
+    // '#6e4206',
+    // '#85520a',
+    // '#9c6411',
+    // '#a76619',
+    // '#bf7b24',
+    '#d18933',
+    // '#da9d4b',
+    // '#e4aa62',
+    // '#ecc478',
+    // '#f3d693',
+    // '#f7e2aa',
+    '#fcf0d1',
+];
