@@ -9,9 +9,14 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <div className="flex flex-col">
-            <TableRank />
-            <ChartNav />
+        <div className="">
+            <h1 className="mb-2 text-center text-lg font-bold sm:text-4xl">
+                Classement
+            </h1>
+            <div className="m-4 flex flex-col justify-around 2xl:flex-row">
+                <TableRank />
+                <ChartNav />
+            </div>
         </div>
     );
 }

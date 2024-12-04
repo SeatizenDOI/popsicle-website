@@ -5,7 +5,7 @@ import useSWR, { Fetcher } from 'swr';
 import { FishItem, getSexeEnum, Sexe } from '@/lib/definition';
 import {
     StackHistoChart,
-    StackHistoItem
+    StackHistoItem,
 } from '@/components/ClassementGraph/StackHistoChart';
 import { months } from '@/lib/data';
 
@@ -17,6 +17,7 @@ export default function SexByMonthChart() {
 
     if (error) return <div>Failed to load</div>;
     if (!data) return <div>Loading...</div>;
+    if (data.data.length === 0) return <div>No data to show</div>;
 
     let fish_items = data.data;
     let month_data: StackHistoItem[] = [];
@@ -39,12 +40,17 @@ export default function SexByMonthChart() {
         ).length;
         month_data.push(tmp_month);
     }
-    console.log(month_data);
+
     return (
-        <StackHistoChart
-            data={month_data}
-            x_title="Mois"
-            y_title="Nombre d'individus"
-        />
+        <div className="flex flex-col">
+            <StackHistoChart
+                data={month_data}
+                x_title="Mois"
+                y_title="Nombre d'individus"
+            />
+            <h1 className="my-2 text-center text-lg font-bold sm:text-2xl">
+                Nombre d'individus par mois
+            </h1>
+        </div>
     );
 }

@@ -20,7 +20,7 @@ interface ScatterChartProps {
 
 export const ScatterChart: React.FC<ScatterChartProps> = ({
     data,
-    width = 600,
+    width = 1200,
     height = 400,
 }) => {
     const ref = useRef<SVGSVGElement | null>(null);
@@ -39,27 +39,29 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
         const x = d3
             .scaleLinear()
             .domain([
-                d3.min(data, (d) => d.weight)! - 5,
-                d3.max(data, (d) => d.weight)! + 5,
+                d3.min(data, (d) => d.height)! - 5,
+                d3.max(data, (d) => d.height)! + 5,
             ])
             .range([0, chartWidth]);
 
         const y = d3
             .scaleLinear()
             .domain([
-                d3.min(data, (d) => d.height)! - 5,
-                d3.max(data, (d) => d.height)! + 5,
+                d3.min(data, (d) => d.weight)! - 5,
+                d3.max(data, (d) => d.weight)! + 5,
             ])
             .range([chartHeight, 0]);
 
         const color = d3.scaleOrdinal(
-            Object.keys(data),
+            data.map((d) => d.sex),
             colors.slice(0, data.length)
         );
         const svg = d3
             .select(ref.current)
             .attr('width', width)
-            .attr('height', height);
+            .attr('height', height)
+            .attr('viewBox', `0 0 ${width} ${height}`) // Set the internal coordinate system
+            .attr('preserveAspectRatio', 'xMidYMid meet');
 
         svg.selectAll('*').remove();
 
@@ -81,7 +83,7 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
             .attr('x', chartWidth / 2)
             .attr('y', chartHeight + margin.bottom - 5)
             .attr('text-anchor', 'middle')
-            .text('Poids (kg)');
+            .text('Taille (cm)');
 
         chart
             .append('text')
@@ -89,15 +91,15 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
             .attr('y', -margin.left + 15)
             .attr('text-anchor', 'middle')
             .attr('transform', 'rotate(-90)')
-            .text('Taille (cm)');
+            .text('Poids (kg)');
 
         // Add dots
         chart
             .selectAll('circle')
             .data(filteredData)
             .join('circle')
-            .attr('cx', (d) => x(d.weight))
-            .attr('cy', (d) => y(d.height))
+            .attr('cx', (d) => x(d.height))
+            .attr('cy', (d) => y(d.weight))
             .attr('r', 5)
             .attr('fill', (d) => color(d.sex));
 
@@ -178,5 +180,5 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
         });
     }, [data, width, height, activeSexes]);
 
-    return <svg ref={ref}></svg>;
+    return <svg ref={ref} className="h-auto w-full"></svg>;
 };

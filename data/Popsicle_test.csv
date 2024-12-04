@@ -1,0 +1,14 @@
+Site,Projet,No_Poisson,No_pêcheur,Date_capture,Month_capture,Date_prelev,Position_capture,Espece,Code_FAO,CODE_BARRE_Poisson,REF_PHOTO,Type de poids,Poids_entier(kg),Type_Taille,Taille_mesure(cm),Sexe,Maturity,Maturité_A_D,Poids_gonades(g),No_Otolithes,No_reference_otolithes,Profondeur_Capture,Commentaires,Prelev_par,Stockage
+Reunion,Popsicle,1,P_1,17/01/2025,Jan,15/03/2025,Run_5,Variola louti,VRL,12,12,GUG,1,LF,10,Male,fe,A,"0,5",a,kl,100,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,2,P_1,18/01/2025,Jan,15/03/2025,Run_6,Variola louti,VRL,12,12,GUG,3,LF,20,Male,fe,A,1,a,kl,105,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,3,P_1,19/01/2025,Jan,15/03/2025,Run_7,Variola louti,VRL,12,12,GUG,5,LF,30,Mle,fe,A,"1,5",b,kl,110,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,4,P_1,20/01/2025,Jan,15/03/2025,Run_8,Variola louti,VRL,12,12,GUG,7,LF,40,Male,fe,A,2,a,kl,115,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,5,P_1,11/02/2025,Fev,15/03/2025,Run_9,Variola louti,VRL,12,12,GUG,9,LF,50,Femelle,fe,B,"2,5",a,kl,120,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,6,P_1,12/02/2025,Fev,15/03/2025,Run_10,Variola louti,VRL,12,12,GUG,11,LF,60,Femle,fe,B,3,b,kl,125,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,7,P_1,13/02/2025,Fev,15/03/2025,Run_11,Variola louti,VRL,12,12,GUG,13,LF,50,Femelle,fe,B,"3,5",a,kl,130,fghfh,gfhfgh,gfhgfh
+Mont_LaPerouse,Popsicle,8,P_1,14/02/2025,Fev,15/03/2025,Run_12,Variola louti,VRL,12,12,GUG,15,LF,55,Femelle,fe,B,4,a,kl,135,fghfh,gfhfgh,gfhgfh
+Mont_LaPerouse,Popsicle,9,P_1,15/02/2025,Fev,15/03/2025,Run_13,Variola louti,VRL,12,12,GUG,17,LF,65,Femlle,fe,B,"4,5",b,kl,140,fghfh,gfhfgh,gfhgfh
+Mont_LaPerouse,Popsicle,10,P_1,16/02/2025,Fev,15/03/2025,Run_14,Variola louti,VRL,12,12,GUG,19,LF,70,I,fe,C,5,a,kl,145,fghfh,gfhfgh,gfhgfh
+Mont_LaPerouse,Popsicle,11,P_1,18/12/2024,Dec,15/03/2025,Run_15,Variola louti,VRL,12,12,GUG,21,LF,75,Ind,fe,C,"5,5",a,kl,150,fghfh,gfhfgh,gfhgfh
+Mont_LaPerouse,Popsicle,12,P_1,19/12/2024,Dec,15/03/2025,Run_16,Variola louti,VRL,12,12,GUG,23,LF,84,Ind,fe,C,6,b,kl,155,fghfh,gfhfgh,gfhgfh
+Reunion,Popsicle,13,P_1,20/12/2024,Dec,15/03/2025,Run_2,Variola louti,VRL,12,12,GUG,25,LF,90,Ind,fe,C,"6,5",a,kl,160,fghfh,gfhfgh,gfhgfh

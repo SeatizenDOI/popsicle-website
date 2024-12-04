@@ -14,7 +14,7 @@ interface DonutChartProps {
 
 export const DonutChart: React.FC<DonutChartProps> = ({
     data,
-    width = 400,
+    width = 1200,
     height = 400,
 }) => {
     const ref = useRef<SVGSVGElement | null>(null);
@@ -43,7 +43,6 @@ export const DonutChart: React.FC<DonutChartProps> = ({
             .append('g')
             .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-        // Draw slices
         g.selectAll('path')
             .data(data_ready)
             .join('path')
@@ -61,14 +60,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
             .attr('transform', (d: any) => `translate(${arc.centroid(d)})`)
             .style('text-anchor', 'middle')
             .style('font-size', '12px');
-    }, [data, width, height]);
+    }, [data]);
 
-    return (
-        <svg
-            ref={ref}
-            width={width}
-            height={height}
-            style={{ overflow: 'visible' }}
-        />
-    );
+    return <svg ref={ref} width={width} height={height} />;
 };

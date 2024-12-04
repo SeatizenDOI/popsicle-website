@@ -41,8 +41,9 @@ export function Tripes() {
                 </li>
             </ul>
             <ImageContainer
-                url="/tripes.svg"
+                url="/gonade.jpeg"
                 title="Evolution des gonades en fonction du sexe"
+                onlyAlt={true}
             />
         </div>
     );

@@ -18,6 +18,7 @@ export default function SexByHeightChart() {
 
     if (error) return <div>Failed to load</div>;
     if (!data) return <div>Loading...</div>;
+    if (data.data.length === 0) return <div>No data to show</div>;
 
     let fish_items = data.data;
     let size_data: StackHistoItem[] = [];
@@ -46,10 +47,15 @@ export default function SexByHeightChart() {
     }
 
     return (
-        <StackHistoChart
-            data={size_data}
-            x_title="Classe de Taille (LF en cm)"
-            y_title="Nombre d'individus"
-        />
+        <div className="flex flex-col overflow-scroll">
+            <StackHistoChart
+                data={size_data}
+                x_title="Classe de Taille (LF en cm)"
+                y_title="Nombre d'individus"
+            />
+            <h1 className="my-2 text-center text-lg font-bold sm:text-2xl">
+                Nombre d'individus par classe de taille (LF en cm)
+            </h1>
+        </div>
     );
 }

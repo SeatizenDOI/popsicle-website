@@ -41,7 +41,9 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
         const svg = d3
             .select(ref.current)
             .attr('width', width)
-            .attr('height', height);
+            .attr('height', height)
+            .attr('viewBox', `0 0 ${width} ${height}`) // Set the internal coordinate system
+            .attr('preserveAspectRatio', 'xMidYMid meet'); // Maintain aspect ratio
 
         svg.selectAll('*').remove();
 
@@ -75,7 +77,7 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
             .range([chartHeight, 0]);
 
         const color = d3.scaleOrdinal(
-            Object.keys(data),
+            Object.keys(data[0]?.values || {}),
             colors.slice(0, data.length)
         );
 
@@ -102,6 +104,18 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
             .style('font-size', '14px')
             .text(y_title);
 
+        // Tooltip setup
+        const tooltip = d3
+            .select('body')
+            .append('div')
+            .style('position', 'absolute')
+            .style('visibility', 'hidden')
+            .style('background', '#f9f9f9')
+            .style('border', '1px solid #ccc')
+            .style('padding', '8px')
+            .style('border-radius', '4px')
+            .style('font-size', '12px');
+
         // Bars
         chart
             .selectAll('.layer')
@@ -115,7 +129,25 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
             .attr('x', (d) => x(d.data.x_label)!)
             .attr('y', (d) => y(d[1]))
             .attr('height', (d) => y(d[0]) - y(d[1]))
-            .attr('width', x.bandwidth());
+            .attr('width', x.bandwidth())
+            .on('mouseover', (event: PointerEvent, d) => {
+                if (!event.currentTarget) return;
+                tooltip
+                    .html(
+                        `<strong>${(d3.select((event.currentTarget as Element).parentNode as unknown as string).datum() as any).key}</strong>: ${
+                            d[1] - d[0]
+                        }`
+                    )
+                    .style('visibility', 'visible');
+            })
+            .on('mousemove', (event) => {
+                tooltip
+                    .style('top', `${event.pageY - 20}px`)
+                    .style('left', `${event.pageX + 10}px`);
+            })
+            .on('mouseout', () => {
+                tooltip.style('visibility', 'hidden');
+            });
 
         // Legend
         const legend = svg
@@ -163,5 +195,5 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
         });
     }, [data, width, height, x_title, y_title, activeKeys]);
 
-    return <svg ref={ref}></svg>;
+    return <svg ref={ref} className="h-auto w-full"></svg>;
 };

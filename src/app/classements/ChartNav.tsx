@@ -8,64 +8,50 @@ import HeightWeightChart from '@/app/classements/HeightWeightChart';
 const ChartNav = () => {
     const [activeChart, setActiveChart] = useState('chart1');
 
+    let item_button = ({ title, href }: { title: string; href: string }) => {
+        return (
+            <button
+                className={`m-2 rounded px-4 py-2 ${
+                    activeChart === href
+                        ? 'bg-primary_orange text-white'
+                        : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => setActiveChart(href)}
+            >
+                {title}
+            </button>
+        );
+    };
+
     return (
-        <div className="flex flex-col items-center p-4">
+        <div className="mt-8 flex flex-col items-center p-4">
             {/* Navigation Menu */}
             <nav className="mb-4">
-                <ul className="flex list-none space-x-4">
-                    <li>
-                        <button
-                            className={`rounded px-4 py-2 ${
-                                activeChart === 'chart1'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 text-gray-800'
-                            }`}
-                            onClick={() => setActiveChart('chart1')}
-                        >
-                            Chart 1
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            className={`rounded px-4 py-2 ${
-                                activeChart === 'chart2'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 text-gray-800'
-                            }`}
-                            onClick={() => setActiveChart('chart2')}
-                        >
-                            Chart 2
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            className={`rounded px-4 py-2 ${
-                                activeChart === 'chart3'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 text-gray-800'
-                            }`}
-                            onClick={() => setActiveChart('chart3')}
-                        >
-                            Chart 3
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            className={`rounded px-4 py-2 ${
-                                activeChart === 'chart4'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 text-gray-800'
-                            }`}
-                            onClick={() => setActiveChart('chart4')}
-                        >
-                            Chart 4
-                        </button>
-                    </li>
-                </ul>
+                <div className="flex flex-wrap justify-center">
+                    {item_button({
+                        title: "Donut du nombre d'individus",
+                        href: 'chart1',
+                    })}
+
+                    {item_button({
+                        title: "Nombre d'individus par classe de taille",
+                        href: 'chart2',
+                    })}
+
+                    {item_button({
+                        title: " Nombre d'individus par mois",
+                        href: 'chart3',
+                    })}
+
+                    {item_button({
+                        title: 'Relation Taille - Poids',
+                        href: 'chart4',
+                    })}
+                </div>
             </nav>
 
             {/* Chart Display */}
-            <div className="w-full">
+            <div className="w-fit overflow-y-scroll p-8">
                 {activeChart === 'chart1' && <SexChart />}
                 {activeChart === 'chart2' && <SexByHeightChart />}
                 {activeChart === 'chart3' && <SexByMonthChart />}

@@ -16,6 +16,7 @@ export default function HeightWeightChart() {
 
     if (error) return <div>Failed to load</div>;
     if (!data) return <div>Loading...</div>;
+    if (data.data.length === 0) return <div>No data to show</div>;
 
     let fish_items = data.data;
 
@@ -27,5 +28,12 @@ export default function HeightWeightChart() {
         };
     });
 
-    return <ScatterChart data={scatter_data} />;
+    return (
+        <div className="flex flex-col">
+            <ScatterChart data={scatter_data} />
+            <h1 className="my-2 text-center text-lg font-bold sm:text-2xl">
+                Relation Taille - Poids
+            </h1>
+        </div>
+    );
 }
