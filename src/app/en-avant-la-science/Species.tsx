@@ -43,7 +43,7 @@ export function Species() {
                             <span className="font-extralight">
                                 Distribution :{' '}
                             </span>
-                            Zone tropical Indo-Pacifique
+                            Zone tropicale Indo-Pacifique
                         </li>
                         <li>
                             <span className="font-extralight">Habitat : </span>{' '}
@@ -61,7 +61,7 @@ export function Species() {
                             <span className="font-extralight">
                                 Particularité :{' '}
                             </span>
-                            hermaphrodite protogyne
+                            Hermaphrodite protogyne
                         </li>
                     </ul>
                 </div>
@@ -106,7 +106,7 @@ export function Species() {
                             <span className="font-extralight">
                                 Distribution :{' '}
                             </span>
-                            Zone tropical Indo-Pacifique
+                            Zone tropicale Indo-Pacifique
                         </li>
                         <li>
                             <span className="font-extralight">Habitat : </span>
@@ -117,14 +117,14 @@ export function Species() {
                             <span className="font-extralight">
                                 Description :{' '}
                             </span>
-                            Le tire boure présente un liseraie blanc sur
+                            Le tire boure présente un liserai blanc sur
                             l’échancrure de sa nageoire caudale
                         </li>
                         <li>
                             <span className="font-extralight">
                                 Particularité :{' '}
                             </span>
-                            hermaphrodite protogyne
+                            Hermaphrodite protogyne
                         </li>
                     </ul>
                 </div>

@@ -115,6 +115,94 @@ export const zone_peche = {
     ],
 };
 
+export const zones_peches_start_stop = [
+    {
+        zone: 'Zone 1 : Le Port',
+        start: 'Embouchure de la rivière des galets',
+        end: 'Entrée de la route du littoral (La Possession)',
+    },
+    {
+        zone: 'Zone 2 : Route du littoral',
+        start: 'Entrée de la route du littoral (La Possession)',
+        end: 'Route du littoral Saint-Denis RSMA',
+    },
+    {
+        zone: 'Zone 3 : Saint Denis',
+        start: 'Route du littoral Saint-Denis RSMA',
+        end: 'Port de saint marie',
+    },
+    {
+        zone: 'Zone 4 : Sainte Marie - Sainte Suzanne',
+        start: 'Port de saint marie',
+        end: 'Usine de bois rouge',
+    },
+    {
+        zone: 'Zone 5 : Sainte Suzanne - Saint André',
+        start: 'Usine de bois rouge',
+        end: 'Embouchure de la rivière du mat',
+    },
+    {
+        zone: 'Zone 6 : Saint-Benoît - Sainte-Anne',
+        start: 'Embouchure de la rivière du mat',
+        end: 'Embouchure de la rivière de l’Est',
+    },
+    {
+        zone: 'Zone 7 : Sainte Rose',
+        start: 'Embouchure de la rivière de l’Est',
+        end: 'Bois blanc',
+    },
+    {
+        zone: 'Zone 8 : Grande pente du volcan',
+        start: 'Bois blanc',
+        end: 'Pointe de la table',
+    },
+    {
+        zone: 'Zone 9 : Saint Philippe',
+        start: 'Pointe de la table',
+        end: 'Cap Méchant',
+    },
+    {
+        zone: 'Zone 10 : Saint Joseph',
+        start: 'Cap Méchant',
+        end: 'Pointe de grande Anse',
+    },
+    {
+        zone: 'Zone 11 : Saint Pierre',
+        start: 'Pointe de grande Anse',
+        end: 'Pointe du Diable',
+    },
+    {
+        zone: 'Zone 12 : Saint Louis',
+        start: 'Pointe du Diable',
+        end: "Gouffre d'etang Salée",
+    },
+    {
+        zone: 'Zone 13 : Etang salé',
+        start: "Gouffre d'etang Salée",
+        end: 'Pointe au sel',
+    },
+    {
+        zone: 'Zone 14 : Saint Leu - Pointe au sel',
+        start: 'Pointe au sel',
+        end: 'Grande Ravine',
+    },
+    {
+        zone: 'Zone 15 : Hermitage / Saint Gilles',
+        start: 'Grande Ravine',
+        end: 'Port de saint Gilles',
+    },
+    {
+        zone: 'Zone 16 : Sec Saint Paul - Baie St Paul',
+        start: 'Port de saint Gilles',
+        end: 'Embouchure de la rivière des galets',
+    },
+    {
+        zone: 'Zone 17 : Mont La Pérouse (90 miles)',
+        start: '',
+        end: '',
+    },
+];
+
 export const months = {
     Jan: 'Janvier',
     Fev: 'Février',

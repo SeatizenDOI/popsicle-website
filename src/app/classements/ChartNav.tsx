@@ -29,7 +29,7 @@ const ChartNav = () => {
             <nav className="mb-4">
                 <div className="flex flex-wrap justify-center">
                     {item_button({
-                        title: "Donut du nombre d'individus",
+                        title: 'Nombre de Grand Queue échantillonnés',
                         href: 'chart1',
                     })}
 

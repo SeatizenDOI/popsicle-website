@@ -152,7 +152,10 @@ export const StackHistoChart: React.FC<StackHistoProps> = ({
         // Legend
         const legend = svg
             .append('g')
-            .attr('transform', `translate(${margin.left}, ${margin.top / 2})`);
+            .attr(
+                'transform',
+                `translate(${chartWidth - (allKeys.length - 1) * 120}, ${margin.top / 2})`
+            );
 
         allKeys.forEach((key, i) => {
             const legendGroup = legend

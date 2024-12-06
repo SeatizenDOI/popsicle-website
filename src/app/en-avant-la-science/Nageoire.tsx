@@ -8,20 +8,20 @@ export function Nageoire() {
                 l'ADN du poisson. Cette analyse permet de :
             </p>
             <ul className="p-4">
-                <li>Identifier et déterminer l'espèce du poisson. </li>
+                <li>Identifier et déterminer l'espèce du poisson </li>
                 <li>
                     Étudier la structure de la population et la connectivité des
                     sous-populations vivant dans différentes zones
                     géographiques, afin de mieux comprendre les interdépendances
-                    au sein des stocks.
+                    au sein des stocks
                 </li>
                 <li>
                     Utiliser une méthode génétique (CKMR) pour estimer le nombre
-                    d'individus adultes dans une population.
+                    d'individus adultes dans une population
                 </li>
                 <li>
                     Développer de nouvelles techniques pour déterminer l’âge et
-                    le sexe des poissons (actuellement en cours de recherche).
+                    le sexe des poissons (actuellement en cours de recherche)
                 </li>
             </ul>
             <ImageContainer

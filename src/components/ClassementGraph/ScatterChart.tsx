@@ -137,12 +137,15 @@ export const ScatterChart: React.FC<ScatterChartProps> = ({
         // Add legend
         const legend = svg
             .append('g')
-            .attr('transform', `translate(${margin.left}, ${margin.top / 2})`);
+            .attr(
+                'transform',
+                `translate(${chartWidth - (allKeys.length - 1) * 120}, ${margin.top / 2})`
+            );
 
         allKeys.forEach((sex, i) => {
             const legendGroup = legend
                 .append('g')
-                .attr('transform', `translate(${i * 80}, 0)`);
+                .attr('transform', `translate(${i * 120}, 0)`);
 
             legendGroup
                 .append('rect')

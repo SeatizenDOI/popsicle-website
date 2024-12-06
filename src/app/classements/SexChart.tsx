@@ -11,9 +11,9 @@ const fetcher: Fetcher<{ data: FishItem[] }, string> = (apiEndPoint: string) =>
 export default function SexChart() {
     const { data, error } = useSWR('/api/fish_data', fetcher);
 
-    if (error) return <div>Failed to load</div>;
-    if (!data) return <div>Loading...</div>;
-    if (data.data.length === 0) return <div>No data to show</div>;
+    if (error) return <div>Échec du chargement</div>;
+    if (!data) return <div>Chargement...</div>;
+    if (data.data.length === 0) return <div>Aucune donnée.</div>;
 
     let fish_items = data.data;
     let counts: { [id: string]: number } = {};
@@ -30,8 +30,8 @@ export default function SexChart() {
     return (
         <div className="flex flex-col">
             <DonutChart data={counts} />
-            <h1 className="my-2 text-center text-lg font-bold sm:text-2xl">
-                Donut du nombre d'individus
+            <h1 className="my-8 text-center text-lg font-bold sm:text-2xl">
+                Nombre de Grand Queue échantillonnés
             </h1>
         </div>
     );

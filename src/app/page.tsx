@@ -76,7 +76,7 @@ export default function HomePage() {
                         </p>
                         <p className="font-regular px-8 pb-4 text-justify text-lg lg:ml-8">
                             🏆 À la clé : Jusqu’à{' '}
-                            <span className="font-bold">1000€</span> pour
+                            <span className="font-bold">1000 €</span> pour
                             récompenser les participants les plus investis après
                             6 mois !
                         </p>
@@ -158,11 +158,11 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         L’objectif de ce projet reste de gérer durablement cette
                         espèce et un nombre maximum de poissons pêché est fixé à
-                        1000 pour ne pas mettre de pression sur la ressource.
-                        Une fois ce nombre atteint, le projet participatif est
-                        terminé. La date de fin du projet est fixée au 15 juin
-                        2025 même si le nombre de 1000 poissons n’est pas
-                        atteint.
+                        1000 pour ne pas exercer de pression excessive sur la
+                        ressource. Une fois ce nombre atteint, le projet
+                        participatif est terminé. La date de fin de la période
+                        d'échantillonage est fixée au 15 juin 2025 même si le
+                        nombre de 1000 poissons n’est pas atteint.
                     </p>
 
                     <div className="my-8 flex w-full flex-wrap justify-around self-center px-4 xl:w-10/12">

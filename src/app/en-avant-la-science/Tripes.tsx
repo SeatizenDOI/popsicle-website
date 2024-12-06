@@ -14,7 +14,7 @@ export function Tripes() {
                 protocoles internationaux standardisés décrivant les stades de
                 maturité des poissons. Ces paramètres permettent de calculer la
                 taille de la première reproduction, d’estimer les périodes de
-                reproduction et l’âge du changement de sexe, entre autres.
+                reproduction et l’âge du changement de sexe.
             </p>
             <p className="pt-4 text-justify">
                 Comme de nombreux mérous, le mérou grand queue a la
@@ -28,20 +28,20 @@ export function Tripes() {
             </p>
             <ul className="p-4">
                 <li>
-                    l’acquisition d’un certain poids et/ou d’un certain âge,
+                    L’acquisition d’un certain poids et/ou d’un certain âge,
                 </li>
                 <li>
-                    l’organisation sociale du groupe : densité de population et
+                    L’organisation sociale du groupe : densité de population et
                     inversion sexuelle pour répondre au déséquilibre constant du
                     sex-ratio (pêche, prédation, etc.),
                 </li>
                 <li>
-                    des facteurs environnementaux : température, salinité,
+                    Des facteurs environnementaux : température, salinité,
                     pollution...
                 </li>
             </ul>
             <ImageContainer
-                url="/gonade.jpeg"
+                url="/gonade.jpg"
                 title="Evolution des gonades en fonction du sexe"
                 onlyAlt={true}
             />

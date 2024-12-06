@@ -38,11 +38,11 @@ export function MapZonePeche() {
     };
 
     return (
-        <div className="h-[500px] w-full">
+        <div className="h-[600px] w-[800px] md:h-[800px] md:w-[1200px]">
             <MapContainer
                 center={[-21.11644398894539, 55.513590539298725]}
                 zoom={9}
-                className="h-full w-full"
+                className="h-full w-full text-center"
                 maxZoom={18}
             >
                 <TileLayer

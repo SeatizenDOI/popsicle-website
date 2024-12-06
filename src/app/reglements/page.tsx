@@ -52,8 +52,8 @@ export default function Page() {
                 <Link href="#article_10">Article 10</Link>) et récompense (
                 <Link href="#article_11">Article 11</Link>) seront seulement
                 attribués au participant même s’il s’agit de plusieurs personnes
-                physiques. Par exemple, un t-shirt du projet pourra être obtenu
-                mais un seul un T-shirt sera fourni au participant. En cas de
+                physiques. Par exemple, un T-shirt du projet pourra être obtenu
+                mais un seul T-shirt sera fourni au participant. En cas de
                 participation en équipe, la personne physique inscrite sera
                 responsable des communications avec les organisateurs du projet.
             </p>
@@ -108,11 +108,11 @@ export default function Page() {
                 ).
             </p>
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
-            <p>
+            <p className="text-justify">
                 Pour cette étude il n’y a pas de limite de taille de capture
                 dans un premier temps.
             </p>
-            <p>
+            <p className="text-justify">
                 Nous avons besoin de 50 poissons entiers de moins 25 cm. Une
                 fois ce quota atteint,
                 <span className="font-semibold">
@@ -132,7 +132,7 @@ export default function Page() {
                 limitation est atteinte.
             </p>
             <br />
-            <p>
+            <p className="text-justify">
                 <span id="article_61">6.1</span> Pour valider une prise, il faut
                 impérativement transmettre les informations et échantillons
                 suivants via un des outils mis à disposition (
@@ -162,12 +162,12 @@ export default function Page() {
                     de l'étiquette du poisson
                 </li>
             </ul>
-            <p>
+            <p className="text-justify">
                 Ces informations et échantillons permettent d’obtenir{' '}
                 <span className="font-semibold">25 points.</span>
             </p>
             <br />
-            <p>
+            <p className="text-justify">
                 <span id="article_62">6.2</span> Pour valider des points Bonus,
                 il faut impérativement fournir avec la même prise :
             </p>
@@ -208,13 +208,16 @@ export default function Page() {
                 <span className="font-semibold"> 60 pts</span>
             </p>
             <h2 id="article_7">Article 7 - Comptabilisation des points</h2>
-            <table className="text-surface min-w-full text-left text-sm font-light">
+            <table className="text-surface min-w-full border-collapse overflow-hidden rounded-lg bg-white text-center text-sm font-light shadow-sm">
                 <thead>
                     <tr>
-                        <th className="bg-slate-200 pl-2 text-left">
+                        <th className="border bg-tertiary_orange px-3 py-3 text-center text-lg md:px-6">
                             Informations ou échantillons fournis
                         </th>
-                        <th className="bg-slate-200 pl-2 text-left" colSpan={7}>
+                        <th
+                            className="border bg-tertiary_orange px-3 py-3 text-center text-lg md:px-6"
+                            colSpan={7}
+                        >
                             Calcul des points
                         </th>
                     </tr>
@@ -222,14 +225,14 @@ export default function Page() {
                 <tbody>
                     {Object.entries(table_values).map(([key, values]) => (
                         <tr key={key}>
-                            <th className="bg-slate-200 pl-2 text-left">
+                            <th className="border bg-tertiary_orange px-3 py-3 text-left text-lg md:px-6">
                                 {key}
                             </th>
                             {values.map((value, index) =>
                                 key === 'Total' ? (
                                     <th
                                         key={index}
-                                        className="bg-slate-200 pl-2 text-left"
+                                        className="border bg-tertiary_orange px-3 py-3 text-center md:px-6"
                                     >
                                         {value}
                                     </th>
@@ -240,7 +243,7 @@ export default function Page() {
                                             value === 0
                                                 ? 'bg-red-200 pl-2'
                                                 : 'bg-green-200 pl-2'
-                                        } p-2 font-medium`}
+                                        } border px-3 py-3 font-medium md:px-6`}
                                     >
                                         {value}
                                     </td>
@@ -251,15 +254,15 @@ export default function Page() {
                 </tbody>
             </table>
             <h3>Exemple de calcul</h3>
-            <p>
+            <p className="text-justify">
                 Données de base (25 pts) + le poids fourni (+ 5pts) soit un
                 total de 25 + 5 = 30pts
             </p>
-            <p>
+            <p className="text-justify">
                 Données de base (25 pts) + la tête (+ 10pts) + les tripes (+
                 10pts) sont fournie en plus : 25 + 10 + 10 = 45 pts
             </p>
-            <p>
+            <p className="text-justify">
                 Données de base (25 pts) + poids (+ 5pts) + tripes (+ 10pts) +
                 tête (+ 10pts) sont fournie : 25 + 5 + 10 + 10 = 50 pts donc
                 l’échantillonnage est complet : bonus + 10 pts soit 60 pts
@@ -267,21 +270,20 @@ export default function Page() {
             <h2 id="article_8">
                 Article 8 - Enregistrements des prises - Réclamations
             </h2>
-            <p>
+            <p className="text-justify">
                 L’enregistrement de chaque prise sera validé par les
                 organisateurs du projet après vérification des données à fournir
                 ainsi que la réception du tube avec le morceau de nageoire.
             </p>
-            <p>
+            <p className="text-justify">
                 Un bonus de point sera validé par les organisateurs du projet
-                après réception du sachet de tripes et/ ou de la tête du poisson
+                après réception du sachet de tripes et/ou de la tête du poisson
                 et/ou du poids avec sa photo ou vidéo.
             </p>
-            <p>
-                Un bonus spécial de + 10 points sera attribué par les
-                organisateurs du projet à tout participant qui fournira toutes
-                les données requises qui correspond à un échantillonnage complet
-                du poisson ou au don du poisson entier..
+            <p className="text-justify">
+                Un bonus de + 10 points sera attribué à tout participant
+                fournissant toutes les données d’un échantillonnage complet ou
+                offrant le poisson entier.
             </p>
             <p className="pt-4 font-bold">
                 Une mise à jour hebdomadaire sera effectuée via les réseaux
@@ -291,12 +293,12 @@ export default function Page() {
             <p className="text-justify">
                 Toute demande ou information à transmettre se fera par SMS,
                 Whatsapp ou messenger. Les demandes seront traitées durant les
-                jours ouvrés dans les journées (entre 9h et 17h). Les photos et
+                jours ouvrés (du lundi au vendredi de 9h à 17h). Les photos et
                 les vidéos seront transmises par ces canaux (SMS, Whatsapp ou
                 messenger).
             </p>{' '}
             <br />
-            <p className="font-bold text-red-600 underline">
+            <p className="text-justify font-bold text-red-600 underline">
                 Attention : à chaque vidéo ou photo l'étiquette du numéro
                 correspondant au tube d’échantillon doit apparaître avec le
                 poisson pour que celui-ci soit validé. Si il n’y a pas

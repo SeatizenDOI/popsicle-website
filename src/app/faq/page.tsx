@@ -18,7 +18,7 @@ export default function FaqPage() {
         },
         {
             question: "Quelles sont les sites d'études ?",
-            answer: "Le seul site d'étude est la Réunion.",
+            answer: "Les sites d'études sont la Réunion et Mayotte mais le seul site d'échantillonage est la Réunion.",
         },
         {
             question:
