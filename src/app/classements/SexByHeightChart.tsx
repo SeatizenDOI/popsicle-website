@@ -16,9 +16,9 @@ const fetcher: Fetcher<{ data: FishItem[] }, string> = (apiEndPoint: string) =>
 export default function SexByHeightChart() {
     const { data, error } = useSWR('/api/fish_data', fetcher);
 
-    if (error) return <div>Failed to load</div>;
-    if (!data) return <div>Loading...</div>;
-    if (data.data.length === 0) return <div>No data to show</div>;
+    if (error) return <div>Échec du chargement</div>;
+    if (!data) return <div>Chargement...</div>;
+    if (data.data.length === 0) return <div>Aucune donnée.</div>;
 
     let fish_items = data.data;
     let size_data: StackHistoItem[] = [];

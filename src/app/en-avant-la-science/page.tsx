@@ -19,21 +19,21 @@ export default function Page() {
             answer: Species,
         },
         {
-            question: 'Taille et poids pour les relations biométriques',
+            question:
+                'Pourquoi nous voulons la taille et le poids du poisson ?',
+
             answer: HeightAndWeight,
         },
         {
-            question:
-                "Les nageoires donnent l'espèce grâce à des analyses génétiques",
+            question: 'Pourquoi nous voulons un morceau de nageoire ?',
             answer: Nageoire,
         },
         {
-            question: 'Otolithes pour l’âge et la croissance',
+            question: 'Pourquoi nous voulons la tête ?',
             answer: Otolithes,
         },
         {
-            question:
-                'Les tripes déterminent le sexe et le stade de maturation du poisson',
+            question: 'Pourquoi nous voulons les tripes ?',
             answer: Tripes,
         },
     ];

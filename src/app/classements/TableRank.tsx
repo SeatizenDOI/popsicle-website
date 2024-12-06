@@ -13,8 +13,8 @@ export default function TableRank() {
     const [searchTerm, setSearchTerm] = useState('');
     const { data, error } = useSWR('/api/classement', fetcher);
 
-    if (error) return <div>Failed to load</div>;
-    if (!data) return <div>Loading...</div>;
+    if (error) return <div>Échec du chargement</div>;
+    if (!data) return <div>Chargement...</div>;
 
     let fisher_rank = data.data.sort((a, b) => a.rank - b.rank);
 

@@ -49,8 +49,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
             .attr('d', arc as any) // TypeScript workaround for arc generator
             .attr('fill', (d: any) => color(d.data[0]))
             .attr('stroke', 'white')
-            .style('stroke-width', '2px')
-            .style('opacity', 0.7);
+            .style('stroke-width', '2px');
 
         // Add labels
         g.selectAll('text')

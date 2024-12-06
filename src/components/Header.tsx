@@ -14,16 +14,16 @@ import { Counter } from '@/components/Counter';
 import { HeaderLink } from '@/components/HeaderLink';
 
 const url_paths: LinkItem[] = [
+    {
+        name: 'En Avant La Science',
+        href: '/en-avant-la-science',
+        icon: GiDna2,
+    },
     { name: 'Règlements', href: '/reglements', icon: VscLaw },
     {
         name: 'Protocoles',
         href: '/protocoles',
         icon: GiTransparentTubes,
-    },
-    {
-        name: 'En Avant La Science',
-        href: '/en-avant-la-science',
-        icon: GiDna2,
     },
     { name: 'Classements', href: '/classements', icon: GiPodium },
     { name: 'FAQ', href: '/faq', icon: FaQuestionCircle },

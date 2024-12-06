@@ -23,13 +23,16 @@ export default function ImageContainer({
     url,
     title,
     onlyAlt,
+    className,
 }: {
     url: string;
     title: string;
+    className?: string;
     onlyAlt?: boolean;
 }) {
+    className = (className ?? ' ') + ' my-4 flex flex-col shadow-lg';
     return (
-        <div className="my-4 flex flex-col shadow-lg">
+        <div className={className}>
             <Image
                 alt={title}
                 className="w-full"

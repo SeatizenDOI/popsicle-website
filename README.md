@@ -8,6 +8,9 @@ EMAIL_WEBSITE="website.popsicle974@gmail.com"
 
 EMAIL_WEBSITE_PASSWORD=\*\*\*\*\*\*
 
+PROD_PATH="." for a local build
+PROD_PATH="/app" for a build in a docker container
+
 ## DOCKER
 
 Build your container: `docker build -t popsicle:latest .`
