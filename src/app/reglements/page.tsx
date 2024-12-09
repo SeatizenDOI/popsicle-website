@@ -2,6 +2,7 @@ import '@/app/ui/reglements.css';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PrimaryButton from '@/components/PrimaryButton';
+import ImageContainer from '@/components/ImageContainer';
 
 export const metadata: Metadata = {
     title: 'Règlements',
@@ -208,7 +209,12 @@ export default function Page() {
                 <span className="font-semibold"> 60 pts</span>
             </p>
             <h2 id="article_7">Article 7 - Comptabilisation des points</h2>
-            <table className="text-surface min-w-full border-collapse overflow-hidden rounded-lg bg-white text-center text-sm font-light shadow-sm">
+            <ImageContainer
+                title="Tableau comptabilisation des points"
+                url="/tableau_points.png"
+                onlyAlt={true}
+            />
+            {/* <table className="text-surface min-w-full border-collapse overflow-hidden rounded-lg bg-white text-center text-sm font-light shadow-sm">
                 <thead>
                     <tr>
                         <th className="border bg-tertiary_orange px-3 py-3 text-center text-lg md:px-6">
@@ -225,7 +231,7 @@ export default function Page() {
                 <tbody>
                     {Object.entries(table_values).map(([key, values]) => (
                         <tr key={key}>
-                            <th className="border bg-tertiary_orange px-3 py-3 text-left text-lg md:px-6">
+                            <th className="border bg-tertiary_orange px-3 py-3 text-left text-xs md:px-6 md:text-lg">
                                 {key}
                             </th>
                             {values.map((value, index) =>
@@ -243,7 +249,7 @@ export default function Page() {
                                             value === 0
                                                 ? 'bg-red-200 pl-2'
                                                 : 'bg-green-200 pl-2'
-                                        } border px-3 py-3 font-medium md:px-6`}
+                                        } border px-1 py-1 font-medium md:px-6`}
                                     >
                                         {value}
                                     </td>
@@ -252,7 +258,7 @@ export default function Page() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table> */}
             <h3>Exemple de calcul</h3>
             <p className="text-justify">
                 Données de base (25 pts) + le poids fourni (+ 5pts) soit un
@@ -285,7 +291,7 @@ export default function Page() {
                 fournissant toutes les données d’un échantillonnage complet ou
                 offrant le poisson entier.
             </p>
-            <p className="pt-4 font-bold">
+            <p className="pt-4 text-justify font-bold">
                 Une mise à jour hebdomadaire sera effectuée via les réseaux
                 sociaux dédiés et le site web du projet.
             </p>

@@ -214,7 +214,7 @@ export default function HomePage() {
                     <h1 className="m-8 self-center text-lg font-bold sm:text-4xl">
                         Comment participer ?
                     </h1>
-                    <p className="m-8 self-center">
+                    <p className="m-8 self-center text-justify">
                         Après avoir pris connaissance du règlement, vous pouvez
                         nous contacter par 3 moyens.
                     </p>
@@ -235,7 +235,7 @@ export default function HomePage() {
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de demande d'inscription
                             </h1>
-                            <p className="w-9/12 self-center text-center">
+                            <p className="my-4 w-9/12 self-center text-center">
                                 En remplissant ce formulaire, vous entrez dans
                                 la file d’attente pour participer au projet.
                             </p>

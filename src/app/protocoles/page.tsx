@@ -86,7 +86,7 @@ export default function Page() {
             <div className="mt-4 flex w-full justify-center">
                 <Map />
             </div>
-            <div className="m-8 border shadow-lg">
+            <div className="m-2 border shadow-lg sm:m-8">
                 <table className="min-w-full border-collapse overflow-hidden rounded-lg bg-white shadow-lg">
                     <thead>
                         <tr className="bg-primary_orange text-white">

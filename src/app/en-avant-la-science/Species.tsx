@@ -134,6 +134,7 @@ export function Species() {
                     url="/cycle_vie.jpg"
                     title="Cycle de vie d'un Croissant Queue Jaune"
                     onlyAlt={true}
+                    className="my-12"
                 />
             </div>
         </div>

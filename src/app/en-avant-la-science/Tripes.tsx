@@ -44,6 +44,7 @@ export function Tripes() {
                 url="/gonade.jpg"
                 title="Evolution des gonades en fonction du sexe"
                 onlyAlt={true}
+                className="my-12"
             />
         </div>
     );

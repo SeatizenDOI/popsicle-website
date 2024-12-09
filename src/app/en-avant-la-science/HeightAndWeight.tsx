@@ -21,6 +21,7 @@ export function HeightAndWeight() {
             <ImageContainer
                 url="/lf_variola.svg"
                 title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
+                className="my-12"
             />
             <p className="py-4 text-justify">
                 Ces mesures servent également à construire une courbe de
