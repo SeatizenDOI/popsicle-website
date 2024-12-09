@@ -4,8 +4,11 @@
 
 @layer base {
     ul {
-        @apply list-inside list-disc;
+        @apply list-outside list-disc;
     }
+    /* li {
+        @apply mx-4 mb-1 sm:mx-20 xl:mx-48 2xl:mx-96;
+    } */
 }
 
 :root {

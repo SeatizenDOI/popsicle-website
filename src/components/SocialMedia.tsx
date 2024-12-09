@@ -4,7 +4,7 @@ import { SiGmail } from 'react-icons/si';
 
 export function SocialMediaComponent() {
     return (
-        <div className="mx-8 flex flex-row justify-evenly py-4 text-2xl lg:py-0">
+        <div className="mx-0 flex flex-row justify-evenly py-4 text-2xl md:mx-8 lg:py-0">
             <Link
                 href="https://www.facebook.com/Popsicle974"
                 className="mx-2 p-1 text-gray-600 hover:scale-150 hover:text-blue-400"

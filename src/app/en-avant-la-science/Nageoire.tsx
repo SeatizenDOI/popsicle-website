@@ -28,6 +28,7 @@ export function Nageoire() {
                 url="/genet_nageoire.jpg"
                 title="Explication de l'utilité d'une nageoire dans la génétique"
                 onlyAlt={true}
+                className="my-12"
             />
 
             <div className="mt-12">
@@ -68,6 +69,7 @@ export function Nageoire() {
                     url="/struc_pop.jpg"
                     title="Image montrant une structure de population"
                     onlyAlt={true}
+                    className="my-12"
                 />
 
                 <h2 className="m-4 text-lg font-semibold">
@@ -93,6 +95,7 @@ export function Nageoire() {
                     url="/metho_ckmr.jpg"
                     title="Principe du CKMR"
                     onlyAlt={true}
+                    className="my-12"
                 />
             </div>
         </div>

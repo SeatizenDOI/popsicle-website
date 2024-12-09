@@ -15,6 +15,7 @@ export function Otolithes() {
                 url="/otolithe.jpg"
                 title="Positionnement des otolithes."
                 onlyAlt={true}
+                className="my-12"
             />
             <p className="py-12 text-justify">
                 Il existe 3 paires d'otolithes, mais seule la grande, appelée

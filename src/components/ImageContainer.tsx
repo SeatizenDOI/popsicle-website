@@ -30,7 +30,7 @@ export default function ImageContainer({
     className?: string;
     onlyAlt?: boolean;
 }) {
-    className = (className ?? ' ') + ' my-4 flex flex-col shadow-lg';
+    className = (className ?? ' ') + ' flex flex-col shadow-lg';
     return (
         <div className={className}>
             <Image
