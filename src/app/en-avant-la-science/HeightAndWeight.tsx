@@ -19,7 +19,7 @@ export function HeightAndWeight() {
             </p>
 
             <ImageContainer
-                url="/lf_variola.svg"
+                url="/longueur_lf.jpeg"
                 title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
                 className="my-12"
             />
