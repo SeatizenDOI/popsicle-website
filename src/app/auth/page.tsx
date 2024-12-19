@@ -13,7 +13,7 @@ const AuthPage: React.FC = () => {
         e.preventDefault();
         const isValid = await validatePassword(password);
         if (isValid) {
-            router.push('/'); // Redirect to the home page
+            window.location.href = '/';
         } else {
             setError('Le mot de passe semble incorrecte.');
         }
