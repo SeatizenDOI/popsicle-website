@@ -5,6 +5,7 @@ import { SocialMediaComponent } from '@/components/SocialMedia';
 export default function Footer() {
     const footer_links: LinkItem[] = [
         { href: '/nous-contacter', name: 'Nous Contacter' },
+        { href: '/cgu', name: 'CGU' },
         { href: '/mentions-legales', name: 'Mentions Légales' },
     ];
 
