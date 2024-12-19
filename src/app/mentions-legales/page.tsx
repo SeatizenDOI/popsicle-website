@@ -59,13 +59,8 @@ export default function Page() {
                 disponibles sur ce site.
             </p>
 
-            <h2 className="mb-2 mt-8 text-xl font-bold">
-                5. Cookies et données personnelles
-            </h2>
-            <p className="text-justify">
-                Ce site n'utilise pas de cookies et ne collecte pas de données
-                scientifiques.
-            </p>
+            <h2 className="mb-2 mt-8 text-xl font-bold">5. Cookies</h2>
+            <p className="text-justify">Ce site n'utilise pas de cookies.</p>
 
             <h2 className="mb-2 mt-8 text-xl font-bold">6. Loi applicable</h2>
             <p className="text-justify">
