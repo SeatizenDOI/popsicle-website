@@ -1,17 +1,19 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { LogoItem } from '@/lib/definition';
 import { SocialMediaComponent } from '@/components/SocialMedia';
+import PrimaryButton from '@/components/PrimaryButton';
 
 export default function HomePage() {
     const logos: LogoItem[] = [
-        { path: '/logo/cnrs.jpg', alt: 'Logo du CNRS' },
+        { path: '/logo/cnrs.png', alt: 'Logo du CNRS' },
+        { path: '/logo/lirmm.jpg', alt: 'Logo du LIRMM' },
         { path: '/logo/capam.jpeg', alt: 'Logo de la CAPAM' },
-        { path: '/logo/coool.webp', alt: 'Logo de COOOOL' },
-        { path: '/logo/Gouvernement.png', alt: 'Logo du gouvernement' },
+        { path: '/logo/coool.svg', alt: 'Logo de COOOOL' },
+        { path: '/logo/gouvernement.png', alt: 'Logo du gouvernement' },
         { path: '/logo/ifremer.png', alt: "Logo d'Ifremer" },
         { path: '/logo/ofb.jpg', alt: "Logo de l'OFB" },
         {
@@ -40,7 +42,7 @@ export default function HomePage() {
     return (
         <div>
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
+                className="mx-8 flex h-auto flex-col justify-between lg:h-[calc(100vh-10rem)]"
                 ref={section1Ref}
             >
                 <div className="flex flex-col-reverse lg:flex-row">
@@ -48,17 +50,37 @@ export default function HomePage() {
                         <h1 className="m-8 text-4xl font-black md:text-6xl lg:px-8 xl:text-8xl">
                             POPSICLE
                         </h1>
-                        <h2 className="px-8 text-2xl font-semibold md:text-4xl lg:ml-8">
-                            Un projet de science participative qui a besoin de
-                            vous !
+                        <h2 className="px-8 text-2xl font-bold md:text-4xl lg:ml-8">
+                            Pêcheur amateur en bateau, en kayak ou depuis la
+                            côte ?
                         </h2>
+                        <h2 className="font-regular px-8 pt-4 text-justify text-xl md:text-2xl lg:ml-8">
+                            🔬 Envie de contribuer à un projet scientifique où
+                            pêche et science se rencontrent ?
+                        </h2>
+                        <p className="font-regular px-8 pt-4 text-justify text-lg lg:ml-8">
+                            🎣 <span className="font-bold"> Mission</span> :
+                            Lorsque tu pêches un{' '}
+                            <span className="font-bold">Grand Queue</span>,
+                            prélève des échantillons et transmets-nous les
+                            données selon un protocole simple. Chaque étape te
+                            rapporte des{' '}
+                            <span className="font-bold">points</span>, convertis
+                            en{' '}
+                            <span className="font-bold">chèques cadeaux </span>
+                            en récompense !
+                        </p>
+                        <p className="px-8 py-4 text-justify text-xl font-medium lg:ml-8">
+                            Un défi scientifique fun à partager entre amis ! 🚀
+                        </p>
                         <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
-                            <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-xl font-bold text-white shadow-md transition duration-200 hover:bg-primary_red"
-                            >
-                                <p>Inscrivez-vous</p>
-                            </Link>
+                            <PrimaryButton
+                                link_ref={
+                                    'https://forms.ifremer.fr/rbe/popsicle/'
+                                }
+                                name={'Inscrivez-vous'}
+                                new_page={true}
+                            />
                             <div className="self-center">
                                 <SocialMediaComponent />
                             </div>
@@ -70,7 +92,7 @@ export default function HomePage() {
                             width={850}
                             height={510}
                             alt="Mervyn avec un variola louti"
-                            className="mt-8"
+                            className="mt-8 h-fit w-auto"
                         />
                     </div>
                 </div>
@@ -98,7 +120,7 @@ export default function HomePage() {
             </section>
             <hr className="block lg:hidden" />
             <section
-                className="mb-8 flex h-auto flex-col justify-between xl:h-[calc(100vh-5rem)]"
+                className="mb-8 flex h-auto flex-col justify-between bg-tertiary_orange px-8 xl:h-[calc(100vh-5rem)]"
                 ref={section2Ref}
             >
                 <div className="flex flex-col">
@@ -111,11 +133,11 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Le projet POPSICLE est financé par le FEAMPA et vise à
                         fournir les informations scientifiques pour une
-                        exploitation durable du Croisant queu jaune (Variola
-                        louti). Des nouvelles méthodes génétiques vont être
-                        utilisées pour déterminer l’âge, le sexe et le stade de
-                        maturité des poissons. Ce projet se déroule à La Réunion
-                        et à Mayotte jusqu’en 2026.{' '}
+                        exploitation durable du Croissant Queue Jaune (
+                        <i>Variola louti</i> ). Des nouvelles méthodes
+                        génétiques vont être utilisées pour déterminer l’âge, le
+                        sexe et le stade de maturité des poissons. Ce projet se
+                        déroule à La Réunion et à Mayotte jusqu’en 2026.{' '}
                     </p>
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         Afin de pouvoir collecter les échantillons nécessaires,
@@ -128,14 +150,14 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         L’objectif de ce projet reste de gérer durablement cette
                         espèce et un nombre maximum de poissons pêché est fixé à
-                        1000 pour ne pas mettre de pression sur la ressource.
-                        Une fois ce nombre atteint, le projet participatif est
-                        terminé. La date de fin du projet est fixée au 15 juin
-                        2025 même si le nombre de 1000 poissons n’est pas
-                        atteint.
+                        300 pour ne pas exercer de pression excessive sur la
+                        ressource. Une fois ce nombre atteint, le projet
+                        participatif est terminé. La date de fin de la période
+                        d'échantillonage est fixée au 15 juin 2025 même si le
+                        nombre de 300 poissons n’est pas atteint.
                     </p>
 
-                    <div className="flex w-full flex-wrap justify-around self-center px-4 xl:w-10/12">
+                    <div className="my-8 flex w-full flex-wrap justify-around self-center px-4 xl:w-10/12">
                         {logos.map((l) => {
                             return (
                                 <Image
@@ -143,8 +165,8 @@ export default function HomePage() {
                                     src={l.path}
                                     alt={l.alt}
                                     width={256}
-                                    height={256}
-                                    className="h:4 w-auto"
+                                    height={128}
+                                    className="h-12 w-auto px-4 mix-blend-multiply lg:h-14 xl:h-20"
                                 />
                             );
                         })}
@@ -177,14 +199,14 @@ export default function HomePage() {
             <hr className="block lg:hidden" />
 
             <section
-                className="flex h-auto flex-col justify-between lg:h-[calc(100vh-5rem)]"
+                className="mx-8 flex h-auto flex-col justify-between lg:h-[calc(100vh-5rem)]"
                 ref={section3Ref}
             >
                 <div className="flex flex-col">
                     <h1 className="m-8 self-center text-lg font-bold sm:text-4xl">
                         Comment participer ?
                     </h1>
-                    <p className="m-8 self-center">
+                    <p className="m-8 self-center text-justify">
                         Après avoir pris connaissance du règlement, vous pouvez
                         nous contacter par 3 moyens.
                     </p>
@@ -193,28 +215,31 @@ export default function HomePage() {
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de contact
                             </h1>
-                            <p></p>
-                            <Link
-                                href="/nous-contacter"
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Contactez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={'/nous-contacter'}
+                                    name={'Contactez-nous'}
+                                    new_page={false}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex aspect-auto min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">
                                 Formulaire de demande d'inscription
                             </h1>
-                            <p className="w-9/12 self-center text-center">
+                            <p className="my-4 w-9/12 self-center text-center">
                                 En remplissant ce formulaire, vous entrez dans
                                 la file d’attente pour participer au projet.
                             </p>
-                            <Link
-                                href={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
-                                className="mb-4 inline-block w-fit self-center rounded-lg bg-primary_orange px-8 py-4 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-primary_red sm:text-xl lg:m-4"
-                            >
-                                <p>Inscrivez-vous</p>
-                            </Link>
+                            <div className="mb-4 self-center">
+                                <PrimaryButton
+                                    link_ref={
+                                        'https://forms.ifremer.fr/rbe/popsicle/'
+                                    }
+                                    name={'Inscrivez-vous'}
+                                    new_page={true}
+                                />
+                            </div>
                         </div>
                         <div className="m-8 flex min-h-64 flex-col justify-between border hover:scale-105 hover:shadow-2xl hover:shadow-primary_orange lg:w-96">
                             <h1 className="p-4 text-center text-sm font-semibold sm:text-xl">

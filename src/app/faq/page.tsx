@@ -9,20 +9,21 @@ export const metadata: Metadata = {
 export default function FaqPage() {
     const faqData = [
         {
-            question: 'What is Next.js?',
-            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas nibh ac dolor sodales aliquam a vel sapien. Phasellus bibendum libero nec fringilla tempus. Curabitur id metus id mi maximus mollis sed ac mi. Nunc commodo id enim et varius. Quisque ac tempor ex. Morbi elementum ac ex nec condimentum. Praesent eleifend, dolor quis malesuada elementum, felis est posuere arcu, at posuere augue diam eu massa. Morbi hendrerit rutrum nulla, ac fermentum nibh interdum ullamcorper. Morbi sed placerat magna, a pulvinar odio. In vitae dui sed justo bibendum tincidunt mattis eget massa. ',
+            question: 'Pourquoi devrais-je participer ?',
+            answer: 'Vous pêchez des mérous croissant à queue jaune ? Nous aurions besoin de prélever un morceau de nageoire.',
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question: 'Quel poisson nous intéresse ?',
+            answer: 'Nous pêchons uniquement le mérou croissant à queue jaune.',
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question: "Quelles sont les sites d'études ?",
+            answer: "Les sites d'études sont la Réunion et Mayotte mais le seul site d'échantillonage est la Réunion.",
         },
         {
-            question: 'How do I create a page?',
-            answer: ' Donec ullamcorper laoreet nisl cursus dignissim. Morbi in lacus nec metus varius rhoncus. Phasellus in pellentesque risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non eros bibendum, laoreet elit id, dignissim sapien. Donec sodales nisl lacus, ut malesuada tortor dapibus sed. Duis vehicula turpis sit amet justo efficitur, in semper elit sodales. Vivamus facilisis tortor a metus venenatis, at aliquet lorem tempus. Fusce mattis gravida eros, eu venenatis nisi. Vivamus efficitur dui et efficitur ultricies. Vivamus placerat magna diam, non auctor nunc tempus gravida. Nunc vehicula auctor augue faucibus finibus. Integer non malesuada erat.',
+            question:
+                'Quelle est la période du projet de science participative ?',
+            answer: 'La période du projet de science participative se déroule du 15 mars au 15 juin 2025. ',
         },
     ];
 

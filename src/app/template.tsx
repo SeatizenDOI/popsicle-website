@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 
 export default function Template({ children }: { children: React.ReactNode }) {
     return (
-        <div className="mx-8 flex min-h-screen flex-col justify-between">
+        <div className="flex min-h-screen flex-col justify-between">
             <Header />
             <div className="mt-40">{children}</div>
             <Footer />

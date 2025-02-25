@@ -1,0 +1,39 @@
+import ImageContainer from '@/components/ImageContainer';
+import VideoContainer from '@/components/VideoContainer';
+
+export function HeightAndWeight() {
+    return (
+        <div>
+            <p className="text-justify">
+                La mesure de la taille du poisson est un élément clé pour
+                établir une base fiable pour toute étude.
+            </p>
+            <p className="pt-4 text-justify">
+                En pesant et mesurant individuellement les poissons d’une
+                espèce, il est possible de définir une relation taille-poids.
+                Cette relation permet ensuite d’estimer le poids des poissons
+                uniquement mesurés.
+            </p>
+            <p className="pt-4 text-justify">
+                La méthode utilisée est standardisée à l’échelle internationale
+                : il s’agit de la Longueur - fourche (L.F).
+            </p>
+
+            <ImageContainer
+                url="/longueur_lf.jpeg"
+                title="Mesure de la Longueur - fourche sur un Croissant Queue Jaune."
+                className="my-12"
+            />
+            <p className="py-4 text-justify">
+                Ces mesures servent également à construire une courbe de
+                croissance en fonction de l’âge, à déterminer les tailles de
+                première maturité sexuelle, les tailles de transition de sexe,
+                et bien d’autres paramètres biologiques essentiels.
+            </p>
+            <VideoContainer
+                url="https://www.youtube.com/embed/bmAT533BZaE?si=vG1F2v79cREuOXV2"
+                title="Échantillonnage biologique de poissons récifaux : Préparation à la dissection"
+            />
+        </div>
+    );
+}

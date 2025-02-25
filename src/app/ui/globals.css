@@ -4,7 +4,10 @@
 
 @layer base {
     ul {
-        @apply list-inside list-disc;
+        @apply list-outside list-disc;
+    }
+    ol {
+        @apply list-outside list-decimal;
     }
 }
 
