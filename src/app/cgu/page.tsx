@@ -137,45 +137,41 @@ export default function Page() {
             <p className="mb-2 mt-8 text-justify">
                 Il est précisé que les droits de reproduction, de représentation
                 et d’adaptation comprennent :
-                <ul className="pl-4">
-                    <li>
-                        Pour le droit de représentation : le droit de diffuser
-                        ou de communiquer tout ou partie des Photographies au
-                        public par tous procédés, papier ou numérique,
-                        incorporant ou non de la bande sonore, connus ou
-                        inconnus à ce jour, en tous lieux, sur tous supports
-                        tangibles ou intangibles et notamment, lors
-                        d’expositions, par voie d’affichage papier, vidéo
-                        comprenant ou non de la bande sonore, y compris par le
-                        biais de supports numériques tels que multimédia,
-                        internet, intranet, réseaux sociaux, logiciels,
-                        applications mobiles.
-                    </li>
-                    <li>
-                        Pour le droit de reproduction : le droit de reproduire,
-                        de fixer et/ou graver sur tous supports connus et
-                        inconnus à ce jour, et d’incorporer les Photographies,
-                        en tout ou partie, à des fins d’archivage dans des bases
-                        de données ouvertes au public, sur tous supports
-                        tangibles ou intangibles, par voie d’affichage papier,
-                        vidéo comprenant ou non de la bande sonore, y compris
-                        par le biais de supports numériques tels que multimédia,
-                        internet, intranet, réseaux sociaux, applications
-                        mobiles.
-                    </li>
-                    <li>
-                        Pour le droit d’adaptation : le droit de procéder à
-                        toute adaptation des Photographies quel que soit le
-                        format et le procédé technique utilisé, de modifier la
-                        taille des Photographies, de rogner les Photographies
-                        et/ou d’extraire une partie des Photographies dans le
-                        respect du droit moral de l’Utilisateur. Le droit de
-                        traduire en plusieurs langues les titres et/ou légende
-                        des Photographies.
-                    </li>
-                </ul>
-                <br />
-                <br />
+            </p>
+            <ul className="pl-4">
+                <li>
+                    Pour le droit de représentation : le droit de diffuser ou de
+                    communiquer tout ou partie des Photographies au public par
+                    tous procédés, papier ou numérique, incorporant ou non de la
+                    bande sonore, connus ou inconnus à ce jour, en tous lieux,
+                    sur tous supports tangibles ou intangibles et notamment,
+                    lors d’expositions, par voie d’affichage papier, vidéo
+                    comprenant ou non de la bande sonore, y compris par le biais
+                    de supports numériques tels que multimédia, internet,
+                    intranet, réseaux sociaux, logiciels, applications mobiles.
+                </li>
+                <li>
+                    Pour le droit de reproduction : le droit de reproduire, de
+                    fixer et/ou graver sur tous supports connus et inconnus à ce
+                    jour, et d’incorporer les Photographies, en tout ou partie,
+                    à des fins d’archivage dans des bases de données ouvertes au
+                    public, sur tous supports tangibles ou intangibles, par voie
+                    d’affichage papier, vidéo comprenant ou non de la bande
+                    sonore, y compris par le biais de supports numériques tels
+                    que multimédia, internet, intranet, réseaux sociaux,
+                    applications mobiles.
+                </li>
+                <li>
+                    Pour le droit d’adaptation : le droit de procéder à toute
+                    adaptation des Photographies quel que soit le format et le
+                    procédé technique utilisé, de modifier la taille des
+                    Photographies, de rogner les Photographies et/ou d’extraire
+                    une partie des Photographies dans le respect du droit moral
+                    de l’Utilisateur. Le droit de traduire en plusieurs langues
+                    les titres et/ou légende des Photographies.
+                </li>
+            </ul>
+            <p className="text-justify">
                 Il est précisé que ces droits sont transférables à tous tiers au
                 choix de l’Ifremer.
             </p>
@@ -209,54 +205,54 @@ export default function Page() {
                 le cadre du Projet dès lors que le contenu de cette Photographie
                 (quel qu’en soit la forme ou le support) serait jugé, en tout ou
                 partie, par l’Ifremer ou ses partenaires, comme :
-                <ul className="pl-4">
-                    <li>
-                        ne se rapportant pas au Projet et ne représentant pas un
-                        individu décrit dans le <strong>Protocole</strong> ;
-                    </li>
-                    <li>
-                        ordurier, outrancier, outrageux, dénigrant,
-                        diffamatoire, de mauvais goût, pornographique, sexiste,
-                        violent ou incitant à la haine, raciste, révisionniste,
-                        antisémite, xénophobe, homophobe, faisant l’apologie de
-                        la guerre, du terrorisme ou des crimes contre l’humanité
-                        et/ou, plus généralement, comme contenant tout propos ou
-                        contenu portant atteinte à la réputation, à l’image, à
-                        la dignité, au respect et/ou à l’intégrité de l’être
-                        humain et/ou de toute personne physique ou morale ;
-                    </li>
-                    <li>
-                        de nature ou à caractère publicitaire ou promotionnelle
-                        et/ou ayant pour objet ou pour finalité l’enrichissement
-                        personnel, en ce compris toute forme de commerce
-                        (notamment, par l’intermédiaire de liens hypertextes) ;
-                    </li>
-                    <li>
-                        contraire à l’ordre public, aux bonnes mœurs ou pouvant
-                        heurter la sensibilité des mineurs ;
-                    </li>
-                    <li>
-                        faisant ouvertement apparaître dans son contenu, toute
-                        information personnelle d’un tiers (par exemple, les
-                        adresses personnelles, numéros de téléphone et/ou
-                        adresses de courrier électronique non publiques) sans
-                        l’autorisation préalable des personnes concernées.
-                        L’Ifremer invite par ailleurs les Utilisateurs à se
-                        montrer prudents dans la diffusion de leurs propres
-                        informations personnelles ;
-                    </li>
-                    <li>
-                        contraire aux droits de propriété intellectuelle de
-                        toute personne quel que soit la forme ou le support de
-                        la Photographie ;
-                    </li>
-                    <li>
-                        enfreignant, plus généralement, toute autre disposition
-                        législative ou réglementaire en vigueur ou incitant à la
-                        commission de tout crime, délit ou infraction.
-                    </li>
-                </ul>
             </p>
+            <ul className="pl-4">
+                <li>
+                    ne se rapportant pas au Projet et ne représentant pas un
+                    individu décrit dans le <strong>Protocole</strong> ;
+                </li>
+                <li>
+                    ordurier, outrancier, outrageux, dénigrant, diffamatoire, de
+                    mauvais goût, pornographique, sexiste, violent ou incitant à
+                    la haine, raciste, révisionniste, antisémite, xénophobe,
+                    homophobe, faisant l’apologie de la guerre, du terrorisme ou
+                    des crimes contre l’humanité et/ou, plus généralement, comme
+                    contenant tout propos ou contenu portant atteinte à la
+                    réputation, à l’image, à la dignité, au respect et/ou à
+                    l’intégrité de l’être humain et/ou de toute personne
+                    physique ou morale ;
+                </li>
+                <li>
+                    de nature ou à caractère publicitaire ou promotionnelle
+                    et/ou ayant pour objet ou pour finalité l’enrichissement
+                    personnel, en ce compris toute forme de commerce (notamment,
+                    par l’intermédiaire de liens hypertextes) ;
+                </li>
+                <li>
+                    contraire à l’ordre public, aux bonnes mœurs ou pouvant
+                    heurter la sensibilité des mineurs ;
+                </li>
+                <li>
+                    faisant ouvertement apparaître dans son contenu, toute
+                    information personnelle d’un tiers (par exemple, les
+                    adresses personnelles, numéros de téléphone et/ou adresses
+                    de courrier électronique non publiques) sans l’autorisation
+                    préalable des personnes concernées. L’Ifremer invite par
+                    ailleurs les Utilisateurs à se montrer prudents dans la
+                    diffusion de leurs propres informations personnelles ;
+                </li>
+                <li>
+                    contraire aux droits de propriété intellectuelle de toute
+                    personne quel que soit la forme ou le support de la
+                    Photographie ;
+                </li>
+                <li>
+                    enfreignant, plus généralement, toute autre disposition
+                    législative ou réglementaire en vigueur ou incitant à la
+                    commission de tout crime, délit ou infraction.
+                </li>
+            </ul>
+
             <h2 className="mb-2 mt-8 text-xl font-bold">
                 7. Propriété intellectuelle
             </h2>
@@ -381,18 +377,18 @@ export default function Page() {
                 9.1 Qui sont les destinataires des données personnelles à
                 caractère personnel ?
             </h2>
+            <ul className="pl-5">
+                <li>l'Ifremer;</li>
+                <li>les partenaires du projet;</li>
+                <li>
+                    les sous-traitants avec lesquels l’Ifremer travaille pour la
+                    création et la mise à jour du Site POPSICLE ainsi que pour
+                    l’exécution de certains services uniquement dans la limite
+                    nécessaire à l’accomplissement des tâches qui leur sont
+                    confiées.
+                </li>
+            </ul>
             <p className="text-justify">
-                <ul className="pl-5">
-                    <li>l'Ifremer;</li>
-                    <li>les partenaires du projet;</li>
-                    <li>
-                        les sous-traitants avec lesquels l’Ifremer travaille
-                        pour la création et la mise à jour du Site POPSICLE
-                        ainsi que pour l’exécution de certains services
-                        uniquement dans la limite nécessaire à l’accomplissement
-                        des tâches qui leur sont confiées.
-                    </li>
-                </ul>
                 <br />
                 L’Ifremer exige de ses sous-traitants qu’ils utilisent les
                 données personnelles uniquement pour gérer les services que

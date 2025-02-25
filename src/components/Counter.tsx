@@ -19,7 +19,7 @@ export function Counter({ isNavMenu }: { isNavMenu: boolean }) {
                 <span className="text-lg font-extrabold text-primary_orange">
                     {data?.fish_number ?? 0}
                 </span>{' '}
-                / 1000 mérous échantillonnés
+                / 300 mérous échantillonnés
             </h2>
         </div>
     );

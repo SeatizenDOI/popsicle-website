@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import ChartNav from '@/app/classements/ChartNav';
-import TableRank from '@/app/classements/TableRank';
+import ChartNav from '@/app/resultats/ChartNav';
 
 export const metadata: Metadata = {
     title: 'Classement',
@@ -14,7 +13,6 @@ export default async function Page() {
                 Classement
             </h1>
             <div className="m-4 flex flex-col justify-around 2xl:flex-row">
-                <TableRank />
                 <ChartNav />
             </div>
         </div>

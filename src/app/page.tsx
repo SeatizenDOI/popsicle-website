@@ -51,41 +51,33 @@ export default function HomePage() {
                             POPSICLE
                         </h1>
                         <h2 className="px-8 text-2xl font-bold md:text-4xl lg:ml-8">
-                            Pêcheur amateur en bateau ou kayak ?
+                            Pêcheur amateur en bateau, en kayak ou depuis la
+                            côte ?
                         </h2>
-                        <h2 className="font-regular px-8 pt-4 text-xl md:text-2xl lg:ml-8">
-                            Participe à une aventure unique où{' '}
-                            <span className="font-bold">pêche</span> et{' '}
-                            <span className="font-bold">science</span> se
-                            rencontrent !
+                        <h2 className="font-regular px-8 pt-4 text-justify text-xl md:text-2xl lg:ml-8">
+                            🔬 Envie de contribuer à un projet scientifique où
+                            pêche et science se rencontrent ?
                         </h2>
                         <p className="font-regular px-8 pt-4 text-justify text-lg lg:ml-8">
-                            🎣 Mission : Pêche du{' '}
-                            <span className="font-bold">
-                                Croissant Queue Jaune
-                            </span>{' '}
-                            et envoie des échantillons selon{' '}
-                            <Link
-                                href="/protocoles"
-                                className="animate-pulse font-bold text-primary_orange"
-                            >
-                                un protocole simple
-                            </Link>
-                            . Chaque étape te rapporte des points et te classe
-                            parmi les 100 participants.
-                        </p>
-                        <p className="font-regular px-8 pb-4 text-justify text-lg lg:ml-8">
-                            🏆 À la clé : Jusqu’à{' '}
-                            <span className="font-bold">1000 €</span> pour
-                            récompenser les participants les plus investis après
-                            6 mois !
+                            🎣 <span className="font-bold"> Mission</span> :
+                            Lorsque tu pêches un{' '}
+                            <span className="font-bold">Grand Queue</span>,
+                            prélève des échantillons et transmets-nous les
+                            données selon un protocole simple. Chaque étape te
+                            rapporte des{' '}
+                            <span className="font-bold">points</span>, convertis
+                            en{' '}
+                            <span className="font-bold">chèques cadeaux </span>
+                            en récompense !
                         </p>
                         <p className="px-8 py-4 text-justify text-xl font-medium lg:ml-8">
                             Un défi scientifique fun à partager entre amis ! 🚀
                         </p>
                         <div className="m-8 flex flex-col justify-between sm:flex-row lg:m-16">
                             <PrimaryButton
-                                link_ref={'https://forms.gle/JCbwYwZUYQESgGDQ7'}
+                                link_ref={
+                                    'https://forms.ifremer.fr/rbe/popsicle/'
+                                }
                                 name={'Inscrivez-vous'}
                                 new_page={true}
                             />
@@ -158,11 +150,11 @@ export default function HomePage() {
                     <p className="w-full self-center py-4 text-justify text-sm font-medium lg:text-lg lg:font-semibold xl:w-9/12 2xl:w-7/12">
                         L’objectif de ce projet reste de gérer durablement cette
                         espèce et un nombre maximum de poissons pêché est fixé à
-                        1000 pour ne pas exercer de pression excessive sur la
+                        300 pour ne pas exercer de pression excessive sur la
                         ressource. Une fois ce nombre atteint, le projet
                         participatif est terminé. La date de fin de la période
                         d'échantillonage est fixée au 15 juin 2025 même si le
-                        nombre de 1000 poissons n’est pas atteint.
+                        nombre de 300 poissons n’est pas atteint.
                     </p>
 
                     <div className="my-8 flex w-full flex-wrap justify-around self-center px-4 xl:w-10/12">
@@ -242,7 +234,7 @@ export default function HomePage() {
                             <div className="mb-4 self-center">
                                 <PrimaryButton
                                     link_ref={
-                                        'https://forms.gle/JCbwYwZUYQESgGDQ7'
+                                        'https://forms.ifremer.fr/rbe/popsicle/'
                                     }
                                     name={'Inscrivez-vous'}
                                     new_page={true}

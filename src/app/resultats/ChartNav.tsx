@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
-import SexChart from '@/app/classements/SexChart';
-import SexByHeightChart from '@/app/classements/SexByHeightChart';
-import SexByMonthChart from '@/app/classements/SexByMonthChart';
-import HeightWeightChart from '@/app/classements/HeightWeightChart';
+import SexChart from '@/app/resultats/SexChart';
+import SexByHeightChart from '@/app/resultats/SexByHeightChart';
+import SexByMonthChart from '@/app/resultats/SexByMonthChart';
+import HeightWeightChart from '@/app/resultats/HeightWeightChart';
 
 const ChartNav = () => {
     const [activeChart, setActiveChart] = useState('chart1');

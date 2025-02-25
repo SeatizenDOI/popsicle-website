@@ -25,7 +25,7 @@ const url_paths: LinkItem[] = [
         href: '/protocoles',
         icon: GiTransparentTubes,
     },
-    { name: 'Classements', href: '/classements', icon: GiPodium },
+    { name: 'Résultats', href: '/resultats', icon: GiPodium },
     { name: 'FAQ', href: '/faq', icon: FaQuestionCircle },
 ];
 

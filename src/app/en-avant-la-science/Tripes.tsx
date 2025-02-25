@@ -1,4 +1,5 @@
 import ImageContainer from '@/components/ImageContainer';
+import VideoContainer from '@/components/VideoContainer';
 
 export function Tripes() {
     return (
@@ -45,6 +46,11 @@ export function Tripes() {
                 title="Evolution des gonades en fonction du sexe"
                 onlyAlt={true}
                 className="my-12"
+            />
+
+            <VideoContainer
+                url="https://www.youtube.com/embed/-AcBCfQ4baA?si=Z2lCY4xX3vmOqiDL"
+                title="Échantillonnage biologique de poissons récifaux : Études des gonades"
             />
         </div>
     );

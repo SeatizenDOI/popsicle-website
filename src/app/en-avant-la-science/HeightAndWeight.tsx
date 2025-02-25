@@ -1,4 +1,5 @@
 import ImageContainer from '@/components/ImageContainer';
+import VideoContainer from '@/components/VideoContainer';
 
 export function HeightAndWeight() {
     return (
@@ -29,6 +30,10 @@ export function HeightAndWeight() {
                 première maturité sexuelle, les tailles de transition de sexe,
                 et bien d’autres paramètres biologiques essentiels.
             </p>
+            <VideoContainer
+                url="https://www.youtube.com/embed/bmAT533BZaE?si=vG1F2v79cREuOXV2"
+                title="Échantillonnage biologique de poissons récifaux : Préparation à la dissection"
+            />
         </div>
     );
 }

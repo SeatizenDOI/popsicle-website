@@ -23,7 +23,7 @@ export default function FaqPage() {
         {
             question:
                 'Quelle est la période du projet de science participative ?',
-            answer: 'La période du projet de science participative se déroule du 15 décembre au 15 juin. ',
+            answer: 'La période du projet de science participative se déroule du 15 mars au 15 juin 2025. ',
         },
     ];
 
