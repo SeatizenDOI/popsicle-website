@@ -57,8 +57,8 @@ export default function Page() {
                     </li>
                     <li>
                         Les pêcheurs professionnels sont exclus du projet
-                        cependant il est possible que l’equi SIH de l’IFREMER
-                        puisse vous racheter vos rouge grand queue. Pour plus
+                        cependant il est possible que l’équipe SIH de l’IFREMER
+                        puisse vous racheter vos rouges grand queue. Pour plus
                         d'informations : 02 62 43 36 84 ;
                         hugues.evano@ifremer.fr
                     </li>
@@ -70,8 +70,14 @@ export default function Page() {
                         <b>250 personnes</b>.
                     </li>
                     <li>
-                        L'inscription est obligatoire via une{' '}
-                        <b>fiche d’inscription</b>.
+                        L'inscription est obligatoire et se fait via une{' '}
+                        <Link
+                            href="https://forms.ifremer.fr/rbe/popsicle/"
+                            className="font-bold text-primary_orange"
+                        >
+                            <b>fiche d’inscription</b>
+                        </Link>
+                        .
                     </li>
                     <li>
                         Les <b>250 premiers inscrits</b> seront retenus pour
@@ -105,7 +111,7 @@ export default function Page() {
                         échantillons et des informations fournies (voir{' '}
                         <Link href="#article_7">Article 7</Link>). Ces points
                         seront convertis en <b>bons d’achat </b> qui seront
-                        distribués selon un <b>système de points défini</b>
+                        distribués selon un <b>système de points défini</b>.
                     </li>
                 </ul>
                 <li className="font-bold">Confidentialité</li>
@@ -125,7 +131,7 @@ export default function Page() {
                 fin prévue, le projet prendra fin <b>de manière anticipée</b>.
                 Dans ce cas, une annonce officielle sera faite aux participants
                 via les
-                <b>réseaux sociaux du projet</b>.
+                <b> réseaux sociaux du projet</b>.
             </p>
             <h2 id="article_4">Article 4 - Inscription</h2>
             <p className="text-justify">
@@ -197,9 +203,8 @@ export default function Page() {
             </ul>
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
             <p className="text-justify">
-                Dans le cadre du projet, il{' '}
-                <b>n’y a pas de limite de taille de capture </b> dans un premier
-                temps.
+                Dans le cadre du projet et dans un premier temps, il{' '}
+                <b>n’y a pas de limite de taille de capture </b>.
             </p>
             <p className="text-justify">
                 Toutefois, un quota de{' '}
@@ -208,7 +213,7 @@ export default function Page() {
             </p>
             <ul className="ml-4">
                 <li>
-                    Les poissons de <b>moins de 25 cm</b>
+                    Les poissons de <b>moins de 25 cm </b>
                     ne seront plus comptabilisés,{' '}
                     <b>sauf s’ils sont relâchés</b> (preuve par vidéo
                     obligatoire).
@@ -223,9 +228,10 @@ export default function Page() {
             </ul>
             <p className="text-justify">
                 ⚠ <b>Rappel</b> : Le projet prendra fin dès que{' '}
-                <b>300 poissons</b> auront été enregistrés, même avant la date
-                limite du <b>15 juin 2025</b>. Une communication officielle sera
-                faite aux participants lorsque cette limitation sera atteinte.
+                <b>300 poissons</b> auront été enregistrés, même si la date
+                limite du <b>15 juin 2025</b> n'est pas atteinte. Une
+                communication officielle sera faite aux participants lorsque
+                cette limitation sera atteinte.
             </p>
             <h2 id="article_6_1">
                 Article 6.1 – Conditions de Validation d’une Prises
@@ -330,7 +336,7 @@ export default function Page() {
                             Poisson entier
                         </td>
                         <td className="border border-gray-300 px-4 py-2">
-                            Fourniture du poisson entier (suivant protocole)
+                            Poisson entier donné suivant le protocole
                         </td>
                         <td className="border border-gray-300 px-4 py-2">
                             50 pts
