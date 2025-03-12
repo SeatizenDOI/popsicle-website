@@ -204,10 +204,10 @@ export default function Page() {
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
             <p className="text-justify">
                 Pour valider une prise, le poisson pêché et échantillonné doit
-                être un Grand Queue et non un Tire Boure.
+                être un <b>Grand Queue</b> et non un Tire Boure.
             </p>
 
-            <p className="text-justify">
+            <p className="pt-3 text-justify">
                 ⚠ <b>Rappel</b> : Le projet prendra fin dès que{' '}
                 <b>300 poissons</b> auront été enregistrés, même si la date
                 limite du <b>15 juin 2025</b> n'est pas atteinte. Une
