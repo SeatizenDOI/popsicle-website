@@ -203,29 +203,10 @@ export default function Page() {
             </ul>
             <h2 id="article_6">Article 6 – Validité des Prises</h2>
             <p className="text-justify">
-                Dans le cadre du projet et dans un premier temps, il{' '}
-                <b>n’y a pas de limite de taille de capture </b>.
+                Pour valider une prise, le poisson pêché et échantillonné doit
+                être un Grand Queue et non un Tire Boure.
             </p>
-            <p className="text-justify">
-                Toutefois, un quota de{' '}
-                <b>50 poissons entiers de moins de 25 cm</b> est fixé. Une fois
-                ce quota atteint :
-            </p>
-            <ul className="ml-4">
-                <li>
-                    Les poissons de <b>moins de 25 cm </b>
-                    ne seront plus comptabilisés,{' '}
-                    <b>sauf s’ils sont relâchés</b> (preuve par vidéo
-                    obligatoire).
-                </li>
-                <li>
-                    Pour ces poissons relâchés, un{' '}
-                    <b>petit bout de nageoire caudale</b> (conformément à la
-                    réglementation en vigueur), la <b>longueur</b> et une{' '}
-                    <b>vidéo/photo du relâcher</b> suffisent pour obtenir{' '}
-                    <b>25 points</b>.
-                </li>
-            </ul>
+
             <p className="text-justify">
                 ⚠ <b>Rappel</b> : Le projet prendra fin dès que{' '}
                 <b>300 poissons</b> auront été enregistrés, même si la date
@@ -234,7 +215,7 @@ export default function Page() {
                 cette limitation sera atteinte.
             </p>
             <h2 id="article_6_1">
-                Article 6.1 – Conditions de Validation d’une Prises
+                Article 6.1 – Conditions de Validation d’une Prise
             </h2>
             <p className="text-justify">
                 Pour <b>valider une prise</b>, le participant doit
@@ -537,8 +518,8 @@ export default function Page() {
                 10.2 Modalités de distribution
             </h3>
             <p className="mb-4">
-                Les bons d’achat seront distribués tous les mois en fonction des
-                points validés.
+                Les bons d’achat seront distribués à la fin du projet soit à
+                partir du 30 juin 2025.
             </p>
             <p className="mb-6">
                 Les participants seront informés de leur solde de points et de
